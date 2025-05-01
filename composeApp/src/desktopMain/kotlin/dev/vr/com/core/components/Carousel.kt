@@ -3,8 +3,15 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -24,12 +31,32 @@ fun Carousel(
     val pages = imageUrls.chunked(3)
     val pagerState = rememberPagerState(pageCount = { pages.size })
 
+    var selectedImage by remember { mutableStateOf<String?>(null) }
+
     LaunchedEffect(Unit) {
         while (true) {
             delay(scrollIntervalMs)
             val nextPage = (pagerState.currentPage + 1) % pages.size
             pagerState.animateScrollToPage(nextPage)
         }
+    }
+
+    selectedImage?.let { imageUrl ->
+        AlertDialog(
+            onDismissRequest = { selectedImage = null },
+            title = { Text("Вы выбрали изображение") },
+            text = { Text("URL: $imageUrl") },
+            confirmButton = {
+                TextButton(onClick = { selectedImage = null }) {
+                    Text("ОК")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { selectedImage = null }) {
+                    Text("Отмена")
+                }
+            }
+        )
     }
 
     HorizontalPager(
@@ -65,7 +92,7 @@ fun Carousel(
                             else -> Theme.colors.pinkAction
                         }
                     ) {
-
+                        selectedImage = imageUrl.toString()
                     }
                 }
             }
