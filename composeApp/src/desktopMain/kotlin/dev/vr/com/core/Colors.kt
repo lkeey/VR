@@ -26,21 +26,12 @@ data class VRColors(
 )
 
 val lightPalette = VRColors(
-    primaryBackground = Color(0x17D46E),
-    secondaryBackground = Color(0x00000000),
-    secondaryBorder = Color(0xFF6D7885),
-    errorColor = Color(0xFFF54135),
-    primaryAction = Color(0x17D46E),
-    defaultText = Color(0xFF222222),
-    editPlaceholder = Color(0xFF6D7885),
-    secondaryScreen = Color(0xFFF2F2F2),
-    greyDescription = Color(0xFFABABAB),
-    backgroundMain = Color(0xFFF4F8FF)
+    primaryBackground = Color.LightGray,
 )
 
 val darkPalette = VRColors(
     primaryBackground = Color.Black,
 )
 
-val LocalColorProvider = staticCompositionLocalOf { VRColors() }
+val LocalColorProvider = staticCompositionLocalOf<VRColors> { error("No default implementation") }
 
