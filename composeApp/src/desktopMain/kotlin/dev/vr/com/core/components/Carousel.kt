@@ -5,6 +5,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.vr.com.core.Theme
@@ -34,27 +35,38 @@ fun Carousel(
     HorizontalPager(
         state = pagerState,
         modifier = Modifier
-            .fillMaxWidth()
-            .height(150.dp),
+            .fillMaxWidth(),
         pageSpacing = 16.dp
     ) { page ->
         Row(
             modifier = Modifier.fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            pages[page].forEach { imageUrl ->
-                Image(
-                    painter = painterResource(imageUrl),
-                    contentDescription = "img",
+            pages[page].forEachIndexed { index, imageUrl ->
+                Column (
                     modifier = Modifier
-                        .weight(1f)
-                        .padding(4.dp)
-                )
-                RoundedButton(
-                    text = "VR ARENA",
-                    color = Theme.colors.blueAction,
+                        .wrapContentSize(),
                 ) {
+                    Image(
+                        modifier = Modifier
+                            .size(300.dp),
+                        painter = painterResource(imageUrl),
+                        contentDescription = "img",
+                    )
 
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    RoundedButton(
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally),
+                        text = "СМОТРЕТЬ",
+                        color = when (index % 2) {
+                            0 -> Theme.colors.blueAction
+                            else -> Theme.colors.pinkAction
+                        }
+                    ) {
+
+                    }
                 }
             }
         }
