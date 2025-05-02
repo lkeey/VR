@@ -17,9 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.vr.com.core.Theme
 import dev.vr.com.core.components.RoundedButton
+import dev.vr.com.core.components.VideoPopUp
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
+import vr.composeapp.generated.resources.Res
+import vr.composeapp.generated.resources.img1
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -42,21 +45,12 @@ fun Carousel(
     }
 
     selectedImage?.let { imageUrl ->
-        AlertDialog(
-            onDismissRequest = { selectedImage = null },
-            title = { Text("Вы выбрали изображение") },
-            text = { Text("URL: $imageUrl") },
-            confirmButton = {
-                TextButton(onClick = { selectedImage = null }) {
-                    Text("ОК")
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { selectedImage = null }) {
-                    Text("Отмена")
-                }
-            }
-        )
+        VideoPopUp(
+            videoUrl = Res.drawable.img1,
+            description = "Вы выбрали $imageUrl"
+        ) {
+            selectedImage = null
+        }
     }
 
     HorizontalPager(
