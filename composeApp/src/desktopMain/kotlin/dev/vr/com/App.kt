@@ -42,21 +42,21 @@ fun App() {
                     text = "VR ARENA",
                     color = Theme.colors.blueAction,
                 ) {
-
+                    navController.navigate(Route.Arena)
                 }
 
                 RoundedButton(
                     text = "VR ZONE",
                     color = Theme.colors.pinkAction,
                 ) {
-
+                    navController.navigate(Route.Zone)
                 }
 
                 RoundedButton(
                     text = "ПРАЗДНИКИ И МЕРОПРИЯТИЯ",
                     color = Theme.colors.blueAction,
                 ) {
-
+                    navController.navigate(Route.Holidays)
                 }
 
                 RoundedButton(
@@ -76,7 +76,7 @@ fun App() {
 
             NavHost(
                 navController = navController,
-                startDestination = Route.Zone,
+                startDestination = Route.Arena,
                 modifier = Modifier
                     .fillMaxSize()
             ) {
