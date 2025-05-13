@@ -9,13 +9,12 @@ import androidx.compose.ui.Modifier
 import dev.vr.com.core.Theme
 import dev.vr.com.core.VRTheme
 import dev.vr.com.core.components.RoundedButton
+import dev.vr.com.presentation.ArenaScreen
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.*
 
 @Composable
 fun App() {
-
-    val images = listOf(Res.drawable.img1, Res.drawable.img2, Res.drawable.img3, Res.drawable.img1, Res.drawable.img2)
 
     VRTheme {
         Column (
@@ -64,8 +63,7 @@ fun App() {
                 contentDescription = "main image"
             )
 
-            Carousel(imageUrls = images)
-
+            ArenaScreen()
         }
     }
 }
