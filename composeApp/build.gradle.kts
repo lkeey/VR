@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+
+    alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 kotlin {
@@ -23,6 +25,9 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
 
             implementation(libs.jetbrains.compose.navigation)
+
+            implementation(libs.kotlinx.serialization.json)
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
