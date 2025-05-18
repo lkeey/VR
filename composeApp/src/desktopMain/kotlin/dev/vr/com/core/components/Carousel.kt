@@ -1,5 +1,6 @@
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -71,7 +72,10 @@ fun Carousel(
                 ) {
                     Image(
                         modifier = Modifier
-                            .size(300.dp),
+                            .size(300.dp)
+                            .clickable {
+                                selectedImage = imageUrl.toString()
+                            },
                         painter = painterResource(imageUrl),
                         contentDescription = "img",
                     )
