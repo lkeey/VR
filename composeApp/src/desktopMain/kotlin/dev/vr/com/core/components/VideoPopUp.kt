@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import vr.composeapp.generated.resources.Res
+import vr.composeapp.generated.resources.movie
 
 @Composable
 fun VideoPopUp(
@@ -35,14 +37,15 @@ fun VideoPopUp(
 //                    url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 //                )
                 Player(
-                    url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                    url = "C:\\Users\\Aleksandr\\IdeaProjects\\VR\\composeApp\\src\\commonMain\\composeResources\\drawable\\movie.mp4",
+//                    url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                     onFinish = {},
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(400.dp),
                     isResumed = true,
                     volume = 1f,
-                    speed = 1f,
+                    speed = 2f,
                     seek = 0f,
                     isFullscreen = false,
                     progressState = mutableStateOf( Progress(0f, 0))
