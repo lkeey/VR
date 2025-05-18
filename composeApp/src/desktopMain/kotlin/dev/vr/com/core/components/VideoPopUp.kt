@@ -1,7 +1,5 @@
 package dev.vr.com.core.components
 
-import DesktopVideoPlayer
-import VideoPlayerScreen
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -13,8 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import vr.composeapp.generated.resources.Res
-import vr.composeapp.generated.resources.movie
 
 @Composable
 fun VideoPopUp(
@@ -31,15 +27,21 @@ fun VideoPopUp(
                 modifier = Modifier.padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
-                DesktopVideoPlayer(
+                VideoPlayer(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(340.dp),
-                    videoURL = "https://streamable.com/e/0mnbp7?",
-                    showControls = false,
-                    autoPlay = true
+                        .height(400.dp),
+                    url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 )
+
+//                DesktopVideoPlayer(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .height(340.dp),
+//                    videoURL = "https://streamable.com/e/0mnbp7?",
+//                    showControls = false,
+//                    autoPlay = true
+//                )
 
 //
 //                SwingPanel(
