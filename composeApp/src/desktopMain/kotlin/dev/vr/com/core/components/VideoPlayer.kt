@@ -11,6 +11,7 @@ import uk.co.caprica.vlcj.factory.discovery.NativeDiscovery
 import uk.co.caprica.vlcj.player.component.CallbackMediaPlayerComponent
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent
 import java.awt.Component
+import java.nio.file.Files
 import java.util.Locale
 
 @Composable
@@ -18,14 +19,16 @@ fun VideoPlayer(
     url: String,
     modifier: Modifier,
 ) {
+    val url = remember(url) {
+        extractResourceToTempFile(url, "video_from_res")
+    }
+
     val mediaPlayerComponent = remember { initializeMediaPlayerComponent() }
     val mediaPlayer = remember { mediaPlayerComponent.mediaPlayer() }
 
     val factory = remember { { mediaPlayerComponent } }
 
     LaunchedEffect(url) {
-        /*OR .start*/
-//        mediaPlayer.media().play(url)
         mediaPlayer.media().start(url)
     }
     DisposableEffect(Unit) {
@@ -61,4 +64,20 @@ private fun isMacOS(): Boolean {
         .getProperty("os.name", "generic")
         .lowercase(Locale.ENGLISH)
     return "mac" in os || "darwin" in os
+}
+
+fun extractResourceToTempFile(resourcePath: String, tempFileNamePrefix: String): String {
+    val tempFile = Files.createTempFile(tempFileNamePrefix, ".mp4").toFile()
+    tempFile.deleteOnExit()
+
+    val inputStream = {}.javaClass.getResourceAsStream(resourcePath)
+        ?: error("Resource not found: $resourcePath")
+
+    inputStream.use { input ->
+        tempFile.outputStream().use { output ->
+            input.copyTo(output)
+        }
+    }
+
+    return tempFile.toURI().toString() // file:///... — для VLC
 }
