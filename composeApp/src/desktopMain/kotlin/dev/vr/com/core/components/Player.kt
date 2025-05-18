@@ -12,7 +12,10 @@ import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter
 import uk.co.caprica.vlcj.player.component.CallbackMediaPlayerComponent
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer
+import vr.composeapp.generated.resources.Res
+import vr.composeapp.generated.resources.movie
 import java.awt.Component
+import java.nio.file.Files
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -29,6 +32,10 @@ fun Player(
     modifier: Modifier,
     onFinish: (() -> Unit)?
 ) {
+//    val url = remember(url) {
+//        extractResourceToTempFile(url, "video_from_res")
+//    }
+
     val mediaPlayerComponent = remember { initializeMediaPlayerComponent() }
     val mediaPlayer = remember { mediaPlayerComponent.mediaPlayer() }
     mediaPlayer.emitProgressTo(progressState)
@@ -38,7 +45,7 @@ fun Player(
     /* OR the following code and using SwingPanel(factory = { factory }, ...) */
     // val factory by rememberUpdatedState(mediaPlayerComponent)
 
-    LaunchedEffect(url) { mediaPlayer.media().play/*OR .start*/(url) }
+    LaunchedEffect(url) { mediaPlayer.media().play/*OR .start*/("F:\\Видео Наше\\Новый год 21-22") }
     LaunchedEffect(seek) { mediaPlayer.controls().setPosition(seek) }
     LaunchedEffect(speed) { mediaPlayer.controls().setRate(speed) }
     LaunchedEffect(volume) { mediaPlayer.audio().setVolume(volume.toPercentage()) }
@@ -137,4 +144,21 @@ private fun isMacOS(): Boolean {
         .getProperty("os.name", "generic")
         .lowercase(Locale.ENGLISH)
     return "mac" in os || "darwin" in os
+}
+
+
+private fun extractResourceToTempFile(resourcePath: String, tempFileNamePrefix: String): String {
+    val tempFile = Files.createTempFile(tempFileNamePrefix, ".mp4").toFile()
+    tempFile.deleteOnExit()
+
+    val inputStream = {}.javaClass.getResourceAsStream(resourcePath)
+        ?: error("Resource not found: $resourcePath")
+
+    inputStream.use { input ->
+        tempFile.outputStream().use { output ->
+            input.copyTo(output)
+        }
+    }
+
+    return tempFile.toURI().toString() // file:///... — для VLC
 }

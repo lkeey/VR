@@ -37,7 +37,7 @@ fun VideoPopUp(
 //                    url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 //                )
                 Player(
-                    url = "C:\\Users\\Aleksandr\\IdeaProjects\\VR\\composeApp\\src\\commonMain\\composeResources\\drawable\\movie.mp4",
+                    url = "/drawable/movie.mp4",
 //                    url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                     onFinish = {},
                     modifier = Modifier

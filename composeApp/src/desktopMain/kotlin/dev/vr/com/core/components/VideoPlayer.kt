@@ -66,7 +66,7 @@ private fun isMacOS(): Boolean {
     return "mac" in os || "darwin" in os
 }
 
-fun extractResourceToTempFile(resourcePath: String, tempFileNamePrefix: String): String {
+private fun extractResourceToTempFile(resourcePath: String, tempFileNamePrefix: String): String {
     val tempFile = Files.createTempFile(tempFileNamePrefix, ".mp4").toFile()
     tempFile.deleteOnExit()
 
