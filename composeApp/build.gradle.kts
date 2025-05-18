@@ -36,6 +36,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
 
             implementation("uk.co.caprica:vlcj:4.7.0")
+
         }
     }
 }
