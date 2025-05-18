@@ -9,10 +9,12 @@ import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.Res
 import vr.composeapp.generated.resources.compose_multiplatform
 
+
 fun main() = application {
     val windowState = rememberWindowState(width = 1500.dp, height = 600.dp)
 
     val navController = rememberNavController()
+
 
     Window(
         onCloseRequest = ::exitApplication,

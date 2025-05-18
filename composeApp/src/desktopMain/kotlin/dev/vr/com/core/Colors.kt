@@ -18,6 +18,8 @@ val lightPalette = VRColors(
 
 val darkPalette = VRColors(
     primaryBackground = Color.Black,
+    pinkAction = Color(0xFFE83E6B),
+    blueAction = Color(0xFF0C81B0),
 )
 
 val LocalColorProvider = staticCompositionLocalOf<VRColors> { error("No default implementation") }

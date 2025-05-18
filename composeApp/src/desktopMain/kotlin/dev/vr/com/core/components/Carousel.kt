@@ -23,6 +23,7 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.Res
 import vr.composeapp.generated.resources.img1
+import vr.composeapp.generated.resources.movie
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -46,7 +47,7 @@ fun Carousel(
 
     selectedImage?.let { imageUrl ->
         VideoPopUp(
-            videoUrl = Res.drawable.img1,
+            videoUrl = Res.drawable.movie.toString(),
             description = "Вы выбрали $imageUrl"
         ) {
             selectedImage = null

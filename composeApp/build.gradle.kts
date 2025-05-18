@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
 
     alias(libs.plugins.jetbrains.kotlin.serialization)
+
 }
 
 kotlin {
@@ -28,11 +29,11 @@ kotlin {
 
             implementation(libs.kotlinx.serialization.json)
 
+            implementation("io.github.khubaibkhan4:mediaplayer-kmp:2.0.9")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
-
         }
     }
 }
