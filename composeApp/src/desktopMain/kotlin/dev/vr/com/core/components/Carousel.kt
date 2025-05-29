@@ -4,15 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -21,11 +13,7 @@ import dev.vr.com.core.components.RoundedButton
 import dev.vr.com.core.components.VideoPopUp
 import dev.vr.com.data.GameModel
 import kotlinx.coroutines.delay
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
-import vr.composeapp.generated.resources.Res
-import vr.composeapp.generated.resources.img1
-import vr.composeapp.generated.resources.movie
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -49,7 +37,8 @@ fun Carousel(
 
     selectedGame?.let { game ->
         VideoPopUp(
-            videoUrl = Res.drawable.movie.toString(),
+            text = game.text,
+            videoUrl = game.movie,
             description = "Вы выбрали ${game.description}"
         ) {
             selectedGame = null
