@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import dev.vr.com.core.Theme
 import dev.vr.com.core.components.RoundedButton
 import dev.vr.com.core.components.VideoPopUp
+import dev.vr.com.data.GameModel
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
@@ -29,14 +30,14 @@ import vr.composeapp.generated.resources.movie
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Carousel(
-    imageUrls: List<DrawableResource>,
+    games: List<GameModel>,
     scrollIntervalMs: Long = 3000L
 ) {
 
-    val pages = imageUrls.chunked(3)
+    val pages = games.chunked(3)
     val pagerState = rememberPagerState(pageCount = { pages.size })
 
-    var selectedImage by remember { mutableStateOf<String?>(null) }
+    var selectedGame by remember { mutableStateOf<GameModel?>(null) }
 
     LaunchedEffect(Unit) {
         while (true) {
@@ -46,12 +47,12 @@ fun Carousel(
         }
     }
 
-    selectedImage?.let { imageUrl ->
+    selectedGame?.let { game ->
         VideoPopUp(
             videoUrl = Res.drawable.movie.toString(),
-            description = "Вы выбрали $imageUrl"
+            description = "Вы выбрали ${game.description}"
         ) {
-            selectedImage = null
+            selectedGame = null
         }
     }
 
@@ -65,7 +66,7 @@ fun Carousel(
             modifier = Modifier.fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            pages[page].forEachIndexed { index, imageUrl ->
+            pages[page].forEachIndexed { index, game ->
                 Column (
                     modifier = Modifier
                         .wrapContentSize(),
@@ -74,9 +75,9 @@ fun Carousel(
                         modifier = Modifier
                             .size(300.dp)
                             .clickable {
-                                selectedImage = imageUrl.toString()
+                                selectedGame = game
                             },
-                        painter = painterResource(imageUrl),
+                        painter = painterResource(game.image),
                         contentDescription = "img",
                     )
 
@@ -91,7 +92,7 @@ fun Carousel(
                             else -> Theme.colors.pinkAction
                         }
                     ) {
-                        selectedImage = imageUrl.toString()
+                        selectedGame = game
                     }
                 }
             }

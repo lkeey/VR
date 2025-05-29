@@ -1,19 +1,24 @@
 package dev.vr.com.core.components
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import dev.vr.com.core.Theme
+import vr.composeapp.generated.resources.PressStart
 import vr.composeapp.generated.resources.Res
-import vr.composeapp.generated.resources.movie
 
 @Composable
 fun VideoPopUp(
@@ -30,98 +35,37 @@ fun VideoPopUp(
                 modifier = Modifier.padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-//                VideoPlayer(
+//                Player(
+//                    url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+//                    onFinish = {},
 //                    modifier = Modifier
 //                        .fillMaxWidth()
 //                        .height(400.dp),
-//                    url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-//                )
-                Player(
-                    url = "/drawable/movie.mp4",
-//                    url = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                    onFinish = {},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(400.dp),
-                    isResumed = true,
-                    volume = 1f,
-                    speed = 2f,
-                    seek = 0f,
-                    isFullscreen = false,
-                    progressState = mutableStateOf( Progress(0f, 0))
-                )
-
-//                DesktopVideoPlayer(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .height(340.dp),
-//                    videoURL = "https://streamable.com/e/0mnbp7?",
-//                    showControls = false,
-//                    autoPlay = true
-//                )
-
-//
-//                SwingPanel(
-//                    modifier = Modifier.fillMaxSize(),
-//                    factory = {
-//                        val html = """
-//                <html>
-//                    <body style="margin:0;">
-//                        <h1>hey!</h1>
-//                    </body>
-//                </html>
-//            """.trimIndent()
-//
-//                        val editorPane = JEditorPane("text/html", html)
-//                        editorPane.isEditable = false
-//                        editorPane.contentType = "text/html"
-//                        val panel = JPanel(BorderLayout())
-//                        panel.add(JScrollPane(editorPane), BorderLayout.CENTER)
-//                        panel
-//                    }
-//                )
-
-//
-//                SwingPanel(
-//                    modifier = Modifier.fillMaxSize(),
-//                    factory = {
-//                        val panel = JPanel()
-//
-//                        Platform.runLater {
-//                            val webView = WebView()
-//                            val engine = webView.engine
-//                            val html = """
-//                    <html>
-//                        <body style="margin:0; background-color:black;">
-//                            <video width="100%" height="100%" controls autoplay>
-//                                <source src="$videoUrl" type="video/mp4">
-//                                Your browser does not support the video tag.
-//                            </video>
-//                        </body>
-//                    </html>
-//                """.trimIndent()
-//
-//                            engine.loadContent(html, "text/html")
-//                            val scene = Scene(webView)
-//                            val jfxPanel = JFXPanel()
-//                            jfxPanel.scene = scene
-//                            panel.add(jfxPanel)
-//                        }
-//
-//                        panel
-//                    }
+//                    isResumed = true,
+//                    volume = 1f,
+//                    speed = 1f,
+//                    seek = 0f,
+//                    isFullscreen = false,
+//                    progressState = mutableStateOf( Progress(0f, 0))
 //                )
 
                 Text(
                     text = description,
-                    color = Color.White
+                    color = Color.White,
+                    fontSize = 10.sp,
+                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.PressStart)),
+                    fontWeight = FontWeight.Bold
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                Button(onClick = onDismiss) {
-                    Text("Закрыть")
-                }
+                RoundedButton(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally),
+                    text = "ЗАКРЫТЬ",
+                    color = Theme.colors.pinkAction,
+                    onClick = onDismiss
+                )
             }
         }
     }

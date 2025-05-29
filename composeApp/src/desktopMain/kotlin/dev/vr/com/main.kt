@@ -15,7 +15,6 @@ fun main() = application {
 
     val navController = rememberNavController()
 
-
     Window(
         onCloseRequest = ::exitApplication,
         icon = painterResource(Res.drawable.compose_multiplatform),

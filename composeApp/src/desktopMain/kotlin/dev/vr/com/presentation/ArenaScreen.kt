@@ -3,6 +3,7 @@ package dev.vr.com.presentation
 import Carousel
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
+import dev.vr.com.data.GameModel
 import vr.composeapp.generated.resources.Res
 import vr.composeapp.generated.resources.img1
 import vr.composeapp.generated.resources.img2
@@ -12,7 +13,45 @@ import vr.composeapp.generated.resources.img3
 fun ArenaScreen(
     navController: NavController
 ) {
-    val images = listOf(Res.drawable.img1, Res.drawable.img2, Res.drawable.img3, Res.drawable.img1, Res.drawable.img2)
 
-    Carousel(imageUrls = images)
+    val games = listOf(
+        GameModel(
+            image = Res.drawable.img1,
+            movie = "movie.mp4",
+            text = "Заголовок 1",
+            description = "Описание 1"
+        ),
+        GameModel(
+            image = Res.drawable.img2,
+            movie = "movie.mp4",
+            text = "Заголовок 2",
+            description = "Описание 2"
+        ),
+        GameModel(
+            image = Res.drawable.img3,
+            movie = "movie.mp4",
+            text = "Заголовок 3",
+            description = "Описание 3"
+        ),
+        GameModel(
+            image = Res.drawable.img1,
+            movie = "movie.mp4",
+            text = "Заголовок 1",
+            description = "Описание 1"
+        ),
+        GameModel(
+            image = Res.drawable.img2,
+            movie = "movie.mp4",
+            text = "Заголовок 2",
+            description = "Описание 2"
+        ),
+        GameModel(
+            image = Res.drawable.img3,
+            movie = "movie.mp4",
+            text = "Заголовок 3",
+            description = "Описание 3"
+        )
+    )
+
+    Carousel(games = games)
 }
