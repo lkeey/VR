@@ -29,6 +29,9 @@ kotlin {
 
             implementation(libs.kotlinx.serialization.json)
 
+//            TODO try later
+//            implementation("network.chaintech:compose-multiplatform-media-player:1.0.22")
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
