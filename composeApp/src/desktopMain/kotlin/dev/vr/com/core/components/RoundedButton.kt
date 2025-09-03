@@ -43,14 +43,13 @@ fun RoundedButton(
         },
         modifier = modifier
             .padding(0.dp)
-            .height(40.dp)
+            .height(80.dp)
             .wrapContentWidth()
     ) {
         Text(
             text = text,
             color = Color.White,
-            fontSize = 10.sp,
-            fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.PressStart)),
+            fontSize = 20.sp,
             fontWeight = FontWeight.Bold
         )
     }
