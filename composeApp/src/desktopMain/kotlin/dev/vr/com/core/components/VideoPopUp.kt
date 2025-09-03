@@ -1,10 +1,6 @@
 package dev.vr.com.core.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -13,14 +9,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import dev.vr.com.core.Theme
-import vr.composeapp.generated.resources.PressStart
-import vr.composeapp.generated.resources.Res
 
 @Composable
 fun VideoPopUp(
@@ -42,7 +35,7 @@ fun VideoPopUp(
                     text = text,
                     color = Color.White,
                     fontSize = 10.sp,
-                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.PressStart)),
+//                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.PressStart)),
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(Modifier.height(8.dp))
@@ -67,7 +60,7 @@ fun VideoPopUp(
                     text = description,
                     color = Color.White,
                     fontSize = 10.sp,
-                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.PressStart)),
+//                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.PressStart)),
                     fontWeight = FontWeight.Bold
                 )
 

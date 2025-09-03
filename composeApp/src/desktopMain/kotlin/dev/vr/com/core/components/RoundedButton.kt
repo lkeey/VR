@@ -10,11 +10,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.font.FontFamily
-import vr.composeapp.generated.resources.PressStart
+import dev.vr.com.core.Theme
+import vr.composeapp.generated.resources.Bold
 import vr.composeapp.generated.resources.Res
 
 @Composable
@@ -41,16 +42,18 @@ fun RoundedButton(
             lineTo(0f, cutSizeY)
             close()
         },
-        modifier = modifier
-            .padding(0.dp)
-            .height(80.dp)
-            .wrapContentWidth()
     ) {
         Text(
+            modifier = Modifier
+                .padding(
+                    horizontal = 16.dp,
+                    vertical = 4.dp
+                ),
             text = text,
-            color = Color.White,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold
+            color = Theme.colors.textInverse,
+            fontSize = 24.sp,
+            fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
+            fontWeight = FontWeight(700)
         )
     }
 }

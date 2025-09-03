@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,6 +26,8 @@ import dev.vr.com.presentation.ArenaScreen
 import dev.vr.com.presentation.HolidaysScreen
 import dev.vr.com.presentation.ZoneScreen
 import org.jetbrains.compose.resources.painterResource
+import vr.composeapp.generated.resources.ExtraBold
+import vr.composeapp.generated.resources.Light
 import vr.composeapp.generated.resources.Res
 import vr.composeapp.generated.resources.back_arena_1
 import vr.composeapp.generated.resources.back_arena_2
@@ -98,7 +101,7 @@ fun App() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 32.dp)
-                        .height(320.dp),
+                        .height(280.dp),
                 ) {
                     Banner(
                         modifier = Modifier
@@ -109,7 +112,8 @@ fun App() {
                             Text(
                                 text = "VR АРЕНА",
                                 fontWeight = FontWeight(800),
-                                fontSize = 30.sp,
+                                fontSize = 56.sp,
+                                fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.ExtraBold)),
                                 color = Theme.colors.textInverse
                             )
                         },
@@ -117,7 +121,8 @@ fun App() {
                             Text(
                                 text = "ЧТО ЭТО?",
                                 fontWeight = FontWeight(400),
-                                fontSize = 30.sp,
+                                fontSize = 56.sp,
+                                fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Light)),
                                 color = Theme.colors.textInverse
                             )
                         },
@@ -131,10 +136,8 @@ fun App() {
                         }
                     )
 
-                    Spacer(
-                        modifier = Modifier
-                            .width(32.dp)
-                    )
+                    Spacer(Modifier.width(32.dp))
+
 
                     Banner(
                         modifier = Modifier
@@ -145,7 +148,8 @@ fun App() {
                             Text(
                                 text = "УЗНАЙ О НАШИХ",
                                 fontWeight = FontWeight(400),
-                                fontSize = 30.sp,
+                                fontSize = 56.sp,
+                                fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Light)),
                                 color = Theme.colors.textInverse
                             )
                         },
@@ -153,7 +157,8 @@ fun App() {
                             Text(
                                 text = "ПРЕИМУЩЕСТВАХ!",
                                 fontWeight = FontWeight(700),
-                                fontSize = 30.sp,
+                                fontSize = 56.sp,
+                                fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.ExtraBold)),
                                 color = Theme.colors.textInverse
                             )
                         },
