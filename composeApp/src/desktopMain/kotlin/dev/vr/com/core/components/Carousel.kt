@@ -1,19 +1,29 @@
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import dev.vr.com.core.Theme
 import dev.vr.com.core.components.RoundedButton
 import dev.vr.com.core.components.VideoPopUp
 import dev.vr.com.data.GameModel
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.painterResource
+import vr.composeapp.generated.resources.Bold
+import vr.composeapp.generated.resources.ExtraBold
+import vr.composeapp.generated.resources.Res
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -48,40 +58,56 @@ fun Carousel(
     HorizontalPager(
         state = pagerState,
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(top = 12.dp),
         pageSpacing = 16.dp
     ) { page ->
         Row(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             pages[page].forEachIndexed { index, game ->
-                Column (
+                Box(
                     modifier = Modifier
-                        .wrapContentSize(),
+                        .size(400.dp)
+                        .clickable { selectedGame = game },
+                    contentAlignment = Alignment.BottomCenter
                 ) {
                     Image(
                         modifier = Modifier
-                            .size(300.dp)
-                            .clickable {
-                                selectedGame = game
-                            },
+                            .fillMaxSize(),
+                        contentScale = ContentScale.Crop,
                         painter = painterResource(game.image),
-                        contentDescription = "img",
+                        contentDescription = "game image",
                     )
 
-                    Spacer(modifier = Modifier.height(4.dp))
-
-                    RoundedButton(
+                    Column (
                         modifier = Modifier
-                            .align(Alignment.CenterHorizontally),
-                        text = "СМОТРЕТЬ",
-                        color = when (index % 2) {
-                            0 -> Theme.colors.blueAction
-                            else -> Theme.colors.pinkAction
-                        }
+                            .padding(20.dp),
+                        verticalArrangement = Arrangement.Center
                     ) {
-                        selectedGame = game
+                        Text(
+                            text = game.text,
+                            fontWeight = FontWeight(700),
+                            fontSize = 36.sp,
+                            fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
+                            color = Theme.colors.textInverse
+                        )
+
+                        Spacer(
+                            Modifier.height(16.dp)
+                        )
+
+                        RoundedButton(
+                            text = "СМОТРЕТЬ",
+                            color = when (index % 2) {
+                                0 -> Theme.colors.blueAction
+                                else -> Theme.colors.pinkAction
+                            }
+                        ) {
+                            selectedGame = game
+                        }
                     }
                 }
             }

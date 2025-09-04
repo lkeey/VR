@@ -13,8 +13,11 @@ import vr.composeapp.generated.resources.img3
 fun ArenaScreen(
     navController: NavController
 ) {
+    Carousel(games = getGames())
+}
 
-    val games = listOf(
+private fun getGames() : List<GameModel> {
+    return listOf(
         GameModel(
             image = Res.drawable.img1,
             movie = "movie.mp4",
@@ -52,6 +55,4 @@ fun ArenaScreen(
             description = "Описание 3"
         )
     )
-
-    Carousel(games = games)
 }
