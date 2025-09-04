@@ -23,12 +23,7 @@ import androidx.compose.ui.window.DialogProperties
 import dev.vr.com.core.Theme
 import dev.vr.com.data.PopupItem
 import org.jetbrains.compose.resources.painterResource
-import vr.composeapp.generated.resources.Bold
-import vr.composeapp.generated.resources.ExtraBold
-import vr.composeapp.generated.resources.Light
-import vr.composeapp.generated.resources.Res
-import vr.composeapp.generated.resources.ic_close
-import vr.composeapp.generated.resources.top_background
+import vr.composeapp.generated.resources.*
 
 @Composable
 fun InfoPopup(
@@ -138,16 +133,12 @@ fun InfoPopup(
                 }
             }
 
-            Spacer(modifier = Modifier.width(4.dp))
-
-            androidx.compose.material.Icon(
-                painter = painterResource(Res.drawable.ic_close),
-                contentDescription = "close",
-                tint = Color.Unspecified,
+            CloseButton(
                 modifier = Modifier
-                    .size(40.dp)
-                    .clickable { onDismiss() }
-            )
+                    .padding(start = 8.dp)
+            ) {
+                onDismiss()
+            }
         }
     }
 }

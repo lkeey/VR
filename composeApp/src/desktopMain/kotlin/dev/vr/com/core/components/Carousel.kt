@@ -17,9 +17,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.vr.com.core.Theme
 import dev.vr.com.core.components.RoundedButton
-import dev.vr.com.core.components.VideoPopUp
+import dev.vr.com.core.components.GamePopUp
 import dev.vr.com.data.GameModel
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.Bold
 import vr.composeapp.generated.resources.Res
@@ -47,10 +48,8 @@ fun Carousel(
 //    }
 
     selectedGame?.let { game ->
-        VideoPopUp(
-            text = game.text,
-            videoUrl = game.movie,
-            description = "Вы выбрали ${game.description}"
+        GamePopUp(
+            gameModel = game,
         ) {
             selectedGame = null
         }
@@ -99,7 +98,7 @@ fun Carousel(
                                 text = game.text,
                                 fontWeight = FontWeight(700),
                                 fontSize = 36.sp,
-                                fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
+                                fontFamily = FontFamily(Font(Res.font.Bold)),
                                 color = Theme.colors.textInverse,
                                 textAlign = TextAlign.Center
                             )
@@ -120,7 +119,7 @@ fun Carousel(
                                         text = "СМОТРЕТЬ",
                                         color = Theme.colors.textInverse,
                                         fontSize = 26.sp,
-                                        fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
+                                        fontFamily = FontFamily(Font(Res.font.Bold)),
                                         fontWeight = FontWeight(700),
                                         textAlign = TextAlign.Center
                                     )
@@ -134,6 +133,7 @@ fun Carousel(
             }
         }
 
+        /* Buttons for next/previous */
         if (pagerState.currentPage > 0) {
             Icon(
                 painter = painterResource(Res.drawable.ic_btn_left),

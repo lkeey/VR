@@ -9,7 +9,7 @@ data class VRColors(
     val blueAction: Color = Color.Black,
     val grayBackground: Color = Color.Black,
     val textInverse: Color = Color.Black,
-
+    val secondaryText: Color = Color.Black,
 )
 
 val lightPalette = VRColors(
@@ -18,6 +18,7 @@ val lightPalette = VRColors(
     blueAction = Color(0xFF0C81B0),
     grayBackground = Color(0xFF1E1E1E),
     textInverse = Color.White,
+    secondaryText = Color(0xFFB3B3B3),
 )
 
 val darkPalette = VRColors(
@@ -26,8 +27,8 @@ val darkPalette = VRColors(
     blueAction = Color(0xFF0C81B0),
     grayBackground = Color(0xFF1E1E1E),
     textInverse = Color.White,
-
-    )
+    secondaryText = Color(0xFFB3B3B3),
+)
 
 val LocalColorProvider = staticCompositionLocalOf<VRColors> { error("No default implementation") }
 
