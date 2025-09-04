@@ -9,11 +9,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import dev.vr.com.core.Theme
+import vr.composeapp.generated.resources.Bold
+import vr.composeapp.generated.resources.Res
 
 @Composable
 fun VideoPopUp(
@@ -25,7 +28,7 @@ fun VideoPopUp(
     Dialog(onDismissRequest = onDismiss) {
         Surface(
             shape = RoundedCornerShape(16.dp),
-            color = Color.Black
+            color = Theme.colors.grayBackground
         ) {
             Column(
                 modifier = Modifier.padding(16.dp),
@@ -40,19 +43,19 @@ fun VideoPopUp(
                 )
                 Spacer(Modifier.height(8.dp))
 
-                Player(
-                    url = videoUrl,
-                    onFinish = {},
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(400.dp),
-                    isResumed = true,
-                    volume = 1f,
-                    speed = 1f,
-                    seek = 0f,
-                    isFullscreen = false,
-                    progressState = mutableStateOf( Progress(0f, 0))
-                )
+//                Player(
+//                    url = videoUrl,
+//                    onFinish = {},
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .height(400.dp),
+//                    isResumed = true,
+//                    volume = 1f,
+//                    speed = 1f,
+//                    seek = 0f,
+//                    isFullscreen = false,
+//                    progressState = mutableStateOf( Progress(0f, 0))
+//                )
 
                 Spacer(Modifier.height(8.dp))
 
@@ -69,9 +72,18 @@ fun VideoPopUp(
                 RoundedButton(
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally),
-                    text = "ЗАКРЫТЬ",
                     color = Theme.colors.pinkAction,
-                    onClick = onDismiss
+                    onClick = onDismiss,
+                    content = {
+                        Text(
+                            text = "ЗАКРЫТЬ",
+                            color = Theme.colors.textInverse,
+                            fontSize = 24.sp,
+                            fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
+                            fontWeight = FontWeight(700)
+                        )
+                    }
+
                 )
             }
         }
