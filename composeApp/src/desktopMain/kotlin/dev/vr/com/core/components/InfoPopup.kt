@@ -24,13 +24,14 @@ import dev.vr.com.core.Theme
 import dev.vr.com.data.PopupItem
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.Bold
+import vr.composeapp.generated.resources.ExtraBold
+import vr.composeapp.generated.resources.Light
 import vr.composeapp.generated.resources.Res
 import vr.composeapp.generated.resources.ic_close
 import vr.composeapp.generated.resources.top_background
 
 @Composable
 fun InfoPopup(
-    title: String,
     items: List<PopupItem>,
     onDismiss: () -> Unit
 ) {
@@ -72,16 +73,26 @@ fun InfoPopup(
                     ) {
                         RoundedText(
                             content = {
-                                Text(
-                                    text = "У НАС В ПАРКЕ:",
-                                    color = Theme.colors.textInverse,
-                                    fontSize = 64.sp,
-                                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
-                                    fontWeight = FontWeight(700),
+                                Row (
                                     modifier = Modifier
                                         .fillMaxWidth(),
-                                    textAlign = TextAlign.Center
-                                )
+                                    horizontalArrangement = Arrangement.Center
+                                ) {
+                                    Text(
+                                        text = "У НАС В",
+                                        color = Theme.colors.textInverse,
+                                        fontSize = 64.sp,
+                                        fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Light)),
+                                        fontWeight = FontWeight(600),
+                                    )
+                                    Text(
+                                        text = " ПАРКЕ:",
+                                        color = Theme.colors.textInverse,
+                                        fontSize = 64.sp,
+                                        fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.ExtraBold)),
+                                        fontWeight = FontWeight(800),
+                                    )
+                                }
                             },
                             color = Theme.colors.grayBackground,
                             shape = Res.drawable.top_background

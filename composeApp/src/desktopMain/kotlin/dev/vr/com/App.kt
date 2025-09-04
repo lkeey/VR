@@ -37,7 +37,6 @@ fun App() {
 
     if (showPopup) {
         InfoPopup(
-            title = "У НАС В ПАРКЕ:",
             items = listOf(
                 PopupItem(Res.drawable.ic_park_1, "VR аттракционы и автостимуляторы"),
                 PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
