@@ -1,7 +1,7 @@
-package dev.vr.com.core.components
+package dev.vr.com.core.components.overlay
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -20,8 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import dev.vr.com.core.Theme
+import dev.vr.com.core.theme.Theme
+import dev.vr.com.core.components.button.CloseButton
+import dev.vr.com.core.components.text.RoundedText
 import dev.vr.com.data.PopupItem
+import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.*
 
@@ -68,7 +70,7 @@ fun InfoPopup(
                     ) {
                         RoundedText(
                             content = {
-                                Row (
+                                Row(
                                     modifier = Modifier
                                         .fillMaxWidth(),
                                     horizontalArrangement = Arrangement.Center
@@ -77,14 +79,14 @@ fun InfoPopup(
                                         text = "У НАС В",
                                         color = Theme.colors.textInverse,
                                         fontSize = 64.sp,
-                                        fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Light)),
+                                        fontFamily = FontFamily(Font(Res.font.Light)),
                                         fontWeight = FontWeight(600),
                                     )
                                     Text(
                                         text = " ПАРКЕ:",
                                         color = Theme.colors.textInverse,
                                         fontSize = 64.sp,
-                                        fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.ExtraBold)),
+                                        fontFamily = FontFamily(Font(Res.font.ExtraBold)),
                                         fontWeight = FontWeight(800),
                                     )
                                 }
@@ -112,7 +114,7 @@ fun InfoPopup(
                                     .fillMaxWidth(),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
-                                androidx.compose.foundation.Image(
+                                Image(
                                     painter = painterResource(item.image),
                                     contentDescription = item.content,
                                 )

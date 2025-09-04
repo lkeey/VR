@@ -1,4 +1,4 @@
-package dev.vr.com.core.components
+package dev.vr.com.core.components.overlay
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

@@ -1,4 +1,4 @@
-package dev.vr.com.core.components
+package dev.vr.com.core.components.movie
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier

@@ -1,4 +1,4 @@
-package dev.vr.com.core.components
+package dev.vr.com.core.components.movie
 
 data class Progress(
     val fraction: Float,

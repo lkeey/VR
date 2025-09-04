@@ -1,4 +1,4 @@
-package dev.vr.com.core
+package dev.vr.com.core.theme
 
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color

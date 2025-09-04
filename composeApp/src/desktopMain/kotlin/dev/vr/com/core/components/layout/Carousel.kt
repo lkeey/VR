@@ -1,5 +1,6 @@
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -15,9 +16,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.vr.com.core.Theme
-import dev.vr.com.core.components.RoundedButton
-import dev.vr.com.core.components.GamePopUp
+import dev.vr.com.core.theme.Theme
+import dev.vr.com.core.components.button.RoundedButton
+import dev.vr.com.core.components.overlay.GamePopUp
 import dev.vr.com.data.GameModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.Font
@@ -158,7 +159,10 @@ fun Carousel(
                 modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .padding(start = 16.dp)
-                    .clickable {
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)
                         }

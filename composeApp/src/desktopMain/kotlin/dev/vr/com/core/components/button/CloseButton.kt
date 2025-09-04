@@ -1,4 +1,4 @@
-package dev.vr.com.core.components
+package dev.vr.com.core.components.button
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource

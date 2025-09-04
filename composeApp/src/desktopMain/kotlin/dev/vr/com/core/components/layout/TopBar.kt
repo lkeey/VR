@@ -1,4 +1,4 @@
-package dev.vr.com.core.components
+package dev.vr.com.core.components.layout
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -21,8 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import dev.vr.com.core.Theme
+import dev.vr.com.core.theme.Theme
+import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.navigation.Route
+import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.*
 
@@ -120,7 +122,7 @@ fun TopBar(
                     text = "ПРАЗДНИКИ И МЕРОПРИЯТИЯ",
                     color = Theme.colors.textInverse,
                     fontSize = 24.sp,
-                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
+                    fontFamily = FontFamily(Font(Res.font.Bold)),
                     fontWeight = FontWeight(700)
                 )
             }

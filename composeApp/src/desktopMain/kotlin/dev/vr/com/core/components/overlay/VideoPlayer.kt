@@ -1,4 +1,4 @@
-package dev.vr.com.core.components
+package dev.vr.com.core.components.overlay
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect

@@ -1,4 +1,4 @@
-package dev.vr.com.core
+package dev.vr.com.core.components.layout
 
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas

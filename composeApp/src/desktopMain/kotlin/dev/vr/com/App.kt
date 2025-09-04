@@ -14,17 +14,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import dev.vr.com.core.AnimatedGradientCirclesBackground
-import dev.vr.com.core.Theme
-import dev.vr.com.core.components.Banner
-import dev.vr.com.core.components.InfoPopup
-import dev.vr.com.core.components.RoundedButton
-import dev.vr.com.core.components.TopBar
+import dev.vr.com.core.components.layout.AnimatedGradientCirclesBackground
+import dev.vr.com.core.theme.Theme
+import dev.vr.com.core.components.overlay.Banner
+import dev.vr.com.core.components.overlay.InfoPopup
+import dev.vr.com.core.components.button.RoundedButton
+import dev.vr.com.core.components.layout.TopBar
 import dev.vr.com.data.PopupItem
 import dev.vr.com.navigation.Route
 import dev.vr.com.presentation.ArenaScreen
 import dev.vr.com.presentation.HolidaysScreen
 import dev.vr.com.presentation.ZoneScreen
+import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.*
 
@@ -37,25 +38,7 @@ fun App() {
 
     if (showPopup) {
         InfoPopup(
-            items = listOf(
-                PopupItem(Res.drawable.ic_park_1, "VR аттракционы и автостимуляторы"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-                PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-            )
+            items = getItems()
         ) {
             showPopup = false
         }
@@ -94,7 +77,7 @@ fun App() {
                             text = "VR АРЕНА",
                             fontWeight = FontWeight(800),
                             fontSize = 56.sp,
-                            fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.ExtraBold)),
+                            fontFamily = FontFamily(Font(Res.font.ExtraBold)),
                             color = Theme.colors.textInverse
                         )
                     },
@@ -103,7 +86,7 @@ fun App() {
                             text = "ЧТО ЭТО?",
                             fontWeight = FontWeight(400),
                             fontSize = 56.sp,
-                            fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Light)),
+                            fontFamily = FontFamily(Font(Res.font.Light)),
                             color = Theme.colors.textInverse
                         )
                     },
@@ -115,7 +98,7 @@ fun App() {
                                     text = "СМОТРЕТЬ",
                                     color = Theme.colors.textInverse,
                                     fontSize = 32.sp,
-                                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
+                                    fontFamily = FontFamily(Font(Res.font.Bold)),
                                     fontWeight = FontWeight(700)
                                 )
                             }
@@ -137,7 +120,7 @@ fun App() {
                             text = "УЗНАЙ О НАШИХ",
                             fontWeight = FontWeight(400),
                             fontSize = 56.sp,
-                            fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Light)),
+                            fontFamily = FontFamily(Font(Res.font.Light)),
                             color = Theme.colors.textInverse
                         )
                     },
@@ -146,7 +129,7 @@ fun App() {
                             text = "ПРЕИМУЩЕСТВАХ!",
                             fontWeight = FontWeight(700),
                             fontSize = 56.sp,
-                            fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.ExtraBold)),
+                            fontFamily = FontFamily(Font(Res.font.ExtraBold)),
                             color = Theme.colors.textInverse
                         )
                     },
@@ -158,7 +141,7 @@ fun App() {
                                     text = "СМОТРЕТЬ",
                                     color = Theme.colors.textInverse,
                                     fontSize = 32.sp,
-                                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
+                                    fontFamily = FontFamily(Font(Res.font.Bold)),
                                     fontWeight = FontWeight(700)
                                 )
                             }
@@ -207,4 +190,26 @@ fun App() {
         }
     }
 
+}
+
+fun getItems(): List<PopupItem> {
+    return listOf(
+        PopupItem(Res.drawable.ic_park_1, "VR аттракционы и автостимуляторы"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+    )
 }

@@ -1,4 +1,4 @@
-package dev.vr.com.core.components
+package dev.vr.com.core.components.overlay
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,7 +20,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import dev.vr.com.core.Theme
+import dev.vr.com.core.theme.Theme
+import dev.vr.com.core.components.button.CloseButton
 import dev.vr.com.data.GameModel
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource

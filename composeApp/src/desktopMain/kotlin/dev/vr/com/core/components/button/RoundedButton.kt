@@ -1,10 +1,8 @@
-package dev.vr.com.core.components
+package dev.vr.com.core.components.button
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -23,7 +21,11 @@ fun RoundedButton(
     onClick: () -> Unit
 ) {
     Box(
-        modifier = modifier,
+        modifier = modifier
+            .clickable(
+                indication = null,
+                interactionSource = remember { MutableInteractionSource() }
+            ) { onClick() },
         contentAlignment = Alignment.Center
     ) {
         Icon(
@@ -35,10 +37,6 @@ fun RoundedButton(
         Box(
             modifier = Modifier
                 .align(Alignment.Center)
-                .clickable(
-                    indication = null,
-                    interactionSource = remember { MutableInteractionSource() }
-                ) { onClick() }
         ) {
             content.invoke()
         }

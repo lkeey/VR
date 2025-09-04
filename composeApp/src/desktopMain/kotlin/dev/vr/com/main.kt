@@ -1,27 +1,33 @@
 package dev.vr.com
 
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
-import androidx.navigation.compose.rememberNavController
-import dev.vr.com.core.VRTheme
-import org.jetbrains.compose.resources.painterResource
-import vr.composeapp.generated.resources.Res
-import vr.composeapp.generated.resources.compose_multiplatform
-import vr.composeapp.generated.resources.logo_vs_arena
+import dev.vr.com.core.theme.VRTheme
+import javax.imageio.ImageIO
 
 
 fun main() = application {
+
+    val LOGO_NAME = "logo.png"
+
+    if (System.getProperty("os.name").lowercase().contains("mac")) {
+        val iconStream = object {}.javaClass.getResourceAsStream("/$LOGO_NAME")
+        val img = ImageIO.read(iconStream)
+        java.awt.Taskbar.getTaskbar().iconImage = img
+    }
+
     val windowState = rememberWindowState(
-        width = 1500.dp, height = 600.dp
+        width = 1500.dp, height = 1000.dp
     )
 
     Window(
         onCloseRequest = ::exitApplication,
-        icon = painterResource(Res.drawable.logo_vs_arena),
+        icon = painterResource("/$LOGO_NAME"),
         state = windowState,
-        title = "VR",
+        title = "VR Arena",
     ) {
         VRTheme {
             App()

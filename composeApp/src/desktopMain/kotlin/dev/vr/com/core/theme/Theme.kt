@@ -1,4 +1,4 @@
-package dev.vr.com.core
+package dev.vr.com.core.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
