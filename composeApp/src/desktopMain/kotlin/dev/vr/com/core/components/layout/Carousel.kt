@@ -30,6 +30,7 @@ import vr.composeapp.generated.resources.ic_btn_right
 
 @Composable
 fun Carousel(
+    modifier: Modifier,
     games: List<GameModel>,
 ) {
 
@@ -57,7 +58,8 @@ fun Carousel(
     }
 
     Box(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth(),
         contentAlignment = Alignment.Center
     ) {
 
@@ -76,7 +78,7 @@ fun Carousel(
                 pages[page].forEachIndexed { index, game ->
                     Box(
                         modifier = Modifier
-                            .size(400.dp)
+                            .weight(1f)
                             .clickable { selectedGame = game },
                         contentAlignment = Alignment.BottomCenter
                     ) {
@@ -129,6 +131,10 @@ fun Carousel(
                                 selectedGame = game
                             }
                         }
+                    }
+
+                    if (index != pages[page].lastIndex) {
+                        Spacer(modifier = Modifier.width(16.dp))
                     }
                 }
             }

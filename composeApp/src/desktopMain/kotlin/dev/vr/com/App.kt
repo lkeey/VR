@@ -34,16 +34,6 @@ fun App() {
 
     val navController = rememberNavController()
 
-    var showPopup by remember { mutableStateOf(false) }
-
-    if (showPopup) {
-        InfoPopup(
-            items = getItems()
-        ) {
-            showPopup = false
-        }
-    }
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -60,98 +50,6 @@ fun App() {
             TopBar(
                 navController = navController
             )
-
-            Row (
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 32.dp)
-                    .height(280.dp),
-            ) {
-                Banner(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight(),
-                    background = painterResource(Res.drawable.back_arena_1),
-                    title = {
-                        Text(
-                            text = "VR АРЕНА",
-                            fontWeight = FontWeight(800),
-                            fontSize = 56.sp,
-                            fontFamily = FontFamily(Font(Res.font.ExtraBold)),
-                            color = Theme.colors.textInverse
-                        )
-                    },
-                    description = {
-                        Text(
-                            text = "ЧТО ЭТО?",
-                            fontWeight = FontWeight(400),
-                            fontSize = 56.sp,
-                            fontFamily = FontFamily(Font(Res.font.Light)),
-                            color = Theme.colors.textInverse
-                        )
-                    },
-                    button = {
-                        RoundedButton(
-                            color = Theme.colors.pinkAction,
-                            content = {
-                                Text(
-                                    text = "СМОТРЕТЬ",
-                                    color = Theme.colors.textInverse,
-                                    fontSize = 32.sp,
-                                    fontFamily = FontFamily(Font(Res.font.Bold)),
-                                    fontWeight = FontWeight(700)
-                                )
-                            }
-                        ) {
-                            /* TODO */
-                        }
-                    }
-                )
-
-                Spacer(Modifier.width(32.dp))
-
-                Banner(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight(),
-                    background = painterResource(Res.drawable.back_arena_2),
-                    title = {
-                        Text(
-                            text = "УЗНАЙ О НАШИХ",
-                            fontWeight = FontWeight(400),
-                            fontSize = 56.sp,
-                            fontFamily = FontFamily(Font(Res.font.Light)),
-                            color = Theme.colors.textInverse
-                        )
-                    },
-                    description = {
-                        Text(
-                            text = "ПРЕИМУЩЕСТВАХ!",
-                            fontWeight = FontWeight(700),
-                            fontSize = 56.sp,
-                            fontFamily = FontFamily(Font(Res.font.ExtraBold)),
-                            color = Theme.colors.textInverse
-                        )
-                    },
-                    button = {
-                        RoundedButton(
-                            color = Theme.colors.blueAction,
-                            content = {
-                                Text(
-                                    text = "СМОТРЕТЬ",
-                                    color = Theme.colors.textInverse,
-                                    fontSize = 32.sp,
-                                    fontFamily = FontFamily(Font(Res.font.Bold)),
-                                    fontWeight = FontWeight(700)
-                                )
-                            }
-                        ) {
-                            showPopup = true
-                        }
-                    }
-                )
-            }
-
 
             NavHost(
                 navController = navController,

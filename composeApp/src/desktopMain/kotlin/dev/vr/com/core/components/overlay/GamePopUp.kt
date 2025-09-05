@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -45,7 +46,7 @@ fun GamePopUp(
             Box(
                 modifier = Modifier
                     .fillMaxWidth(0.5f)
-                    .fillMaxHeight(0.7f)
+                    .fillMaxHeight(0.9f)
                     .clip(
                         GenericShape { size, _ ->
                             // Размер среза угла (можешь регулировать)
@@ -89,7 +90,8 @@ fun GamePopUp(
                         modifier = Modifier
                             .fillMaxWidth(),
                         painter = painterResource(gameModel.image),
-                        contentDescription = gameModel.text
+                        contentDescription = gameModel.text,
+                        contentScale = ContentScale.Crop
                     )
 
                     Spacer(Modifier.height(12.dp))
@@ -116,7 +118,7 @@ fun GamePopUp(
                             fontFamily = FontFamily(Font(Res.font.Bold)),
                             fontWeight = FontWeight.W700,
                             textAlign = TextAlign.Start,
-                            textDecoration = TextDecoration.Underline // ✅
+                            textDecoration = TextDecoration.Underline
                         )
                     )
 
@@ -128,7 +130,6 @@ fun GamePopUp(
                         text = gameModel.description,
                         color = Theme.colors.secondaryText,
                         fontSize = 21.sp,
-                        textDecoration = TextDecoration.Underline,
                         fontFamily = FontFamily(Font(Res.font.Light)),
                         fontWeight = FontWeight(600),
                         textAlign = TextAlign.Start
