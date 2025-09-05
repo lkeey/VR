@@ -2,23 +2,14 @@ package dev.vr.com.presentation
 
 import Carousel
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -26,6 +17,7 @@ import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.overlay.Banner
 import dev.vr.com.core.components.overlay.InfoPopup
 import dev.vr.com.core.components.overlay.InfoVideoPopUp
+import dev.vr.com.core.components.text.RoundedText
 import dev.vr.com.core.theme.Theme
 import dev.vr.com.data.GameModel
 import dev.vr.com.getItems
@@ -57,6 +49,83 @@ fun ArenaScreen(
             onDismiss = {
                 showVideoPopup = false
 
+            },
+            firstColumn = {
+                Column {
+                    RoundedText(
+                        content = {
+                            Text(
+                                text = "ВАС ЖДУТ НЕРЕАЛЬНЫЕ ЭМОЦИИ",
+                                color = Theme.colors.textInverse,
+                                fontSize = 32.sp,
+                                fontFamily = FontFamily(Font(Res.font.Bold)),
+                                fontWeight = FontWeight(700),
+                            )
+                        },
+                        color = Theme.colors.blueAction,
+                        shape = Res.drawable.grafity_background
+                    )
+                    Text(
+                        text = "ОТ КОМАНДНЫХ СОСТЯЗАНИЙ\nНА ВИРТУАЛЬНОЙ АРЕНЕ",
+                        color = Theme.colors.textInverse,
+                        fontSize = 32.sp,
+                        fontFamily = FontFamily(Font(Res.font.Bold)),
+                        fontWeight = FontWeight(700),
+                    )
+                }
+            },
+            secondColumn = {
+                Column {
+                    Text(
+                        text = "VR ARENA",
+                        color = Theme.colors.textInverse,
+                        fontSize = 32.sp,
+                        fontFamily = FontFamily(Font(Res.font.ExtraBold)),
+                        fontWeight = FontWeight(800),
+                    )
+
+                    Text(
+                        text = "Большое игровое пространство, созданное для проведения захватывающих командных сражений \n" +
+                                "в виртуальной реальности и организации незабываемых праздничных мероприятий.",
+                        color = Theme.colors.secondaryText,
+                        fontSize = 24.sp,
+                        fontFamily = FontFamily(Font(Res.font.Light)),
+                        fontWeight = FontWeight(600),
+                    )
+                }
+            },
+            bottom = {
+                Column {
+                    Divider(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 16.dp),
+                        thickness = 2.dp,
+                        color = Theme.colors.secondaryGray
+                    )
+
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "Спортивно-соревновательная составляющая и эффект полного погружения",
+                        color = Theme.colors.blueAction,
+                        textAlign = TextAlign.Center,
+                        fontSize = 28.sp,
+                        fontFamily = FontFamily(Font(Res.font.Bold)),
+                        fontWeight = FontWeight(700),
+                    )
+
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = "в игру гарантировано подарят НЕЗАБЫВАЕМЫЕ ЭМОЦИИ всем участникам!",
+                        color = Theme.colors.textInverse,
+                        textAlign = TextAlign.Center,
+                        fontSize = 28.sp,
+                        fontFamily = FontFamily(Font(Res.font.Bold)),
+                        fontWeight = FontWeight(700),
+                    )
+                }
             }
         )
     }

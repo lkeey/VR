@@ -3,31 +3,26 @@ package dev.vr.com
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dev.vr.com.core.components.layout.AnimatedGradientCirclesBackground
-import dev.vr.com.core.theme.Theme
-import dev.vr.com.core.components.overlay.Banner
-import dev.vr.com.core.components.overlay.InfoPopup
-import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.layout.TopBar
+import dev.vr.com.core.theme.Theme
 import dev.vr.com.data.PopupItem
 import dev.vr.com.navigation.Route
 import dev.vr.com.presentation.ArenaScreen
 import dev.vr.com.presentation.HolidaysScreen
 import dev.vr.com.presentation.ZoneScreen
-import org.jetbrains.compose.resources.Font
-import org.jetbrains.compose.resources.painterResource
-import vr.composeapp.generated.resources.*
+import vr.composeapp.generated.resources.Res
+import vr.composeapp.generated.resources.ic_park_1
 
 @Composable
 fun App() {
