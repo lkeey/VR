@@ -79,8 +79,7 @@ fun TopBar(
 
         RoundedButton(
             modifier = Modifier
-                .weight(1f)
-                .padding(12.dp),
+                .weight(1f),
             color =
                 if (currentDestination == Route.Arena::class.qualifiedName) Theme.colors.blueAction
                 else Theme.colors.pinkAction,
@@ -97,8 +96,7 @@ fun TopBar(
 
         RoundedButton(
             modifier = Modifier
-                .weight(1f)
-                .padding(12.dp),
+                .weight(1f),
             color =
                 if (currentDestination == Route.Zone::class.qualifiedName) Theme.colors.blueAction
                 else Theme.colors.pinkAction,

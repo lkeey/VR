@@ -231,7 +231,28 @@ fun ArenaScreen(
             )
         }
 
+        /* TODO change to this code */
+//        RoundedButton(
+//            color = Theme.colors.pinkAction,
+//            content = {
+//                Icon(
+//                    painter = painterResource(Res.drawable.game_topic),
+//                    contentDescription = "games",
+//                    tint = Theme.colors.textInverse,
+//                    modifier = Modifier
+//                        .width(60.dp)
+//                )
+//            },
+//            innerPadding = PaddingValues(
+//                vertical = 12.dp,
+//                horizontal = 16.dp
+//            )
+//        ) { }
+
         Image(
+            modifier = Modifier
+                .padding(top = 4.dp)
+                .height(32.dp),
             painter = painterResource(Res.drawable.ic_btn_game),
             contentDescription = "banner background"
         )

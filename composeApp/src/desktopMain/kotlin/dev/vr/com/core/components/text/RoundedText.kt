@@ -24,6 +24,8 @@ fun RoundedText(
             painter = painterResource(shape),
             tint = color,
             contentDescription = null,
+            modifier = Modifier
+                .matchParentSize()
         )
 
         content.invoke()

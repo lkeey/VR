@@ -123,20 +123,35 @@ fun ZoneScreen(
                             fontFamily = FontFamily(Font(Res.font.Bold)),
                             fontWeight = FontWeight(700)
                         )
-                    }
+                    },
+                    innerPadding = PaddingValues(
+                        horizontal = 40.dp,
+                        vertical = 8.dp
+                    )
                 ) {
                     showVideoPopup = true
                 }
             }
         )
 
-        Image(
+        RoundedButton(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            painter = painterResource(Res.drawable.ic_btn_game_big),
-            contentDescription = "banner background"
-        )
+                .padding(top = 4.dp),
+            color = Theme.colors.pinkAction,
+            content = {
+                Icon(
+                    painter = painterResource(Res.drawable.game_topic),
+                    contentDescription = "games",
+                    tint = Theme.colors.textInverse,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            },
+            innerPadding = PaddingValues(
+                vertical = 4.dp
+            )
+        ) { }
+
 
         LazyVerticalGrid(
             columns = GridCells

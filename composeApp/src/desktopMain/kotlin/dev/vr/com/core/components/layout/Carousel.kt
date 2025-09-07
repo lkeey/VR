@@ -65,8 +65,7 @@ fun Carousel(
         HorizontalPager(
             state = pagerState,
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 12.dp),
+                .fillMaxWidth(),
             pageSpacing = 16.dp
         ) { page ->
             Row(
