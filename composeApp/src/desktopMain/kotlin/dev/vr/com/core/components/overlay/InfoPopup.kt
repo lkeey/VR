@@ -17,15 +17,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
-import dev.vr.com.core.theme.Theme
-import dev.vr.com.core.components.button.CloseButton
 import dev.vr.com.core.components.text.RoundedText
+import dev.vr.com.core.theme.Theme
 import dev.vr.com.data.PopupItem
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
-import vr.composeapp.generated.resources.*
+import vr.composeapp.generated.resources.ExtraBold
+import vr.composeapp.generated.resources.Light
+import vr.composeapp.generated.resources.Res
+import vr.composeapp.generated.resources.top_background
 
 @Composable
 fun InfoPopup(
@@ -33,114 +33,106 @@ fun InfoPopup(
     onDismiss: () -> Unit
 ) {
 
-    Dialog(
-        onDismissRequest = onDismiss,
-        properties = DialogProperties(usePlatformDefaultWidth = false)
+    VRPopUp(
+        onDismiss = onDismiss,
     ) {
-        Row {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.7f)
-                    .fillMaxHeight(0.7f)
-                    .clip(
-                        GenericShape { size, _ ->
-                            // Размер среза угла (можешь регулировать)
-                            val cutX = size.width * 0.05f
-                            val cutY = size.height * 0.1f
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .fillMaxHeight(0.7f)
+                .clip(
+                    GenericShape { size, _ ->
+                        // Размер среза угла (можешь регулировать)
+                        val cutX = size.width * 0.05f
+                        val cutY = size.height * 0.1f
 
-                            moveTo(0f, 0f)                 // левый верх
-                            lineTo(size.width, 0f)         // правый верх
-                            lineTo(size.width, size.height - cutY) // правая сторона вниз
-                            lineTo(size.width - cutX, size.height) // срезанный угол
-                            lineTo(0f, size.height)        // левый низ
-                            close()
-                        }
-                    )
-                    .background(Theme.colors.primaryBackground)
-                    .padding(20.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    // Header
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                    ) {
-                        RoundedText(
-                            content = {
-                                Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.Center
-                                ) {
-                                    Text(
-                                        text = "У НАС В",
-                                        color = Theme.colors.textInverse,
-                                        fontSize = 64.sp,
-                                        fontFamily = FontFamily(Font(Res.font.Light)),
-                                        fontWeight = FontWeight(600),
-                                    )
-                                    Text(
-                                        text = " ПАРКЕ:",
-                                        color = Theme.colors.textInverse,
-                                        fontSize = 64.sp,
-                                        fontFamily = FontFamily(Font(Res.font.ExtraBold)),
-                                        fontWeight = FontWeight(800),
-                                    )
-                                }
-                            },
-                            color = Theme.colors.grayBackground,
-                            shape = Res.drawable.top_background
-                        )
+                        moveTo(0f, 0f)                 // левый верх
+                        lineTo(size.width, 0f)         // правый верх
+                        lineTo(size.width, size.height - cutY) // правая сторона вниз
+                        lineTo(size.width - cutX, size.height) // срезанный угол
+                        lineTo(0f, size.height)        // левый низ
+                        close()
                     }
-
-                    Spacer(Modifier.height(16.dp))
-
-                    LazyVerticalGrid(
-                        columns = GridCells
-                            .Fixed(4),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(16.dp),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        contentPadding = PaddingValues(4.dp)
-                    ) {
-                        items(items) { item ->
-                            Column(
+                )
+                .background(Theme.colors.primaryBackground)
+                .padding(20.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                // Header
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                ) {
+                    RoundedText(
+                        content = {
+                            Row(
                                 modifier = Modifier
                                     .fillMaxWidth(),
-                                horizontalAlignment = Alignment.CenterHorizontally
+                                horizontalArrangement = Arrangement.Center
                             ) {
-                                Image(
-                                    painter = painterResource(item.image),
-                                    contentDescription = item.content,
-                                )
-
-                                Spacer(Modifier.height(8.dp))
-
                                 Text(
-                                    modifier = Modifier
-                                        .fillMaxWidth(),
-                                    text = item.content,
+                                    text = "У НАС В",
                                     color = Theme.colors.textInverse,
-                                    textAlign = TextAlign.Center
+                                    fontSize = 64.sp,
+                                    fontFamily = FontFamily(Font(Res.font.Light)),
+                                    fontWeight = FontWeight(600),
+                                )
+                                Text(
+                                    text = " ПАРКЕ:",
+                                    color = Theme.colors.textInverse,
+                                    fontSize = 64.sp,
+                                    fontFamily = FontFamily(Font(Res.font.ExtraBold)),
+                                    fontWeight = FontWeight(800),
                                 )
                             }
+                        },
+                        color = Theme.colors.grayBackground,
+                        shape = Res.drawable.top_background
+                    )
+                }
+
+                Spacer(Modifier.height(16.dp))
+
+                LazyVerticalGrid(
+                    columns = GridCells
+                        .Fixed(4),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    contentPadding = PaddingValues(4.dp)
+                ) {
+                    items(items) { item ->
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Image(
+                                painter = painterResource(item.image),
+                                contentDescription = item.content,
+                            )
+
+                            Spacer(Modifier.height(8.dp))
+
+                            Text(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                text = item.content,
+                                color = Theme.colors.textInverse,
+                                textAlign = TextAlign.Center
+                            )
                         }
                     }
-
                 }
-            }
 
-            CloseButton(
-                modifier = Modifier
-                    .padding(start = 8.dp)
-            ) {
-                onDismiss()
             }
         }
+
+
     }
 }

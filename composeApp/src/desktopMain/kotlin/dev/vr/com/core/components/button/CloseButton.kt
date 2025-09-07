@@ -24,7 +24,8 @@ fun CloseButton (
             .clickable(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() }
-            ) { onDismiss() }
-
+            ) {
+                onDismiss()
+            }
     )
 }

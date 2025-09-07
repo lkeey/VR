@@ -19,10 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.core.components.button.CloseButton
 import dev.vr.com.data.GameModel
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
@@ -36,41 +33,37 @@ fun GamePopUp(
     onDismiss: () -> Unit
 ) {
 
-    Dialog(
-        onDismissRequest = onDismiss,
-        properties = DialogProperties(usePlatformDefaultWidth = false)
+    VRPopUp(
+        onDismiss = onDismiss,
     ) {
-        Row (
-            verticalAlignment = Alignment.Top
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.5f)
-                    .fillMaxHeight(0.9f)
-                    .clip(
-                        GenericShape { size, _ ->
-                            // Размер среза угла (можешь регулировать)
-                            val cutX = size.width * 0.05f
-                            val cutY = size.height * 0.1f
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.5f)
+                .fillMaxHeight(0.9f)
+                .clip(
+                    GenericShape { size, _ ->
+                        // Размер среза угла (можешь регулировать)
+                        val cutX = size.width * 0.05f
+                        val cutY = size.height * 0.1f
 
-                            moveTo(0f, 0f)                 // левый верх
-                            lineTo(size.width, 0f)         // правый верх
-                            lineTo(size.width, size.height - cutY) // правая сторона вниз
-                            lineTo(size.width - cutX, size.height) // срезанный угол
-                            lineTo(0f, size.height)        // левый низ
-                            close()
-                        }
-                    )
-                    .background(Theme.colors.grayBackground)
-                    .padding(20.dp)
-                    .verticalScroll(rememberScrollState()),
-                contentAlignment = Alignment.Center
+                        moveTo(0f, 0f)                 // левый верх
+                        lineTo(size.width, 0f)         // правый верх
+                        lineTo(size.width, size.height - cutY) // правая сторона вниз
+                        lineTo(size.width - cutX, size.height) // срезанный угол
+                        lineTo(0f, size.height)        // левый низ
+                        close()
+                    }
+                )
+                .background(Theme.colors.grayBackground)
+                .padding(20.dp)
+                .verticalScroll(rememberScrollState()),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Column(
-                    modifier = Modifier
-                        .padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
 
 //                    Player(
 //                    url = videoUrl,
@@ -86,62 +79,54 @@ fun GamePopUp(
 //                    progressState = mutableStateOf( Progress(0f, 0))
 //                )
 
-                    Image(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        painter = painterResource(gameModel.image),
-                        contentDescription = gameModel.text,
-                        contentScale = ContentScale.Crop
-                    )
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    painter = painterResource(gameModel.image),
+                    contentDescription = gameModel.text,
+                    contentScale = ContentScale.Crop
+                )
 
-                    Spacer(Modifier.height(12.dp))
+                Spacer(Modifier.height(12.dp))
 
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        text = gameModel.text,
-                        color = Theme.colors.textInverse,
-                        fontSize = 40.sp,
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = gameModel.text,
+                    color = Theme.colors.textInverse,
+                    fontSize = 40.sp,
+                    fontFamily = FontFamily(Font(Res.font.Bold)),
+                    fontWeight = FontWeight(700),
+                    textAlign = TextAlign.Start
+                )
+
+                Spacer(Modifier.height(8.dp))
+
+                Text(
+                    text = "PROMO VIDEO",
+                    modifier = Modifier.fillMaxWidth(),
+                    style = TextStyle(
+                        color = Theme.colors.blueAction,
+                        fontSize = 28.sp,
                         fontFamily = FontFamily(Font(Res.font.Bold)),
-                        fontWeight = FontWeight(700),
-                        textAlign = TextAlign.Start
+                        fontWeight = FontWeight.W700,
+                        textAlign = TextAlign.Start,
+                        textDecoration = TextDecoration.Underline
                     )
+                )
 
-                    Spacer(Modifier.height(8.dp))
+                Spacer(Modifier.height(20.dp))
 
-                    Text(
-                        text = "PROMO VIDEO",
-                        modifier = Modifier.fillMaxWidth(),
-                        style = TextStyle(
-                            color = Theme.colors.blueAction,
-                            fontSize = 28.sp,
-                            fontFamily = FontFamily(Font(Res.font.Bold)),
-                            fontWeight = FontWeight.W700,
-                            textAlign = TextAlign.Start,
-                            textDecoration = TextDecoration.Underline
-                        )
-                    )
-
-                    Spacer(Modifier.height(20.dp))
-
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        text = gameModel.description,
-                        color = Theme.colors.secondaryText,
-                        fontSize = 21.sp,
-                        fontFamily = FontFamily(Font(Res.font.Light)),
-                        fontWeight = FontWeight(600),
-                        textAlign = TextAlign.Start
-                    )
-                }
-            }
-
-            CloseButton(
-                modifier = Modifier
-                    .padding(start = 8.dp)
-            ) {
-                onDismiss()
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = gameModel.description,
+                    color = Theme.colors.secondaryText,
+                    fontSize = 21.sp,
+                    fontFamily = FontFamily(Font(Res.font.Light)),
+                    fontWeight = FontWeight(600),
+                    textAlign = TextAlign.Start
+                )
             }
         }
     }

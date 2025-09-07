@@ -17,9 +17,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
-import dev.vr.com.core.components.button.CloseButton
 import dev.vr.com.core.theme.Theme
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.Font
@@ -38,113 +35,106 @@ fun InfoVideoPopUp (
     onCLick: () -> Unit,
 ) {
 
-    Dialog(
-        onDismissRequest = onDismiss,
-        properties = DialogProperties(usePlatformDefaultWidth = false)
+    VRPopUp(
+        onDismiss = onDismiss,
     ) {
-        Row {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .fillMaxHeight(0.8f)
-                    .clip(
-                        GenericShape { size, _ ->
-                            // Размер среза угла (можешь регулировать)
-                            val cutX = size.width * 0.05f
-                            val cutY = size.height * 0.1f
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.8f)
+                .fillMaxHeight(0.8f)
+                .clip(
+                    GenericShape { size, _ ->
+                        // Размер среза угла (можешь регулировать)
+                        val cutX = size.width * 0.05f
+                        val cutY = size.height * 0.1f
 
-                            moveTo(0f, 0f)                 // левый верх
-                            lineTo(size.width, 0f)         // правый верх
-                            lineTo(size.width, size.height - cutY) // правая сторона вниз
-                            lineTo(size.width - cutX, size.height) // срезанный угол
-                            lineTo(0f, size.height)        // левый низ
-                            close()
-                        }
-                    )
-                    .background(Theme.colors.grayBackground)
-                    .padding(20.dp),
-                contentAlignment = Alignment.Center
+                        moveTo(0f, 0f)                 // левый верх
+                        lineTo(size.width, 0f)         // правый верх
+                        lineTo(size.width, size.height - cutY) // правая сторона вниз
+                        lineTo(size.width - cutX, size.height) // срезанный угол
+                        lineTo(0f, size.height)        // левый низ
+                        close()
+                    }
+                )
+                .background(Theme.colors.grayBackground)
+                .padding(20.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Column (
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
             ) {
-                Column (
+                Box(
                     modifier = Modifier
-                        .verticalScroll(rememberScrollState())
+                        .fillMaxWidth()
                 ) {
-                    Box(
+                    Image(
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxWidth(),
+                        painter = painterResource(image),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Column (
+                        modifier = Modifier
+                            .align(Alignment.CenterEnd)
+                            .padding(end = 32.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Image(
+                        Icon(
+                            painter = painterResource(Res.drawable.ic_play),
+                            contentDescription = "play",
+                            tint = Color.Unspecified,
                             modifier = Modifier
-                                .fillMaxWidth(),
-                            painter = painterResource(image),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop
+                                .height(100.dp)
+                                .clickable (
+                                    indication = null,
+                                    interactionSource = remember { MutableInteractionSource() }
+                                ) {
+                                    onCLick()
+                                }
                         )
 
-                        Column (
+                        Text(
                             modifier = Modifier
-                                .align(Alignment.CenterEnd)
-                                .padding(end = 32.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Icon(
-                                painter = painterResource(Res.drawable.ic_play),
-                                contentDescription = "play",
-                                tint = Color.Unspecified,
-                                modifier = Modifier
-                                    .height(100.dp)
-                                    .clickable (
-                                        indication = null,
-                                        interactionSource = remember { MutableInteractionSource() }
-                                    ) {
-                                        onCLick()
-                                    }
-                            )
-
-                            Text(
-                                modifier = Modifier
-                                    .padding(top = 4.dp),
-                                text = "ВИДЕО",
-                                color = Theme.colors.textInverse,
-                                fontSize = 32.sp,
-                                fontFamily = FontFamily(Font(Res.font.Bold)),
-                                fontWeight = FontWeight(700),
-                            )
-                        }
+                                .padding(top = 4.dp),
+                            text = "ВИДЕО",
+                            color = Theme.colors.textInverse,
+                            fontSize = 32.sp,
+                            fontFamily = FontFamily(Font(Res.font.Bold)),
+                            fontWeight = FontWeight(700),
+                        )
                     }
-
-
-                    Row(
-                        modifier = Modifier
-                            .padding(top = 12.dp)
-                            .fillMaxWidth()
-                    ) {
-                        Column (
-                            modifier = Modifier
-                                .weight(1f)
-                        ) {
-                            firstColumn()
-                        }
-
-                        Column (
-                            modifier = Modifier
-                                .weight(1f)
-                        ) {
-                            secondColumn()
-                        }
-                    }
-
-                    bottom()
-
                 }
-            }
 
-            CloseButton(
-                modifier = Modifier
-                    .padding(start = 8.dp)
-            ) {
-                onDismiss()
+
+                Row(
+                    modifier = Modifier
+                        .padding(top = 12.dp)
+                        .fillMaxWidth()
+                ) {
+                    Column (
+                        modifier = Modifier
+                            .weight(1f)
+                    ) {
+                        firstColumn()
+                    }
+
+                    Column (
+                        modifier = Modifier
+                            .weight(1f)
+                    ) {
+                        secondColumn()
+                    }
+                }
+
+                bottom()
+
             }
         }
+
+
+
     }
 }
