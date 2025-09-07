@@ -31,7 +31,7 @@ import vr.composeapp.generated.resources.*
 
 @Composable
 fun ZoneScreen(
-    navController: NavController
+    modifier: Modifier = Modifier
 ) {
 
     var showVideoPopup by remember { mutableStateOf(false) }
@@ -90,10 +90,10 @@ fun ZoneScreen(
 
     Column {
         Banner(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.4f),
-            background = painterResource(Res.drawable.zone_background),
+            background = painterResource(Res.drawable.banner_zone),
             title = {
                 Text(
                     text = "VR ZONE",
@@ -108,7 +108,7 @@ fun ZoneScreen(
                     text = "ЧТО ЭТО?",
                     fontWeight = FontWeight(700),
                     fontSize = 56.sp,
-                    fontFamily = FontFamily(Font(Res.font.Bold)),
+                    fontFamily = FontFamily(Font(Res.font.Light)),
                     color = Theme.colors.textInverse
                 )
             },

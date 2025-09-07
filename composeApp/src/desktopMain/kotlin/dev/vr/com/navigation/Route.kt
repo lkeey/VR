@@ -5,12 +5,12 @@ import kotlinx.serialization.Serializable
 sealed interface Route {
 
     @Serializable
-    data object Arena: Route
+    object Arena: Route
 
     @Serializable
-    data object Zone: Route
+    object Zone: Route
 
     @Serializable
-    data object Holidays: Route
+    object Holidays: Route
 
 }

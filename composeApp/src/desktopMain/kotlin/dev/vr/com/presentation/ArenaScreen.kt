@@ -27,7 +27,7 @@ import vr.composeapp.generated.resources.*
 
 @Composable
 fun ArenaScreen(
-    navController: NavController
+    modifier: Modifier = Modifier
 ) {
     var showInfoPopup by remember { mutableStateOf(false) }
     var showVideoPopup by remember { mutableStateOf(false) }
@@ -130,7 +130,9 @@ fun ArenaScreen(
         )
     }
 
-    Column {
+    Column (
+        modifier = modifier
+    ) {
 
         Row (
             modifier = Modifier

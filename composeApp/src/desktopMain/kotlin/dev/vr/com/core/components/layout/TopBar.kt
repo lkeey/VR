@@ -7,15 +7,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.theme.Theme
 import dev.vr.com.navigation.Route
@@ -24,11 +21,12 @@ import vr.composeapp.generated.resources.*
 
 @Composable
 fun TopBar(
-    navController: NavHostController
+    currentRoute: Route,
+    onNavigate: (Route) -> Unit,
 ) {
 
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination?.route
+//    val navBackStackEntry by navController.currentBackStackEntryAsState()
+//    val currentDestination = navBackStackEntry?.destination?.route
 
     Row(
         modifier = Modifier
@@ -56,7 +54,7 @@ fun TopBar(
     ) {
         Icon(
             modifier = Modifier
-                .weight(0.5f)
+                .weight(0.4f)
                 .height(60.dp),
             tint = Color.Unspecified,
             painter = painterResource(Res.drawable.logo_vs_arena),
@@ -65,13 +63,7 @@ fun TopBar(
 
         Icon(
             modifier = Modifier
-                .weight(0.5f)
-                .clickable (
-                    indication = null,
-                    interactionSource = remember { MutableInteractionSource() }
-                ){
-                    /* TODO */
-                },
+                .weight(0.6f),
             tint = Color.Unspecified,
             painter = painterResource(Res.drawable.name_top),
             contentDescription = "name"
@@ -81,7 +73,7 @@ fun TopBar(
             modifier = Modifier
                 .weight(1f),
             color =
-                if (currentDestination == Route.Arena::class.qualifiedName) Theme.colors.blueAction
+                if (currentRoute == Route.Arena) Theme.colors.blueAction
                 else Theme.colors.pinkAction,
             content = {
                 Icon(
@@ -91,14 +83,14 @@ fun TopBar(
                 )
             }
         ) {
-            navController.navigate(Route.Arena)
+            onNavigate(Route.Arena)
         }
 
         RoundedButton(
             modifier = Modifier
                 .weight(1f),
             color =
-                if (currentDestination == Route.Zone::class.qualifiedName) Theme.colors.blueAction
+                if (currentRoute == Route.Zone) Theme.colors.blueAction
                 else Theme.colors.pinkAction,
             content = {
                 Icon(
@@ -108,7 +100,7 @@ fun TopBar(
                 )
             }
         ) {
-            navController.navigate(Route.Zone)
+            onNavigate(Route.Zone)
         }
 
         RoundedButton(
@@ -116,7 +108,7 @@ fun TopBar(
                 .weight(2f)
                 .padding(12.dp),
             color =
-                if (currentDestination == Route.Holidays::class.qualifiedName) Theme.colors.blueAction
+                if (currentRoute == Route.Holidays) Theme.colors.blueAction
                 else Theme.colors.pinkAction,
             content = {
                 Icon(
@@ -129,7 +121,7 @@ fun TopBar(
                 )
             }
         ) {
-            navController.navigate(Route.Holidays)
+            onNavigate(Route.Holidays)
         }
 
         Icon(

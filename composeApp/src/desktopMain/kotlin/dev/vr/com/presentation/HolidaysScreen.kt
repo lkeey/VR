@@ -23,7 +23,7 @@ import vr.composeapp.generated.resources.*
 
 @Composable
 fun HolidaysScreen(
-    navController: NavController
+    modifier: Modifier = Modifier
 ) {
     var showVideoPopup by remember { mutableStateOf(false) }
 
@@ -82,10 +82,10 @@ fun HolidaysScreen(
 
     Column {
         Banner(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .fillMaxHeight(0.4f),
-            background = painterResource(Res.drawable.zone_background),
+            background = painterResource(Res.drawable.holidays_background),
             title = {
                 Text(
                     text = "ПРАЗДНИКИ И",
