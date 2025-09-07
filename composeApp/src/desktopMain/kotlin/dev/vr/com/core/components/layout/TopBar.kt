@@ -127,8 +127,7 @@ fun TopBar(
                     contentDescription = "arena",
                     tint = Theme.colors.textInverse
                 )
-            },
-            shape = Res.drawable.rounded_2x
+            }
         ) {
             navController.navigate(Route.Holidays)
         }

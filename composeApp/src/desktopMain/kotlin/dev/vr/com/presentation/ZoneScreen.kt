@@ -92,7 +92,7 @@ fun ZoneScreen(
         Banner(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(280.dp),
+                .fillMaxHeight(0.4f),
             background = painterResource(Res.drawable.zone_background),
             title = {
                 Text(
@@ -184,6 +184,90 @@ fun ZoneScreen(
 
 private fun getGames() : List<GameModel> {
     return listOf(
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
+        GameModel(
+            image = Res.drawable.zone1,
+            movie = "1.mp4",
+            text = "ALYX",
+            description = "ALYX описание"
+        ),
         GameModel(
             image = Res.drawable.zone1,
             movie = "1.mp4",
