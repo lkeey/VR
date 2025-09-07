@@ -172,7 +172,11 @@ fun ArenaScreen(
                                 fontFamily = FontFamily(Font(Res.font.Bold)),
                                 fontWeight = FontWeight(700)
                             )
-                        }
+                        },
+                        innerPadding = PaddingValues(
+                            horizontal = 40.dp,
+                            vertical = 8.dp
+                        )
                     ) {
                         showVideoPopup = true
                     }
@@ -215,7 +219,11 @@ fun ArenaScreen(
                                 fontFamily = FontFamily(Font(Res.font.Bold)),
                                 fontWeight = FontWeight(700)
                             )
-                        }
+                        },
+                        innerPadding = PaddingValues(
+                            horizontal = 40.dp,
+                            vertical = 8.dp
+                        )
                     ) {
                         showInfoPopup = true
                     }

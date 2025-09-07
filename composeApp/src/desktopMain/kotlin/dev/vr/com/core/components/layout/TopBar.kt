@@ -1,20 +1,18 @@
 package dev.vr.com.core.components.layout
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -36,6 +34,7 @@ fun TopBar(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 20.dp)
+            .height(100.dp)
             .clip(
                 GenericShape { size, _ ->
                     // Размер среза угла
@@ -55,16 +54,33 @@ fun TopBar(
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
+        Icon(
             modifier = Modifier
-                .weight(0.5f),
+                .weight(0.5f)
+                .height(60.dp),
+            tint = Color.Unspecified,
             painter = painterResource(Res.drawable.logo_vs_arena),
             contentDescription = "logo"
         )
 
+        Icon(
+            modifier = Modifier
+                .weight(0.5f)
+                .clickable (
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() }
+                ){
+                    /* TODO */
+                },
+            tint = Color.Unspecified,
+            painter = painterResource(Res.drawable.name_top),
+            contentDescription = "name"
+        )
+
         RoundedButton(
             modifier = Modifier
-                .weight(1f),
+                .weight(1f)
+                .padding(12.dp),
             color =
                 if (currentDestination == Route.Arena::class.qualifiedName) Theme.colors.blueAction
                 else Theme.colors.pinkAction,
@@ -74,13 +90,6 @@ fun TopBar(
                     contentDescription = "arena",
                     tint = Theme.colors.textInverse
                 )
-//                Text(
-//                    text = "VR ARENA",
-//                    color = Theme.colors.textInverse,
-//                    fontSize = 24.sp,
-//                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
-//                    fontWeight = FontWeight(700)
-//                )
             }
         ) {
             navController.navigate(Route.Arena)
@@ -88,7 +97,8 @@ fun TopBar(
 
         RoundedButton(
             modifier = Modifier
-                .weight(1f),
+                .weight(1f)
+                .padding(12.dp),
             color =
                 if (currentDestination == Route.Zone::class.qualifiedName) Theme.colors.blueAction
                 else Theme.colors.pinkAction,
@@ -98,23 +108,15 @@ fun TopBar(
                     contentDescription = "arena",
                     tint = Theme.colors.textInverse
                 )
-//                Text(
-//                    text = "VR ZONE",
-//                    color = Theme.colors.textInverse,
-//                    fontSize = 24.sp,
-//                    fontFamily = FontFamily(org.jetbrains.compose.resources.Font(Res.font.Bold)),
-//                    fontWeight = FontWeight(700)
-//                )
             }
-            ,
-//            shape = Res.drawable.rounded_2x
         ) {
             navController.navigate(Route.Zone)
         }
 
         RoundedButton(
             modifier = Modifier
-                .weight(2f),
+                .weight(2f)
+                .padding(12.dp),
             color =
                 if (currentDestination == Route.Holidays::class.qualifiedName) Theme.colors.blueAction
                 else Theme.colors.pinkAction,
@@ -132,14 +134,18 @@ fun TopBar(
             navController.navigate(Route.Holidays)
         }
 
-        Image(
+        Icon(
             modifier = Modifier
                 .weight(0.5f)
-                .clickable {
+                .clickable (
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() }
+                ) {
                     /* TODO */
                 }
-                .size(60.dp),
-            painter = painterResource(Res.drawable.ic_btn_settings),
+                .height(60.dp),
+            tint = Color.Unspecified,
+            painter = painterResource(Res.drawable.ic_settings),
             contentDescription = "settings"
         )
     }

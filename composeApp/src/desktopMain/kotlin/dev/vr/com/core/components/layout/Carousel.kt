@@ -13,12 +13,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.vr.com.core.theme.Theme
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.overlay.GamePopUp
+import dev.vr.com.core.theme.Theme
 import dev.vr.com.data.GameModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.Font
@@ -80,7 +79,7 @@ fun Carousel(
                         modifier = Modifier
                             .weight(1f)
                             .clickable { selectedGame = game },
-                        contentAlignment = Alignment.BottomCenter
+                        contentAlignment = Alignment.BottomCenter,
                     ) {
                         Image(
                             modifier = Modifier
@@ -92,22 +91,21 @@ fun Carousel(
 
                         Column(
                             modifier = Modifier
+                                .fillMaxWidth()
                                 .padding(20.dp),
-                            verticalArrangement = Arrangement.Center
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
                                 text = game.text,
                                 fontWeight = FontWeight(700),
                                 fontSize = 36.sp,
                                 fontFamily = FontFamily(Font(Res.font.Bold)),
                                 color = Theme.colors.textInverse,
-                                textAlign = TextAlign.Center
                             )
 
                             Spacer(
-                                Modifier.height(16.dp)
+                                Modifier.height(8.dp)
                             )
 
                             RoundedButton(
@@ -117,16 +115,17 @@ fun Carousel(
                                 },
                                 content = {
                                     Text(
-                                        modifier = Modifier
-                                            .fillMaxWidth(),
                                         text = "СМОТРЕТЬ",
                                         color = Theme.colors.textInverse,
                                         fontSize = 26.sp,
                                         fontFamily = FontFamily(Font(Res.font.Bold)),
                                         fontWeight = FontWeight(700),
-                                        textAlign = TextAlign.Center
                                     )
-                                }
+                                },
+                                innerPadding = PaddingValues(
+                                    horizontal = 32.dp,
+                                    vertical = 8.dp
+                                )
                             ) {
                                 selectedGame = game
                             }
