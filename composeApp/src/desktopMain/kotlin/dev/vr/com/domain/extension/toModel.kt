@@ -16,11 +16,9 @@ fun GameEntity.toModel(
 }
 
 fun GameModel.toEntity(
-    id: Long = 0L,
     imageConverter: (DrawableResource) -> ByteArray
 ): GameEntity {
     return GameEntity(
-        id = id,
         name = text,
         description = description,
         imageData = imageConverter(image),

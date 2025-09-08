@@ -46,7 +46,7 @@ class GamesViewModel(
 
     private fun addGame(game: GameModel) {
         viewModelScope.launch {
-            repository.addGame(game)
+
         }
     }
 
