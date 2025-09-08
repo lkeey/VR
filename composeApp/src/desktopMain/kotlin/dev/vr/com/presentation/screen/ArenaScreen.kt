@@ -1,4 +1,4 @@
-package dev.vr.com.presentation
+package dev.vr.com.presentation.screen
 
 import Carousel
 import androidx.compose.foundation.Image
@@ -12,14 +12,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.overlay.Banner
 import dev.vr.com.core.components.overlay.InfoPopup
 import dev.vr.com.core.components.overlay.InfoVideoPopUp
 import dev.vr.com.core.components.text.RoundedText
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.data.GameModel
+import dev.vr.com.domain.model.GameModel
 import dev.vr.com.getItems
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource

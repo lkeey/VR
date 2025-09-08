@@ -1,4 +1,4 @@
-package dev.vr.com.navigation
+package dev.vr.com.presentation.navigation
 
 import kotlinx.serialization.Serializable
 

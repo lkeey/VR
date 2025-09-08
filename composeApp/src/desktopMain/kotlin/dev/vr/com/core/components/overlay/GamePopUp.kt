@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.data.GameModel
+import dev.vr.com.domain.model.GameModel
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.Bold
@@ -39,7 +39,7 @@ fun GamePopUp(
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.5f)
-                .fillMaxHeight(0.9f)
+                .fillMaxHeight(0.8f)
                 .clip(
                     GenericShape { size, _ ->
                         // Размер среза угла (можешь регулировать)
@@ -81,7 +81,8 @@ fun GamePopUp(
 
                 Image(
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .heightIn(max = 400.dp),
                     painter = painterResource(gameModel.image),
                     contentDescription = gameModel.text,
                     contentScale = ContentScale.Crop

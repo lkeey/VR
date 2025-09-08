@@ -1,4 +1,4 @@
-package dev.vr.com.data
+package dev.vr.com.data.model
 
 import org.jetbrains.compose.resources.DrawableResource
 

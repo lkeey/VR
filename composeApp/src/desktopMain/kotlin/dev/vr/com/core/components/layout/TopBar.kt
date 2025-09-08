@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.navigation.Route
+import dev.vr.com.presentation.navigation.Route
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.*
 
@@ -49,7 +49,7 @@ fun TopBar(
             )
             .background(Theme.colors.grayBackground)
             .padding(vertical = 4.dp),
-        horizontalArrangement = Arrangement.SpaceAround,
+        horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -105,7 +105,7 @@ fun TopBar(
 
         RoundedButton(
             modifier = Modifier
-                .weight(2f)
+                .weight(1.75f)
                 .padding(12.dp),
             color =
                 if (currentRoute == Route.Holidays) Theme.colors.blueAction
@@ -119,7 +119,11 @@ fun TopBar(
                     contentDescription = "arena",
                     tint = Theme.colors.textInverse
                 )
-            }
+            },
+            innerPadding = PaddingValues(
+                horizontal = 16.dp,
+                vertical = 14.dp
+            )
         ) {
             onNavigate(Route.Holidays)
         }

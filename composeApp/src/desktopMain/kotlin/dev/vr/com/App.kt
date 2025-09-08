@@ -19,11 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.vr.com.core.components.layout.TopBar
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.data.PopupItem
-import dev.vr.com.navigation.Route
-import dev.vr.com.presentation.ArenaScreen
-import dev.vr.com.presentation.HolidaysScreen
-import dev.vr.com.presentation.ZoneScreen
+import dev.vr.com.data.model.PopupItem
+import dev.vr.com.presentation.navigation.Route
+import dev.vr.com.presentation.screen.ArenaScreen
+import dev.vr.com.presentation.screen.HolidaysScreen
+import dev.vr.com.presentation.screen.ZoneScreen
 import vr.composeapp.generated.resources.Res
 import vr.composeapp.generated.resources.ic_park_1
 
@@ -64,14 +64,13 @@ fun App() {
                 }
 
                 slideInHorizontally(
-                                initialOffsetX = { fullWidth -> if (forward) fullWidth else -fullWidth },
-                                animationSpec = tween(300)
-                            ).togetherWith(
-                    slideOutHorizontally(
-                                targetOffsetX = { fullWidth -> if (forward) -fullWidth else fullWidth },
-                                animationSpec = tween(300)
-                            )
-                )
+                    initialOffsetX = { fullWidth -> if (forward) fullWidth else -fullWidth },
+                    animationSpec = tween(300)
+                ).togetherWith(
+        slideOutHorizontally(
+                    targetOffsetX = { fullWidth -> if (forward) -fullWidth else fullWidth },
+                    animationSpec = tween(300)
+                ))
             }
         ) { target ->
             when (target) {
@@ -80,41 +79,6 @@ fun App() {
                 Route.Holidays -> HolidaysScreen()
             }
         }
-
-//        NavHost(
-//            navController = navController,
-//            startDestination = Route.Arena,
-//            modifier = Modifier
-//                .fillMaxSize()
-//        ) {
-//
-//            composable<Route.Zone>(
-//                exitTransition = { slideOutHorizontally() },
-//                popEnterTransition = { slideInHorizontally() }
-//            ) {
-//                ZoneScreen(
-//                    navController = navController
-//                )
-//            }
-//
-//            composable<Route.Arena>(
-//                exitTransition = { slideOutHorizontally() },
-//                popEnterTransition = { slideInHorizontally() }
-//            ) {
-//                ArenaScreen(
-//                    navController = navController
-//                )
-//            }
-//
-//            composable<Route.Holidays>(
-//                exitTransition = { slideOutHorizontally() },
-//                popEnterTransition = { slideInHorizontally() }
-//            ) {
-//                HolidaysScreen(
-//                    navController = navController
-//                )
-//            }
-//        }
     }
 
 }

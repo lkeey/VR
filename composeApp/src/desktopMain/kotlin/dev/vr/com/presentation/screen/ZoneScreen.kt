@@ -1,4 +1,4 @@
-package dev.vr.com.presentation
+package dev.vr.com.presentation.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -18,13 +18,13 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.overlay.Banner
+import dev.vr.com.core.components.overlay.GamePopUp
 import dev.vr.com.core.components.overlay.InfoVideoPopUp
 import dev.vr.com.core.components.text.RoundedText
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.data.GameModel
+import dev.vr.com.domain.model.GameModel
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.*
@@ -33,6 +33,7 @@ import vr.composeapp.generated.resources.*
 fun ZoneScreen(
     modifier: Modifier = Modifier
 ) {
+    var selectedGame by remember { mutableStateOf<GameModel?>(null) }
 
     var showVideoPopup by remember { mutableStateOf(false) }
 
@@ -86,6 +87,15 @@ fun ZoneScreen(
             },
             bottom = { }
         )
+    }
+
+
+    selectedGame?.let { game ->
+        GamePopUp(
+            gameModel = game,
+        ) {
+            selectedGame = null
+        }
     }
 
     Column {
@@ -163,21 +173,21 @@ fun ZoneScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(4.dp)
         ) {
-            items(getGames()) { item ->
+            items(getGames()) { game ->
                 Box (
                     modifier = Modifier
                         .clickable (
                             indication = null,
                             interactionSource = remember { MutableInteractionSource() }
                         ) {
-                            /* TODO */
+                            selectedGame = game
                         }
                 ) {
                     Image(
                         modifier = Modifier
                             .fillMaxSize(),
-                        painter = painterResource(item.image),
-                        contentDescription = item.text,
+                        painter = painterResource(game.image),
+                        contentDescription = game.text,
                         contentScale = ContentScale.Crop
                     )
 

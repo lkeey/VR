@@ -6,9 +6,9 @@
 //import androidx.compose.runtime.Composable
 //import androidx.compose.ui.Modifier
 //import androidx.navigation.NavController
-//import dev.vr.com.presentation.ArenaScreen
-//import dev.vr.com.presentation.HolidaysScreen
-//import dev.vr.com.presentation.ZoneScreen
+//import dev.vr.com.presentation.screen.ArenaScreen
+//import dev.vr.com.presentation.screen.HolidaysScreen
+//import dev.vr.com.presentation.screen.ZoneScreen
 //
 //@Composable
 //fun VRNavHost (

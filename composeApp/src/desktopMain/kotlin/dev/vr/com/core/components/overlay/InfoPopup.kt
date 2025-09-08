@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.vr.com.core.components.text.RoundedText
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.data.PopupItem
+import dev.vr.com.data.model.PopupItem
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.ExtraBold

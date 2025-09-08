@@ -4,9 +4,8 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-
     alias(libs.plugins.jetbrains.kotlin.serialization)
-
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -25,16 +24,22 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
 
-            implementation(libs.jetbrains.compose.navigation)
-
             implementation(libs.kotlinx.serialization.json)
+
+            // movie
+            implementation("uk.co.caprica:vlcj:4.7.0")
+
+            // db
+            implementation("app.cash.sqldelight:runtime:2.0.2")
+            implementation("app.cash.sqldelight:sqlite-driver:2.0.2")
+            implementation("app.cash.sqldelight:coroutines-extensions:2.0.2")
 
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
 
-            implementation("uk.co.caprica:vlcj:4.7.0")
+
         }
     }
 }
@@ -52,3 +57,12 @@ compose.desktop {
         }
     }
 }
+
+sqldelight {
+    databases {
+        create("VRDatabase") {
+            packageName.set("dev.vr.com.db")
+        }
+    }
+}
+
