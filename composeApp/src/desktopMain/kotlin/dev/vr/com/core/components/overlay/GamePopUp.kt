@@ -79,14 +79,14 @@ fun GamePopUp(
 //                    progressState = mutableStateOf( Progress(0f, 0))
 //                )
 
-                Image(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(max = 400.dp),
-                    painter = painterResource(gameModel.image),
-                    contentDescription = gameModel.text,
-                    contentScale = ContentScale.Crop
-                )
+//                Image(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .heightIn(max = 400.dp),
+//                    painter = painterResource(gameModel.image),
+//                    contentDescription = gameModel.text,
+//                    contentScale = ContentScale.Crop
+//                )
 
                 Spacer(Modifier.height(12.dp))
 

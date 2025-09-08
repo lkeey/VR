@@ -173,161 +173,161 @@ fun ZoneScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(4.dp)
         ) {
-            items(getGames()) { game ->
-                Box (
-                    modifier = Modifier
-                        .clickable (
-                            indication = null,
-                            interactionSource = remember { MutableInteractionSource() }
-                        ) {
-                            selectedGame = game
-                        }
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        painter = painterResource(game.image),
-                        contentDescription = game.text,
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Icon(
-                        painter = painterResource(Res.drawable.ic_open),
-                        contentDescription = "open",
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .padding(4.dp),
-                        tint = Color.Unspecified
-                    )
-                }
-            }
+//            items(getGames()) { game ->
+//                Box (
+//                    modifier = Modifier
+//                        .clickable (
+//                            indication = null,
+//                            interactionSource = remember { MutableInteractionSource() }
+//                        ) {
+//                            selectedGame = game
+//                        }
+//                ) {
+////                    Image(
+////                        modifier = Modifier
+////                            .fillMaxSize(),
+////                        painter = painterResource(game.image),
+////                        contentDescription = game.text,
+////                        contentScale = ContentScale.Crop
+////                    )
+//
+//                    Icon(
+//                        painter = painterResource(Res.drawable.ic_open),
+//                        contentDescription = "open",
+//                        modifier = Modifier
+//                            .align(Alignment.BottomEnd)
+//                            .padding(4.dp),
+//                        tint = Color.Unspecified
+//                    )
+//                }
+//            }
         }
     }
 
 }
 
 
-private fun getGames() : List<GameModel> {
-    return listOf(
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-        GameModel(
-            image = Res.drawable.zone1,
-            movie = "1.mp4",
-            text = "ALYX",
-            description = "ALYX описание"
-        ),
-    )
-}
+//private fun getGames() : List<GameModel> {
+//    return listOf(
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//        GameModel(
+//            image = Res.drawable.zone1,
+//            movie = "1.mp4",
+//            text = "ALYX",
+//            description = "ALYX описание"
+//        ),
+//    )
+//}

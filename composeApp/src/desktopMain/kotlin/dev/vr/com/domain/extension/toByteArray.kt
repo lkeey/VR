@@ -1,8 +1,9 @@
 package dev.vr.com.domain.extension
 
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.graphics.toComposeImageBitmap
 import java.awt.image.BufferedImage
+import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import javax.imageio.ImageIO
 
@@ -17,6 +18,12 @@ fun ImageBitmap.toByteArray(): ByteArray {
 }
 
 fun byteArrayToImageBitmap(bytes: ByteArray): ImageBitmap {
-    val bufferedImage = ImageIO.read(bytes.inputStream())
-    return bufferedImage.asImageBitmap()
+    val bufferedImage: BufferedImage =
+        ImageIO.read(ByteArrayInputStream(bytes)) ?: throw IllegalArgumentException("Invalid image bytes")
+
+    return bufferedImage.toComposeImageBitmap()
+}
+
+fun BufferedImage.toComposeImageBitmap(): ImageBitmap {
+    return this.toComposeImageBitmap()
 }

@@ -22,6 +22,7 @@ import dev.vr.com.core.theme.Theme
 import dev.vr.com.data.database.DatabaseFactory
 import dev.vr.com.data.model.PopupItem
 import dev.vr.com.data.repository.GameRepositoryImpl
+import dev.vr.com.domain.model.GameModel
 import dev.vr.com.domain.usecase.AddGameUseCase
 import dev.vr.com.presentation.navigation.Route
 import dev.vr.com.presentation.screen.ArenaScreen
@@ -36,11 +37,7 @@ fun App() {
 
     // DI
     val db = DatabaseFactory.createDatabase()
-    val addGameUseCase = AddGameUseCase(GameRepositoryImpl(db))
-    println(addGameUseCase.invoke(
-        game =
-    ))
-
+//    val addGameUseCase = AddGameUseCase(GameRepositoryImpl(db))
 
     var currentRoute by remember { mutableStateOf<Route>(Route.Arena) }
     var previousRoute by remember { mutableStateOf<Route?>(null) }

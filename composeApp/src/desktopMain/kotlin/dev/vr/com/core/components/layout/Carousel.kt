@@ -80,13 +80,14 @@ fun Carousel(
                             .clickable { selectedGame = game },
                         contentAlignment = Alignment.BottomCenter,
                     ) {
-                        Image(
-                            modifier = Modifier
-                                .fillMaxSize(),
-                            contentScale = ContentScale.Crop,
-                            painter = painterResource(game.image),
-                            contentDescription = "game image",
-                        )
+                        /*TODO*/
+//                        Image(
+//                            modifier = Modifier
+//                                .fillMaxSize(),
+//                            contentScale = ContentScale.Crop,
+//                            painter = painterResource(game.image),
+//                            contentDescription = "game image",
+//                        )
 
                         Column(
                             modifier = Modifier
