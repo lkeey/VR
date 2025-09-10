@@ -1,15 +1,20 @@
 package dev.vr.com.presentation.screen.settings
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.toComposeImageBitmap
 import androidx.compose.ui.unit.dp
-import dev.vr.com.domain.extension.toComposeImageBitmap
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import java.io.File
 import javax.imageio.ImageIO
 import java.awt.FileDialog as AwtFileDialog
@@ -18,15 +23,44 @@ import java.awt.FileDialog as AwtFileDialog
 fun SettingsScreen (
     viewModel: GamesViewModel
 ) {
+
+    val state = viewModel.state.collectAsStateWithLifecycle().value
+
     var name by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var videoPath by remember { mutableStateOf("") }
     var imageBitmap by remember { mutableStateOf<ImageBitmap?>(null) }
 
     Column(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier
+            .padding(16.dp)
+            .background(Color.Yellow)
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+
+        state.error?.let {
+            Text("Ошибка: $it")
+        }
+
+        if (state.games.isNotEmpty()) {
+            state.games.forEach {
+                Column {
+                    Text("$it")
+
+                    Image(
+                        bitmap = it.image,
+                        contentDescription = it.text,
+                    )
+                }
+
+
+            }
+        } else {
+            Text("Игр нет")
+        }
+
+
         Text("Add New Game")
 
         BasicTextField(
@@ -68,8 +102,8 @@ fun SettingsScreen (
 
         Button(onClick = {
             if (name.isNotBlank() && description.isNotBlank() && videoPath.isNotBlank() && imageBitmap != null) {
-                viewModel.onIntent(
-                    GamesIntent.AddGame(
+                viewModel.onEvent(
+                    GamesEvent.AddGame(
                         game = dev.vr.com.domain.model.GameModel(
                             text = name,
                             description = description,

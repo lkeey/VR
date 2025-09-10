@@ -1,7 +1,5 @@
 package dev.vr.com.domain.usecase
 
-import androidx.compose.ui.graphics.ImageBitmap
-import dev.vr.com.data.repository.GameRepositoryImpl
 import dev.vr.com.domain.extension.toByteArray
 import dev.vr.com.domain.extension.toEntity
 import dev.vr.com.domain.model.GameModel
@@ -13,15 +11,21 @@ class AddGameUseCase (
 
     suspend fun invoke(
         game: GameModel
-    ) {
-        repository.addGame(
-            game.toEntity(
-                imageConverter = { drawable ->
-                    // convert drawable to ByteArray
-                    (drawable as ImageBitmap).toByteArray()
-                }
+    ) : Result<Unit> {
+        return try {
+            println("Saving game: name=${game.text}, description=${game.description}, video=${game.movie}, image=${game.image.width}x${game.image.height}")
+
+            repository.addGame(
+                game.toEntity(
+                    imageConverter = { it.toByteArray() }
+                )
             )
-        )
+            Result.success(Unit)
+        } catch (e : Exception) {
+            println(e.printStackTrace())
+            Result.failure(e)
+        }
+
     }
 
 }

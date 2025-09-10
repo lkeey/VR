@@ -1,42 +1,38 @@
 package dev.vr.com
 
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import dev.vr.com.core.components.layout.TopBar
 import dev.vr.com.core.theme.Theme
 import dev.vr.com.data.database.DatabaseFactory
 import dev.vr.com.data.model.PopupItem
 import dev.vr.com.data.repository.GameRepositoryImpl
-import dev.vr.com.domain.model.GameModel
-import dev.vr.com.domain.usecase.AddGameUseCase
+import dev.vr.com.db.VRDatabase
 import dev.vr.com.presentation.navigation.Route
 import dev.vr.com.presentation.screen.ArenaScreen
 import dev.vr.com.presentation.screen.HolidaysScreen
 import dev.vr.com.presentation.screen.ZoneScreen
+import dev.vr.com.presentation.screen.settings.GamesViewModel
+import dev.vr.com.presentation.screen.settings.SettingsScreen
 import vr.composeapp.generated.resources.Res
 import vr.composeapp.generated.resources.ic_park_1
+import java.io.File
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun App() {
 
     // DI
-    val db = DatabaseFactory.createDatabase()
+    val db = createDatabase()
+    val repository = GameRepositoryImpl(db = db)
 //    val addGameUseCase = AddGameUseCase(GameRepositoryImpl(db))
 
     var currentRoute by remember { mutableStateOf<Route>(Route.Arena) }
@@ -69,6 +65,7 @@ fun App() {
                     Route.Arena -> previousRoute != Route.Arena
                     Route.Zone -> previousRoute == Route.Arena
                     Route.Holidays -> previousRoute == Route.Zone
+                    Route.Settings -> previousRoute == Route.Settings
                 }
 
                 slideInHorizontally(
@@ -85,10 +82,22 @@ fun App() {
                 Route.Arena -> ArenaScreen()
                 Route.Zone -> ZoneScreen()
                 Route.Holidays -> HolidaysScreen()
+                Route.Settings -> SettingsScreen(GamesViewModel(repository))
             }
         }
     }
 
+}
+
+fun createDatabase(): VRDatabase {
+    val dbFile = File(System.getProperty("user.home"), "vr.db")
+    val driver = JdbcSqliteDriver("jdbc:sqlite:${dbFile.absolutePath}")
+
+    if (!dbFile.exists()) {
+        VRDatabase.Schema.create(driver) // создаём таблицы только один раз
+    }
+
+    return VRDatabase(driver)
 }
 
 fun getItems(): List<PopupItem> {

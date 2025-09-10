@@ -3,7 +3,6 @@ package dev.vr.com.domain.extension
 import androidx.compose.ui.graphics.ImageBitmap
 import dev.vr.com.domain.model.GameEntity
 import dev.vr.com.domain.model.GameModel
-import org.jetbrains.compose.resources.DrawableResource
 
 fun GameEntity.toModel(
     imageConverter: (ByteArray) -> ImageBitmap

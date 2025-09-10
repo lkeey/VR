@@ -13,4 +13,7 @@ sealed interface Route {
     @Serializable
     object Holidays: Route
 
+    @Serializable
+    object Settings: Route
+
 }

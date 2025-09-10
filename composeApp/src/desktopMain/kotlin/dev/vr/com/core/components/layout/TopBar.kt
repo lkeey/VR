@@ -135,7 +135,7 @@ fun TopBar(
                     indication = null,
                     interactionSource = remember { MutableInteractionSource() }
                 ) {
-                    /* TODO */
+                    onNavigate(Route.Settings)
                 }
                 .height(60.dp),
             tint = Color.Unspecified,
