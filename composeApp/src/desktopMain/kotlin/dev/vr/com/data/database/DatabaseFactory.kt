@@ -2,17 +2,30 @@ package dev.vr.com.data.database
 
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import dev.vr.com.db.VRDatabase
+import java.io.File
 
 object DatabaseFactory {
 
-    fun createDatabase(): VRDatabase {
-        // 1. Create a SQLite driver (file-based)
-        val driver = JdbcSqliteDriver("jdbc:sqlite:vrgames.db")
+    fun createDatabase(
+        path: String? = null
+    ): VRDatabase {
+        val dbFile = File(
+            path ?: File(
+                System.getProperty("user.home"),
+                "vr.db"
+            ).absolutePath
+        )
 
-        // 2. Create the database schema if it doesn't exist
-        VRDatabase.Schema.create(driver)
+        /* SQLite driver (file-based) */
+        val driver = JdbcSqliteDriver(
+            // "jdbc:sqlite:vrgames.db"
+            "jdbc:sqlite:${dbFile.absolutePath}"
+        )
 
-        // 3. Return the database instance
+        if (!dbFile.exists()) {
+            VRDatabase.Schema.create(driver)
+        }
+
         return VRDatabase(driver)
     }
 }

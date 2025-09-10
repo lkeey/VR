@@ -13,7 +13,6 @@ fun ImageBitmap.toByteArray(): ByteArray {
     val bufferedImage = BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB)
     val pixels = IntArray(width * height)
 
-    // stride = ширина картинки, если пиксели плотно без паддинга
     this.readPixels(pixels, stride = width, startX = 0, startY = 0, width = width, height = height)
 
     bufferedImage.setRGB(0, 0, width, height, pixels, 0, width)

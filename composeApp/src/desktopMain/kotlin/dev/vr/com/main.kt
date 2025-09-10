@@ -6,13 +6,12 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import dev.vr.com.core.theme.VRTheme
-import dev.vr.com.data.database.DatabaseFactory
 import javax.imageio.ImageIO
 
+const val LOGO_NAME = "logo.png"
 
+@Suppress("DEPRECATION")
 fun main() = application {
-
-    val LOGO_NAME = "logo.png"
 
     if (System.getProperty("os.name").lowercase().contains("mac")) {
         val iconStream = object {}.javaClass.getResourceAsStream("/$LOGO_NAME")

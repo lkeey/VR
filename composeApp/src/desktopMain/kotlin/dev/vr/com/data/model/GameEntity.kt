@@ -1,5 +1,6 @@
-package dev.vr.com.domain.model
+package dev.vr.com.data.model
 
+/* game model saved into local db */
 data class GameEntity(
     val id: Long = 0L,
     val name: String,

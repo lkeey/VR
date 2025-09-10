@@ -1,7 +1,7 @@
 package dev.vr.com.presentation.screen.settings
 
 import androidx.compose.ui.graphics.ImageBitmap
-import dev.vr.com.domain.model.GameModel
+import dev.vr.com.presentation.model.GameModel
 
 data class SettingsState(
     val games: List<GameModel> = emptyList(),

@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.overlay.GamePopUp
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.domain.model.GameModel
+import dev.vr.com.presentation.model.GameModel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource

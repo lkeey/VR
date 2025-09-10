@@ -1,6 +1,6 @@
 package dev.vr.com.domain.repository
 
-import dev.vr.com.domain.model.GameEntity
+import dev.vr.com.data.model.GameEntity
 import kotlinx.coroutines.flow.Flow
 
 interface GameRepository {

@@ -1,7 +1,8 @@
-package dev.vr.com.domain.model
+package dev.vr.com.presentation.model
 
 import androidx.compose.ui.graphics.ImageBitmap
 
+/* presentation game model */
 data class GameModel (
     val image: ImageBitmap,
     val movie: String,

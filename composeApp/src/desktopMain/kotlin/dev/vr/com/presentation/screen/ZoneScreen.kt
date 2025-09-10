@@ -24,7 +24,7 @@ import dev.vr.com.core.components.overlay.GamePopUp
 import dev.vr.com.core.components.overlay.InfoVideoPopUp
 import dev.vr.com.core.components.text.RoundedText
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.domain.model.GameModel
+import dev.vr.com.presentation.model.GameModel
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.*

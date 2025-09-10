@@ -23,11 +23,6 @@ fun SettingsScreen (
 
     val state = viewModel.state.collectAsStateWithLifecycle().value
 
-//    var name by remember { mutableStateOf("") }
-//    var description by remember { mutableStateOf("") }
-//    var videoPath by remember { mutableStateOf("") }
-//    var imageBitmap by remember { mutableStateOf<ImageBitmap?>(null) }
-
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -56,7 +51,6 @@ fun SettingsScreen (
         } else {
             Text("Игр нет")
         }
-
 
         Text("Add New Game")
 

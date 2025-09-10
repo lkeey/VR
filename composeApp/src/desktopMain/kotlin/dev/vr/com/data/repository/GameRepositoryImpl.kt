@@ -2,13 +2,13 @@ package dev.vr.com.data.repository
 
 import app.cash.sqldelight.coroutines.asFlow
 import dev.vr.com.db.VRDatabase
-import dev.vr.com.domain.model.GameEntity
+import dev.vr.com.data.model.GameEntity
 import dev.vr.com.domain.repository.GameRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class GameRepositoryImpl(
-    private val db: VRDatabase
+    db: VRDatabase
 ) : GameRepository {
 
     private val queries = db.gameQueries

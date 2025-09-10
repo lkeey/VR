@@ -3,7 +3,7 @@ package dev.vr.com.presentation.screen.settings
 import androidx.compose.ui.graphics.toComposeImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.vr.com.domain.model.GameModel
+import dev.vr.com.presentation.model.GameModel
 import dev.vr.com.domain.repository.GameRepository
 import dev.vr.com.domain.usecase.AddGameUseCase
 import dev.vr.com.domain.usecase.GetGamesUseCase

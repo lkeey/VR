@@ -1,6 +1,5 @@
 package dev.vr.com.presentation.screen
 
-import Carousel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
@@ -18,8 +17,7 @@ import dev.vr.com.core.components.overlay.InfoPopup
 import dev.vr.com.core.components.overlay.InfoVideoPopUp
 import dev.vr.com.core.components.text.RoundedText
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.domain.model.GameModel
-import dev.vr.com.getItems
+import dev.vr.com.data.model.PopupItem
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.*
@@ -264,6 +262,28 @@ fun ArenaScreen(
 //            games = getGames()
 //        )
     }
+}
+
+fun getItems(): List<PopupItem> {
+    return listOf(
+        PopupItem(Res.drawable.ic_park_1, "VR аттракционы и автостимуляторы"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+    )
 }
 
 //private fun getGames() : List<GameModel> {
