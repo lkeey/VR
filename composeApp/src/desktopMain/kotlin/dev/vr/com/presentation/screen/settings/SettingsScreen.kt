@@ -4,15 +4,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dev.vr.com.core.components.field.VRTextField
+import dev.vr.com.core.theme.Theme
+import java.awt.Frame
 import java.io.File
 import java.awt.FileDialog as AwtFileDialog
 
@@ -25,8 +30,22 @@ fun SettingsScreen (
 
     Column(
         modifier = Modifier
-            .padding(16.dp)
-            .background(Color.Yellow)
+            .padding(top = 8.dp)
+            .clip(
+                GenericShape { size, _ ->
+                    // Размер среза угла (можешь регулировать)
+                    val cutX = size.width * 0.05f
+                    val cutY = size.height * 0.1f
+
+                    moveTo(0f, 0f)                 // левый верх
+                    lineTo(size.width, 0f)         // правый верх
+                    lineTo(size.width, size.height - cutY) // правая сторона вниз
+                    lineTo(size.width - cutX, size.height) // срезанный угол
+                    lineTo(0f, size.height)        // левый низ
+                    close()
+                }
+            )
+            .background(Theme.colors.secondaryGray)
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -34,6 +53,14 @@ fun SettingsScreen (
         state.error?.let {
             Text("Ошибка: $it")
         }
+
+        VRTextField(
+            previousData = state.gameName,
+            label = "Введите название игры:",
+            onTextChanged = {
+                viewModel.onEvent(SettingsEvent.OnEnterGameName(it))
+            }
+        )
 
         if (state.games.isNotEmpty()) {
             state.games.forEach {
@@ -108,7 +135,7 @@ fun SettingsScreen (
 }
 
 fun chooseImageFile(): File? {
-    val fileDialog = AwtFileDialog(null as java.awt.Frame?, "Select Image", AwtFileDialog.LOAD)
+    val fileDialog = AwtFileDialog(null as Frame?, "Select Image", AwtFileDialog.LOAD)
     fileDialog.isVisible = true
     return if (fileDialog.file != null) File(fileDialog.directory, fileDialog.file) else null
 }
