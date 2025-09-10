@@ -5,18 +5,23 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.GenericShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.field.VRTextField
 import dev.vr.com.core.theme.Theme
+import org.jetbrains.compose.resources.Font
+import vr.composeapp.generated.resources.Bold
+import vr.composeapp.generated.resources.Res
 import java.awt.Frame
 import java.io.File
 import java.awt.FileDialog as AwtFileDialog
@@ -46,6 +51,7 @@ fun SettingsScreen (
                 }
             )
             .background(Theme.colors.secondaryGray)
+            .padding(horizontal = 8.dp)
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -53,14 +59,6 @@ fun SettingsScreen (
         state.error?.let {
             Text("Ошибка: $it")
         }
-
-        VRTextField(
-            previousData = state.gameName,
-            label = "Введите название игры:",
-            onTextChanged = {
-                viewModel.onEvent(SettingsEvent.OnEnterGameName(it))
-            }
-        )
 
         if (state.games.isNotEmpty()) {
             state.games.forEach {
@@ -81,56 +79,72 @@ fun SettingsScreen (
 
         Text("Add New Game")
 
-        BasicTextField(
-            value = state.gameName,
-            onValueChange = {
+        VRTextField(
+            previousData = state.gameName,
+            label = "Введите название игры:",
+            onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameName(it))
-
-             },
-            decorationBox = { inner -> Box(modifier = Modifier.fillMaxWidth()) { inner() } }
+            }
         )
-        Text("Game Name")
 
-        BasicTextField(
-            value = state.gameDescription,
-            onValueChange = {
+        VRTextField(
+            previousData = state.gameName,
+            label = "Введите описание игры:",
+            onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameDescription(it))
-            },
-            decorationBox = {
-                inner -> Box(
-                modifier = Modifier.fillMaxWidth()) { inner() } }
+            }
         )
-        Text("Description")
 
-        BasicTextField(
-            value = state.gameMovieUrl,
-            onValueChange = {
+        VRTextField(
+            previousData = state.gameName,
+            label = "**Введите ссылку на видео игры:",
+            onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameMoviePath(it))
-            },
-            decorationBox = { inner -> Box(modifier = Modifier.fillMaxWidth()) { inner() } }
+            }
         )
-        Text("Video Path (e.g., video.mp4)")
+
 
         Button(onClick = {
             val file = chooseImageFile()
             viewModel.onEvent(SettingsEvent.OnChooseImage(file))
         }) {
-            Text("Select Image")
+            Text("Выберите изображение")
         }
 
         state.gameImage?.let {
-            Image(it, contentDescription = "Selected Image", modifier = Modifier.size(150.dp))
+            Image(
+                bitmap = it,
+                contentDescription = "Selected Image",
+                modifier = Modifier
+                    .size(150.dp)
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = {
-            if (state.gameName.isNotBlank() && state.gameDescription.isNotBlank() && state.gameMovieUrl.isNotBlank() && state.gameImage != null) {
+        RoundedButton(
+            color = Theme.colors.pinkAction,
+            content = {
+                Text(
+                    text = "ДОБАВИТЬ ИГРУ",
+                    color = Theme.colors.textInverse,
+                    fontSize = 32.sp,
+                    fontFamily = FontFamily(Font(Res.font.Bold)),
+                    fontWeight = FontWeight(700)
+                )
+            },
+            innerPadding = PaddingValues(
+                horizontal = 40.dp,
+                vertical = 8.dp
+            )
+        ) {
+            if (state.gameName.isNotBlank() && state.gameImage != null) {
                 viewModel.onEvent(SettingsEvent.OnAddGame)
             }
-        }) {
-            Text("Add Game")
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
     }
 }
 

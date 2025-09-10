@@ -61,8 +61,7 @@ fun VRTextField (
         singleLine = true,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 8.dp)
-            .padding(horizontal = 8.dp),
+            .padding(top = 8.dp),
         colors = TextFieldDefaults.textFieldColors(
             textColor = Theme.colors.pinkAction,
             cursorColor = Theme.colors.pinkAction,
