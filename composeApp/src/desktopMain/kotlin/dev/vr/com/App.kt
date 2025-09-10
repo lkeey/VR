@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.dp
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import dev.vr.com.core.components.layout.TopBar
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.data.database.DatabaseFactory
 import dev.vr.com.data.model.PopupItem
 import dev.vr.com.data.repository.GameRepositoryImpl
 import dev.vr.com.db.VRDatabase
@@ -20,7 +19,7 @@ import dev.vr.com.presentation.navigation.Route
 import dev.vr.com.presentation.screen.ArenaScreen
 import dev.vr.com.presentation.screen.HolidaysScreen
 import dev.vr.com.presentation.screen.ZoneScreen
-import dev.vr.com.presentation.screen.settings.GamesViewModel
+import dev.vr.com.presentation.screen.settings.SettingsViewModel
 import dev.vr.com.presentation.screen.settings.SettingsScreen
 import vr.composeapp.generated.resources.Res
 import vr.composeapp.generated.resources.ic_park_1
@@ -82,7 +81,7 @@ fun App() {
                 Route.Arena -> ArenaScreen()
                 Route.Zone -> ZoneScreen()
                 Route.Holidays -> HolidaysScreen()
-                Route.Settings -> SettingsScreen(GamesViewModel(repository))
+                Route.Settings -> SettingsScreen(SettingsViewModel(repository))
             }
         }
     }

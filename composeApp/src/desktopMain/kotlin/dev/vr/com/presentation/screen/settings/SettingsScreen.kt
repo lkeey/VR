@@ -8,28 +8,25 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.toComposeImageBitmap
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import java.io.File
-import javax.imageio.ImageIO
 import java.awt.FileDialog as AwtFileDialog
 
 @Composable
 fun SettingsScreen (
-    viewModel: GamesViewModel
+    viewModel: SettingsViewModel
 ) {
 
     val state = viewModel.state.collectAsStateWithLifecycle().value
 
-    var name by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var videoPath by remember { mutableStateOf("") }
-    var imageBitmap by remember { mutableStateOf<ImageBitmap?>(null) }
+//    var name by remember { mutableStateOf("") }
+//    var description by remember { mutableStateOf("") }
+//    var videoPath by remember { mutableStateOf("") }
+//    var imageBitmap by remember { mutableStateOf<ImageBitmap?>(null) }
 
     Column(
         modifier = Modifier
@@ -64,59 +61,51 @@ fun SettingsScreen (
         Text("Add New Game")
 
         BasicTextField(
-            value = name,
-            onValueChange = { name = it },
+            value = state.gameName,
+            onValueChange = {
+                viewModel.onEvent(SettingsEvent.OnEnterGameName(it))
+
+             },
             decorationBox = { inner -> Box(modifier = Modifier.fillMaxWidth()) { inner() } }
         )
         Text("Game Name")
 
         BasicTextField(
-            value = description,
-            onValueChange = { description = it },
-            decorationBox = { inner -> Box(modifier = Modifier.fillMaxWidth()) { inner() } }
+            value = state.gameDescription,
+            onValueChange = {
+                viewModel.onEvent(SettingsEvent.OnEnterGameDescription(it))
+            },
+            decorationBox = {
+                inner -> Box(
+                modifier = Modifier.fillMaxWidth()) { inner() } }
         )
         Text("Description")
 
         BasicTextField(
-            value = videoPath,
-            onValueChange = { videoPath = it },
+            value = state.gameMovieUrl,
+            onValueChange = {
+                viewModel.onEvent(SettingsEvent.OnEnterGameMoviePath(it))
+            },
             decorationBox = { inner -> Box(modifier = Modifier.fillMaxWidth()) { inner() } }
         )
         Text("Video Path (e.g., video.mp4)")
 
         Button(onClick = {
             val file = chooseImageFile()
-            if (file != null) {
-                val buffered = ImageIO.read(file)
-                imageBitmap = buffered.toComposeImageBitmap()
-            }
+            viewModel.onEvent(SettingsEvent.OnChooseImage(file))
         }) {
             Text("Select Image")
         }
 
-        imageBitmap?.let {
+        state.gameImage?.let {
             Image(it, contentDescription = "Selected Image", modifier = Modifier.size(150.dp))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = {
-            if (name.isNotBlank() && description.isNotBlank() && videoPath.isNotBlank() && imageBitmap != null) {
-                viewModel.onEvent(
-                    GamesEvent.AddGame(
-                        game = dev.vr.com.domain.model.GameModel(
-                            text = name,
-                            description = description,
-                            movie = videoPath,
-                            image = imageBitmap!! // will convert later to ByteArray
-                        )
-                    )
-                )
-                // Clear fields
-                name = ""
-                description = ""
-                videoPath = ""
-                imageBitmap = null
+            if (state.gameName.isNotBlank() && state.gameDescription.isNotBlank() && state.gameMovieUrl.isNotBlank() && state.gameImage != null) {
+                viewModel.onEvent(SettingsEvent.OnAddGame)
             }
         }) {
             Text("Add Game")
