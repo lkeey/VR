@@ -23,6 +23,7 @@ import dev.vr.com.presentation.screen.ZoneScreen
 import dev.vr.com.presentation.screen.arena.ArenaViewModel
 import dev.vr.com.presentation.screen.settings.SettingsScreen
 import dev.vr.com.presentation.screen.settings.SettingsViewModel
+import dev.vr.com.presentation.screen.zone.ZoneViewModel
 import java.io.File
 
 @Composable
@@ -80,7 +81,7 @@ fun App() {
         ) { target ->
             when (target) {
                 Route.Arena -> ArenaScreen(ArenaViewModel(gameRepository))
-                Route.Zone -> ZoneScreen()
+                Route.Zone -> ZoneScreen(ZoneViewModel(gameRepository))
                 Route.Holidays -> HolidaysScreen()
                 Route.Settings -> SettingsScreen(SettingsViewModel(gameRepository))
             }

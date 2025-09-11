@@ -1,16 +1,25 @@
 package dev.vr.com.presentation.screen
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.overlay.Banner
 import dev.vr.com.core.components.overlay.GamePopUp
@@ -18,14 +27,18 @@ import dev.vr.com.core.components.overlay.InfoVideoPopUp
 import dev.vr.com.core.components.text.RoundedText
 import dev.vr.com.core.theme.Theme
 import dev.vr.com.presentation.model.GameModel
+import dev.vr.com.presentation.screen.zone.ZoneViewModel
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.*
 
 @Composable
 fun ZoneScreen(
+    viewModel: ZoneViewModel,
     modifier: Modifier = Modifier
 ) {
+    val state = viewModel.state.collectAsStateWithLifecycle().value
+
     var selectedGame by remember { mutableStateOf<GameModel?>(null) }
 
     var showVideoPopup by remember { mutableStateOf(false) }
@@ -166,37 +179,38 @@ fun ZoneScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             contentPadding = PaddingValues(4.dp)
         ) {
-//            items(getGames()) { game ->
-//                Box (
-//                    modifier = Modifier
-//                        .clickable (
-//                            indication = null,
-//                            interactionSource = remember { MutableInteractionSource() }
-//                        ) {
-//                            selectedGame = game
-//                        }
-//                ) {
-////                    Image(
-////                        modifier = Modifier
-////                            .fillMaxSize(),
-////                        painter = painterResource(game.image),
-////                        contentDescription = game.text,
-////                        contentScale = ContentScale.Crop
-////                    )
-//
-//                    Icon(
-//                        painter = painterResource(Res.drawable.ic_open),
-//                        contentDescription = "open",
-//                        modifier = Modifier
-//                            .align(Alignment.BottomEnd)
-//                            .padding(4.dp),
-//                        tint = Color.Unspecified
-//                    )
-//                }
-//            }
+            items(state.games) { game ->
+                Box (
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable (
+                            indication = null,
+                            interactionSource = remember { MutableInteractionSource() }
+                        ) {
+                            selectedGame = game
+                        }
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(max = 250.dp),
+                        bitmap = game.image,
+                        contentDescription = game.text,
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Icon(
+                        painter = painterResource(Res.drawable.ic_open),
+                        contentDescription = "open",
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(4.dp),
+                        tint = Color.Unspecified
+                    )
+                }
+            }
         }
     }
-
 }
 
 

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class ArenaViewModel (
-    private val repository: GameRepository
+    repository: GameRepository
 ) : ViewModel() {
 
     private val getGamesUseCase = GetGamesUseCase(repository)
