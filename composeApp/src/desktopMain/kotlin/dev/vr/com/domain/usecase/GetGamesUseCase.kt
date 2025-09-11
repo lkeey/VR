@@ -27,4 +27,17 @@ class GetGamesUseCase (
             }
             .flowOn(Dispatchers.IO)
 
+    fun invoke(categoryName: String): Flow<List<GameModel>> =
+        repository
+            .getGamesByCategory(categoryName)
+            .map { list ->
+                list.map {
+                    it.toModel(
+                        imageConverter = { bytes ->
+                            byteArrayToImageBitmap(bytes)
+                        }
+                    )
+                }
+            }
+            .flowOn(Dispatchers.IO)
 }

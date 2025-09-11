@@ -8,8 +8,10 @@ import dev.vr.com.domain.usecase.AddGameUseCase
 import dev.vr.com.domain.usecase.GetGamesUseCase
 import dev.vr.com.presentation.model.GameModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.imageio.ImageIO
@@ -22,7 +24,11 @@ class SettingsViewModel(
     private val addGameUseCase = AddGameUseCase(repository)
 
     private val _state = MutableStateFlow(SettingsState())
-    val state: StateFlow<SettingsState> = _state
+    val state = _state.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
+        _state.value
+    )
 
     init {
         loadGames()

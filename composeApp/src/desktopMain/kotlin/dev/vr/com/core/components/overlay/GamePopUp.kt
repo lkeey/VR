@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.sp
 import dev.vr.com.core.theme.Theme
 import dev.vr.com.presentation.model.GameModel
 import org.jetbrains.compose.resources.Font
-import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.Bold
 import vr.composeapp.generated.resources.Light
 import vr.composeapp.generated.resources.Res
@@ -79,14 +78,14 @@ fun GamePopUp(
 //                    progressState = mutableStateOf( Progress(0f, 0))
 //                )
 
-//                Image(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .heightIn(max = 400.dp),
-//                    painter = painterResource(gameModel.image),
-//                    contentDescription = gameModel.text,
-//                    contentScale = ContentScale.Crop
-//                )
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(max = 400.dp),
+                    bitmap = gameModel.image,
+                    contentDescription = gameModel.text,
+                    contentScale = ContentScale.Crop
+                )
 
                 Spacer(Modifier.height(12.dp))
 

@@ -1,4 +1,9 @@
 package dev.vr.com.presentation.screen.arena
 
-class ArenaState {
-}
+import dev.vr.com.presentation.model.GameModel
+
+data class ArenaState (
+    val isLoading : Boolean = false,
+    val games : List<GameModel> = emptyList(),
+    val error: String? = null,
+)

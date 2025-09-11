@@ -1,4 +1,7 @@
 package dev.vr.com.presentation.screen.arena
 
-class ArenaEvent {
+import dev.vr.com.presentation.screen.settings.SettingsEvent
+
+sealed interface ArenaEvent {
+
 }

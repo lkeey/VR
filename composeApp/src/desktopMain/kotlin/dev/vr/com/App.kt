@@ -20,6 +20,7 @@ import dev.vr.com.presentation.navigation.Route
 import dev.vr.com.presentation.screen.arena.ArenaScreen
 import dev.vr.com.presentation.screen.HolidaysScreen
 import dev.vr.com.presentation.screen.ZoneScreen
+import dev.vr.com.presentation.screen.arena.ArenaViewModel
 import dev.vr.com.presentation.screen.settings.SettingsScreen
 import dev.vr.com.presentation.screen.settings.SettingsViewModel
 import java.io.File
@@ -78,7 +79,7 @@ fun App() {
             }
         ) { target ->
             when (target) {
-                Route.Arena -> ArenaScreen()
+                Route.Arena -> ArenaScreen(ArenaViewModel(gameRepository))
                 Route.Zone -> ZoneScreen()
                 Route.Holidays -> HolidaysScreen()
                 Route.Settings -> SettingsScreen(SettingsViewModel(gameRepository))

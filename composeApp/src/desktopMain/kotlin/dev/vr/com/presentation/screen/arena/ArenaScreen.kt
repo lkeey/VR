@@ -1,5 +1,6 @@
 package dev.vr.com.presentation.screen.arena
 
+import Carousel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
@@ -11,6 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.overlay.Banner
 import dev.vr.com.core.components.overlay.InfoPopup
@@ -24,8 +26,11 @@ import vr.composeapp.generated.resources.*
 
 @Composable
 fun ArenaScreen(
+    viewModel: ArenaViewModel,
     modifier: Modifier = Modifier
 ) {
+    val state = viewModel.state.collectAsStateWithLifecycle().value
+
     var showInfoPopup by remember { mutableStateOf(false) }
     var showVideoPopup by remember { mutableStateOf(false) }
 
@@ -256,11 +261,11 @@ fun ArenaScreen(
             contentDescription = "banner background"
         )
 
-//        Carousel(
-//            modifier = Modifier
-//                .fillMaxWidth(),
-//            games = getGames()
-//        )
+        Carousel(
+            modifier = Modifier
+                .fillMaxWidth(),
+            games = state.games
+        )
     }
 }
 
