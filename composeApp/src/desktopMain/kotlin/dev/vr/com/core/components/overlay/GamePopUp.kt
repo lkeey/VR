@@ -118,16 +118,18 @@ fun GamePopUp(
 
                 Spacer(Modifier.height(20.dp))
 
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    text = gameModel.description,
-                    color = Theme.colors.secondaryText,
-                    fontSize = 21.sp,
-                    fontFamily = FontFamily(Font(Res.font.Light)),
-                    fontWeight = FontWeight(600),
-                    textAlign = TextAlign.Start
-                )
+                gameModel.description?.let {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        text = it,
+                        color = Theme.colors.secondaryText,
+                        fontSize = 21.sp,
+                        fontFamily = FontFamily(Font(Res.font.Light)),
+                        fontWeight = FontWeight(600),
+                        textAlign = TextAlign.Start
+                    )
+                }
             }
         }
     }

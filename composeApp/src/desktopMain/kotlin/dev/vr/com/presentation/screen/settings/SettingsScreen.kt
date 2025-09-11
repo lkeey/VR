@@ -9,18 +9,22 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.vr.com.core.components.button.RoundedButton
+import dev.vr.com.core.components.field.VRDropDown
 import dev.vr.com.core.components.field.VRTextField
 import dev.vr.com.core.theme.Theme
 import org.jetbrains.compose.resources.Font
 import vr.composeapp.generated.resources.Bold
+import vr.composeapp.generated.resources.ExtraBold
 import vr.composeapp.generated.resources.Res
 import java.awt.Frame
 import java.io.File
@@ -53,7 +57,8 @@ fun SettingsScreen (
             .background(Theme.colors.secondaryGray)
             .padding(horizontal = 8.dp)
             .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         state.error?.let {
@@ -77,10 +82,36 @@ fun SettingsScreen (
             Text("Игр нет")
         }
 
-        Text("Add New Game")
+        RoundedButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp),
+            color = Theme.colors.pinkAction,
+            content = {
+                Text(
+                    text = "Добавить что-то новое можно здесь",
+                    color = Theme.colors.textInverse,
+                    fontSize = 32.sp,
+                    fontFamily = FontFamily(Font(Res.font.ExtraBold)),
+                    fontWeight = FontWeight(800),
+                )
+            },
+            innerPadding = PaddingValues(
+                vertical = 4.dp
+            )
+        ) { }
+
+        VRDropDown(
+            options = listOf("Arena", "Zone", "Holidays"),
+            previousData = state.gameCategory ?: "",
+            label = "Выберите категорию",
+            onOptionSelected = {
+                viewModel.onEvent(SettingsEvent.OnChoseGameCategory(it))
+            }
+        )
 
         VRTextField(
-            previousData = state.gameName,
+            previousData = state.gameName ?: "",
             label = "Введите название игры:",
             onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameName(it))
@@ -88,7 +119,7 @@ fun SettingsScreen (
         )
 
         VRTextField(
-            previousData = state.gameName,
+            previousData = state.gameName ?: "",
             label = "Введите описание игры:",
             onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameDescription(it))
@@ -96,7 +127,7 @@ fun SettingsScreen (
         )
 
         VRTextField(
-            previousData = state.gameName,
+            previousData = state.gameMovieUrl ?: "",
             label = "**Введите ссылку на видео игры:",
             onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameMoviePath(it))
@@ -138,9 +169,7 @@ fun SettingsScreen (
                 vertical = 8.dp
             )
         ) {
-            if (state.gameName.isNotBlank() && state.gameImage != null) {
-                viewModel.onEvent(SettingsEvent.OnAddGame)
-            }
+            viewModel.onEvent(SettingsEvent.OnAddGame)
         }
 
         Spacer(modifier = Modifier.height(16.dp))

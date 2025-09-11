@@ -1,4 +1,4 @@
-package dev.vr.com.presentation.screen
+package dev.vr.com.presentation.screen.arena
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

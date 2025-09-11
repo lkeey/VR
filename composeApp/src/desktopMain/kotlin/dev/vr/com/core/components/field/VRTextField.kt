@@ -25,11 +25,13 @@ fun VRTextField (
     previousData: String,
     label: String,
     backgroundColor: Color = Theme.colors.grayBackground,
+    isReadOnly: Boolean = false,
     skew: Dp = 12.dp,
     cutTL: Dp = 8.dp,
     cutTR: Dp = 8.dp,
     cutBR: Dp = 20.dp,
-    onTextChanged: (String) -> Unit
+    trailingIcon: @Composable (() -> Unit)? = null,
+    onTextChanged: (String) -> Unit,
 ) {
     var textValue by remember {
         mutableStateOf(previousData)
@@ -41,6 +43,7 @@ fun VRTextField (
             textValue = it
             onTextChanged(it)
         },
+        readOnly = isReadOnly,
         placeholder = {
             Text(
                 text = label,
@@ -70,6 +73,7 @@ fun VRTextField (
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
         ),
+        trailingIcon = trailingIcon
     )
 
 }

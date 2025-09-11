@@ -4,9 +4,10 @@ package dev.vr.com.data.model
 data class GameEntity(
     val id: Long = 0L,
     val name: String,
-    val description: String,
+    val description: String?,
     val imageData: ByteArray,
-    val videoPath: String
+    val videoPath: String?,
+    val categoryName: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

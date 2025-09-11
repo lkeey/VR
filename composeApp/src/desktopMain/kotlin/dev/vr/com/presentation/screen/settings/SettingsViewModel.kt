@@ -3,10 +3,10 @@ package dev.vr.com.presentation.screen.settings
 import androidx.compose.ui.graphics.toComposeImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.vr.com.presentation.model.GameModel
 import dev.vr.com.domain.repository.GameRepository
 import dev.vr.com.domain.usecase.AddGameUseCase
 import dev.vr.com.domain.usecase.GetGamesUseCase
+import dev.vr.com.presentation.model.GameModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -71,6 +71,14 @@ class SettingsViewModel(
                     )
                 }
             }
+
+            is SettingsEvent.OnChoseGameCategory -> {
+                _state.update {
+                    it.copy(
+                        gameCategory = event.category
+                    )
+                }
+            }
         }
     }
 
@@ -103,21 +111,23 @@ class SettingsViewModel(
             addGameUseCase
                 .invoke(
                     game = GameModel(
-                        text = state.value.gameName,
-                        image = state.value.gameImage ?: throw Exception("no image"),
-                        description = state.value.gameDescription,
-                        movie = state.value.gameMovieUrl
-                    )
+                        text = state.value.gameName ?: throw Exception("Обязательно укажите название") ,
+                        image = state.value.gameImage ?: throw Exception("Обязательно добавьте изображение"),
+                        description = state.value.gameDescription ?: "",
+                        movie = state.value.gameMovieUrl ?: ""
+                    ),
+                    categoryName = state.value.gameCategory ?: throw Exception("Обязательно выберите раздел"),
                 )
                 .onSuccess {
-                    _state.update {
-                        it.copy(
-                            gameName = "",
-                            gameImage = null,
-                            gameDescription = "",
-                            gameMovieUrl = ""
-                        )
-                    }
+//                    _state.update {
+//                        it.copy(
+//                            gameName = null,
+//                            gameImage = null,
+//                            gameDescription = null,
+//                            gameMovieUrl = null,
+//                            gameCategory = null,
+//                        )
+//                    }
 
                     loadGames()
                 }

@@ -15,13 +15,3 @@ fun GameEntity.toModel(
     )
 }
 
-fun GameModel.toEntity(
-    imageConverter: (ImageBitmap) -> ByteArray
-): GameEntity {
-    return GameEntity(
-        name = text,
-        description = description,
-        imageData = imageConverter(image),
-        videoPath = movie
-    )
-}

@@ -23,18 +23,39 @@ class GameRepositoryImpl(
                         name = it.name,
                         description = it.description,
                         imageData = it.image,
-                        videoPath = it.video_path
+                        videoPath = it.video_path,
+                        categoryName = it.category
                     )
                 }
             }
     }
 
-    override suspend fun addGame(gameEntity: GameEntity) {
+    override fun getGamesByCategory(categoryName: String): Flow<List<GameEntity>> {
+        return queries.selectGamesByCategory(categoryName)
+            .asFlow()
+            .map { query ->
+                query.executeAsList().map {
+                    GameEntity(
+                        id = it.id,
+                        name = it.name,
+                        description = it.description,
+                        imageData = it.image,
+                        videoPath = it.video_path,
+                        categoryName = it.category
+                    )
+                }
+            }
+    }
+
+    override suspend fun addGame(
+        gameEntity: GameEntity,
+    ) {
         queries.insertGame(
             name = gameEntity.name,
             description = gameEntity.description,
             image = gameEntity.imageData,
-            video_path = gameEntity.videoPath
+            video_path = gameEntity.videoPath,
+            category = gameEntity.categoryName
         )
     }
 

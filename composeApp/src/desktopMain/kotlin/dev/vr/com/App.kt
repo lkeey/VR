@@ -17,7 +17,7 @@ import dev.vr.com.core.theme.Theme
 import dev.vr.com.data.database.DatabaseFactory
 import dev.vr.com.data.repository.GameRepositoryImpl
 import dev.vr.com.presentation.navigation.Route
-import dev.vr.com.presentation.screen.ArenaScreen
+import dev.vr.com.presentation.screen.arena.ArenaScreen
 import dev.vr.com.presentation.screen.HolidaysScreen
 import dev.vr.com.presentation.screen.ZoneScreen
 import dev.vr.com.presentation.screen.settings.SettingsScreen
