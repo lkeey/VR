@@ -1,5 +1,6 @@
 package dev.vr.com.domain.usecase
 
+import dev.vr.com.data.model.CategoryModel
 import dev.vr.com.domain.extension.byteArrayToImageBitmap
 import dev.vr.com.domain.extension.toModel
 import dev.vr.com.domain.repository.GameRepository
@@ -27,9 +28,9 @@ class GetGamesUseCase (
             }
             .flowOn(Dispatchers.IO)
 
-    fun invoke(categoryName: String): Flow<List<GameModel>> =
+    fun invoke(category: CategoryModel): Flow<List<GameModel>> =
         repository
-            .getGamesByCategory(categoryName)
+            .getGamesByCategory(category.key)
             .map { list ->
                 list.map {
                     it.toModel(

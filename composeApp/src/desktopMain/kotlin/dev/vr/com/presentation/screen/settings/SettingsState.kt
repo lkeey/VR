@@ -1,6 +1,7 @@
 package dev.vr.com.presentation.screen.settings
 
 import androidx.compose.ui.graphics.ImageBitmap
+import dev.vr.com.data.model.CategoryModel
 import dev.vr.com.presentation.model.GameModel
 
 data class SettingsState(
@@ -11,5 +12,5 @@ data class SettingsState(
     val gameDescription: String? = null,
     val gameMovieUrl: String? = null,
     val gameImage: ImageBitmap? = null,
-    val gameCategory: String? = null
+    val gameCategory: CategoryModel? = null
 )

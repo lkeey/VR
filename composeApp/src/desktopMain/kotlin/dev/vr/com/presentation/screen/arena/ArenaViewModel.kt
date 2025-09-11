@@ -2,6 +2,7 @@ package dev.vr.com.presentation.screen.arena
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.vr.com.data.model.CategoryModel
 import dev.vr.com.domain.repository.GameRepository
 import dev.vr.com.domain.usecase.GetGamesUseCase
 import kotlinx.coroutines.flow.*
@@ -42,7 +43,7 @@ class ArenaViewModel (
             }
 
             getGamesUseCase
-                .invoke(categoryName = "Arena")
+                .invoke(CategoryModel.ARENA)
                 .catch { e ->
                     _state.update { it.copy(error = e.message, isLoading = false) }
                 }

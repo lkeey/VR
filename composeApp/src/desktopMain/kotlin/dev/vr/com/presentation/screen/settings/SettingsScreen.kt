@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -22,6 +21,7 @@ import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.field.VRDropDown
 import dev.vr.com.core.components.field.VRTextField
 import dev.vr.com.core.theme.Theme
+import dev.vr.com.data.model.CategoryModel
 import org.jetbrains.compose.resources.Font
 import vr.composeapp.generated.resources.Bold
 import vr.composeapp.generated.resources.ExtraBold
@@ -102,8 +102,8 @@ fun SettingsScreen (
         ) { }
 
         VRDropDown(
-            options = listOf("Arena", "Zone", "Holidays"),
-            previousData = state.gameCategory ?: "",
+            categories = CategoryModel.entries.toList(),
+            previousData = state.gameCategory?.key ?: "",
             label = "Выберите категорию",
             onOptionSelected = {
                 viewModel.onEvent(SettingsEvent.OnChoseGameCategory(it))

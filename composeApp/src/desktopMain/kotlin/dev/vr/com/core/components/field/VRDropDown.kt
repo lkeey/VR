@@ -5,15 +5,16 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import dev.vr.com.core.theme.Theme
+import dev.vr.com.data.model.CategoryModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun VRDropDown (
-    options: List<String>,
+    categories: List<CategoryModel>,
     previousData: String,
     label : String,
     modifier: Modifier = Modifier,
-    onOptionSelected: (String) -> Unit,
+    onOptionSelected: (CategoryModel) -> Unit,
 ) {
 
     var expanded by remember {
@@ -47,19 +48,19 @@ fun VRDropDown (
                 expanded = false
             },
         ) {
-            options.forEach { option ->
+            categories.forEach { category ->
                 DropdownMenuItem(
                     content = {
                         Text(
-                            text = option,
+                            text = category.key,
                             color = Theme.colors.pinkAction
                         )
                     },
                     onClick = {
-                        textValue = option
+                        textValue = category.key
 
                         expanded = false
-                        onOptionSelected(option)
+                        onOptionSelected(category)
                     },
                 )
             }

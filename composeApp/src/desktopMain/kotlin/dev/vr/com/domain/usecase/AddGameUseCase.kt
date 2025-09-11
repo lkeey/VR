@@ -1,5 +1,6 @@
 package dev.vr.com.domain.usecase
 
+import dev.vr.com.data.model.CategoryModel
 import dev.vr.com.data.model.GameEntity
 import dev.vr.com.domain.extension.toByteArray
 import dev.vr.com.domain.repository.GameRepository
@@ -13,7 +14,7 @@ class AddGameUseCase (
 
     suspend fun invoke(
         game: GameModel,
-        categoryName: String,
+        category: CategoryModel
     ) : Result<Unit> =
         withContext(Dispatchers.IO) {
              try {
@@ -25,7 +26,7 @@ class AddGameUseCase (
                         description = game.description,
                         imageData = game.image.toByteArray(),
                         videoPath = game.movie,
-                        categoryName = categoryName
+                        categoryName = category.key
                     )
                 )
 

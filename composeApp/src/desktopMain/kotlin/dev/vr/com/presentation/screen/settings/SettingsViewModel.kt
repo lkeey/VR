@@ -122,7 +122,7 @@ class SettingsViewModel(
                         description = state.value.gameDescription ?: "",
                         movie = state.value.gameMovieUrl ?: ""
                     ),
-                    categoryName = state.value.gameCategory ?: throw Exception("Обязательно выберите раздел"),
+                    category = state.value.gameCategory ?: throw Exception("Обязательно выберите раздел"),
                 )
                 .onSuccess {
 //                    _state.update {
