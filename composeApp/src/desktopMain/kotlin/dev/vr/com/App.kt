@@ -18,9 +18,10 @@ import dev.vr.com.data.database.DatabaseFactory
 import dev.vr.com.data.repository.GameRepositoryImpl
 import dev.vr.com.presentation.navigation.Route
 import dev.vr.com.presentation.screen.arena.ArenaScreen
-import dev.vr.com.presentation.screen.HolidaysScreen
-import dev.vr.com.presentation.screen.ZoneScreen
+import dev.vr.com.presentation.screen.holidays.HolidaysScreen
+import dev.vr.com.presentation.screen.zone.ZoneScreen
 import dev.vr.com.presentation.screen.arena.ArenaViewModel
+import dev.vr.com.presentation.screen.holidays.HolidaysViewModel
 import dev.vr.com.presentation.screen.settings.SettingsScreen
 import dev.vr.com.presentation.screen.settings.SettingsViewModel
 import dev.vr.com.presentation.screen.zone.ZoneViewModel
@@ -82,7 +83,7 @@ fun App() {
             when (target) {
                 Route.Arena -> ArenaScreen(ArenaViewModel(gameRepository))
                 Route.Zone -> ZoneScreen(ZoneViewModel(gameRepository))
-                Route.Holidays -> HolidaysScreen()
+                Route.Holidays -> HolidaysScreen(HolidaysViewModel(gameRepository))
                 Route.Settings -> SettingsScreen(SettingsViewModel(gameRepository))
             }
         }

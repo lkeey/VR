@@ -104,7 +104,7 @@ fun SettingsScreen (
         VRDropDown(
             categories = CategoryModel.entries.toList(),
             previousData = state.gameCategory?.key ?: "",
-            label = "Выберите категорию",
+            label = "Выберите категорию (раздел)",
             onOptionSelected = {
                 viewModel.onEvent(SettingsEvent.OnChoseGameCategory(it))
             }
@@ -112,7 +112,7 @@ fun SettingsScreen (
 
         VRTextField(
             previousData = state.gameName ?: "",
-            label = "Введите название игры:",
+            label = "Введите название игры / блока:",
             onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameName(it))
             }
@@ -120,7 +120,7 @@ fun SettingsScreen (
 
         VRTextField(
             previousData = state.gameName ?: "",
-            label = "Введите описание игры:",
+            label = "Введите описание игры / блока, если есть:",
             onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameDescription(it))
             }
@@ -128,7 +128,7 @@ fun SettingsScreen (
 
         VRTextField(
             previousData = state.gameMovieUrl ?: "",
-            label = "**Введите ссылку на видео игры:",
+            label = "**Введите ссылку на видео игры / блока, если есть:",
             onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameMoviePath(it))
             }
@@ -157,7 +157,7 @@ fun SettingsScreen (
             color = Theme.colors.pinkAction,
             content = {
                 Text(
-                    text = "ДОБАВИТЬ ИГРУ",
+                    text = "ДОБАВИТЬ",
                     color = Theme.colors.textInverse,
                     fontSize = 32.sp,
                     fontFamily = FontFamily(Font(Res.font.Bold)),

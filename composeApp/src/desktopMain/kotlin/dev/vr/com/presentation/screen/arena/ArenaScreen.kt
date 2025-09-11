@@ -264,7 +264,7 @@ fun ArenaScreen(
         Carousel(
             modifier = Modifier
                 .fillMaxWidth(),
-            games = state.games
+            objects = state.games
         )
     }
 }

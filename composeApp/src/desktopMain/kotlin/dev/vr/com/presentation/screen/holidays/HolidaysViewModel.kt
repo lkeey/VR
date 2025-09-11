@@ -1,20 +1,21 @@
-package dev.vr.com.presentation.screen.zone
+package dev.vr.com.presentation.screen.holidays
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.vr.com.data.model.CategoryModel
 import dev.vr.com.domain.repository.GameRepository
 import dev.vr.com.domain.usecase.GetGamesUseCase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class ZoneViewModel (
+class HolidaysViewModel (
     repository: GameRepository
 ) : ViewModel() {
 
     private val getGamesUseCase = GetGamesUseCase(repository)
 
-    private val _state = MutableStateFlow(ZoneState())
+    private val _state = MutableStateFlow(HolidaysState())
     val state = _state.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000L),
@@ -22,10 +23,10 @@ class ZoneViewModel (
     )
 
     init {
-        loadGames()
+        loadHolidays()
     }
 
-    private fun loadGames() {
+    private fun loadHolidays() {
         viewModelScope.launch {
 
             _state.update {
@@ -34,15 +35,30 @@ class ZoneViewModel (
                 )
             }
 
+            delay(10_000L)
+
             getGamesUseCase
-                .invoke(CategoryModel.ZONE)
+                .invoke(CategoryModel.HOLIDAYS)
                 .catch { e ->
-                    _state.update { it.copy(error = e.message, isLoading = false) }
+                    _state.update {
+                        it.copy(
+                            error = e.message,
+                            isLoading = false
+                        )
+                    }
                 }
                 .collect { games ->
-                    _state.update { it.copy(games = games, isLoading = false, error = null) }
+                    _state.update {
+                        it.copy(
+                            holidays = games,
+                            isLoading = false,
+                            error = null
+                        )
+                    }
                 }
 
         }
     }
+
+
 }

@@ -30,10 +30,10 @@ import vr.composeapp.generated.resources.ic_btn_right
 @Composable
 fun Carousel(
     modifier: Modifier,
-    games: List<GameModel>,
+    objects: List<GameModel>,
 ) {
 
-    val pages = games.chunked(3)
+    val pages = objects.chunked(3)
     val pagerState = rememberPagerState(pageCount = { pages.size })
     val coroutineScope = rememberCoroutineScope()
 

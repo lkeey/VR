@@ -1,28 +1,34 @@
-package dev.vr.com.presentation.screen
+package dev.vr.com.presentation.screen.holidays
 
 import Carousel
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.overlay.Banner
 import dev.vr.com.core.components.overlay.InfoVideoPopUp
 import dev.vr.com.core.components.text.RoundedText
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.presentation.model.GameModel
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.*
 
 @Composable
 fun HolidaysScreen(
+    viewModel: HolidaysViewModel,
     modifier: Modifier = Modifier
 ) {
+
+    val state = viewModel.state.collectAsStateWithLifecycle().value
+
     var showVideoPopup by remember { mutableStateOf(false) }
 
     if (showVideoPopup) {
@@ -124,12 +130,28 @@ fun HolidaysScreen(
             }
         )
 
-//        Carousel(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(top = 12.dp),
-//            games = getGames()
-//        )
+        if (state.isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp), // можно под размер карусели
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        } else if (state.holidays.isEmpty()) {
+            Text(
+                text = "Праздников нет",
+                modifier = Modifier.padding(16.dp)
+            )
+        } else {
+            Carousel(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp),
+                objects = state.holidays
+            )
+        }
     }
 }
 
