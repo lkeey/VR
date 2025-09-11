@@ -134,7 +134,7 @@ fun HolidaysScreen(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp), // можно под размер карусели
+                    .height(200.dp),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator()

@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import dev.vr.com.data.model.CategoryModel
 import dev.vr.com.domain.repository.GameRepository
 import dev.vr.com.domain.usecase.GetGamesUseCase
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -34,8 +33,6 @@ class HolidaysViewModel (
                     isLoading = true
                 )
             }
-
-            delay(10_000L)
 
             getGamesUseCase
                 .invoke(CategoryModel.HOLIDAYS)

@@ -1,25 +1,19 @@
 package dev.vr.com.presentation.screen.zone
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.vr.com.core.components.button.RoundedButton
+import dev.vr.com.core.components.layout.GamesGrid
 import dev.vr.com.core.components.overlay.Banner
 import dev.vr.com.core.components.overlay.GamePopUp
 import dev.vr.com.core.components.overlay.InfoVideoPopUp
@@ -166,47 +160,30 @@ fun ZoneScreen(
             )
         ) { }
 
-
-        LazyVerticalGrid(
-            columns = GridCells
-                .Fixed(7),
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            contentPadding = PaddingValues(4.dp)
-        ) {
-            items(state.games) { game ->
-                Box (
-                    modifier = Modifier
-                        .weight(1f)
-                        .clickable (
-                            indication = null,
-                            interactionSource = remember { MutableInteractionSource() }
-                        ) {
-                            selectedGame = game
-                        }
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .heightIn(max = 250.dp),
-                        bitmap = game.image,
-                        contentDescription = game.text,
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Icon(
-                        painter = painterResource(Res.drawable.ic_open),
-                        contentDescription = "open",
-                        modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .padding(4.dp),
-                        tint = Color.Unspecified
-                    )
-                }
+        if (state.isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
             }
+        } else if (state.games.isEmpty()) {
+            Text(
+                text = "Праздников нет",
+                modifier = Modifier.padding(16.dp)
+            )
+        } else {
+            GamesGrid(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                games = state.games,
+                onClick = { game ->
+                    selectedGame = game
+                }
+            )
         }
     }
 }
