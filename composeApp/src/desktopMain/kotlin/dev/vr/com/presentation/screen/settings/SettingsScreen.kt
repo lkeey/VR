@@ -7,6 +7,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -62,24 +63,13 @@ fun SettingsScreen (
     ) {
 
         state.error?.let {
-            Text("Ошибка: $it")
-        }
-
-        if (state.games.isNotEmpty()) {
-            state.games.forEach {
-                Column {
-                    Text("$it")
-
-                    Image(
-                        bitmap = it.image,
-                        contentDescription = it.text,
-                    )
-                }
-
-
-            }
-        } else {
-            Text("Игр нет")
+            Text(
+                text = "Ошибка: $it",
+                color = Theme.colors.pinkAction,
+                fontSize = 32.sp,
+                fontFamily = FontFamily(Font(Res.font.ExtraBold)),
+                fontWeight = FontWeight(800),
+            )
         }
 
         RoundedButton(
@@ -174,6 +164,28 @@ fun SettingsScreen (
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            thickness = 2.dp,
+            color = Theme.colors.blueAction
+        )
+
+        if (state.games.isNotEmpty()) {
+            state.games.forEach {
+                Column {
+                    Text("$it")
+
+                    Image(
+                        bitmap = it.image,
+                        contentDescription = it.text,
+                    )
+                }
+            }
+        } else {
+            Text("Игр нет")
+        }
     }
 }
 

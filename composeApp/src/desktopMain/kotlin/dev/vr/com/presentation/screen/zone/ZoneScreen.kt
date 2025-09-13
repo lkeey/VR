@@ -171,7 +171,7 @@ fun ZoneScreen(
             }
         } else if (state.games.isEmpty()) {
             Text(
-                text = "Праздников нет",
+                text = "Игр нет",
                 modifier = Modifier.padding(16.dp)
             )
         } else {

@@ -7,12 +7,7 @@ import dev.vr.com.domain.repository.GameRepository
 import dev.vr.com.domain.usecase.AddGameUseCase
 import dev.vr.com.domain.usecase.GetGamesUseCase
 import dev.vr.com.presentation.model.GameModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.imageio.ImageIO
 
@@ -114,17 +109,18 @@ class SettingsViewModel(
                 )
             }
 
-            addGameUseCase
-                .invoke(
-                    game = GameModel(
-                        text = state.value.gameName ?: throw Exception("Обязательно укажите название") ,
-                        image = state.value.gameImage ?: throw Exception("Обязательно добавьте изображение"),
-                        description = state.value.gameDescription ?: "",
-                        movie = state.value.gameMovieUrl ?: ""
-                    ),
-                    category = state.value.gameCategory ?: throw Exception("Обязательно выберите раздел"),
-                )
-                .onSuccess {
+            try {
+                addGameUseCase
+                    .invoke(
+                        game = GameModel(
+                            text = state.value.gameName ?: throw Exception("Обязательно укажите название") ,
+                            image = state.value.gameImage ?: throw Exception("Обязательно добавьте изображение"),
+                            description = state.value.gameDescription ?: "",
+                            movie = state.value.gameMovieUrl ?: ""
+                        ),
+                        category = state.value.gameCategory ?: throw Exception("Обязательно выберите раздел"),
+                    )
+                    .onSuccess {
 //                    _state.update {
 //                        it.copy(
 //                            gameName = null,
@@ -135,16 +131,25 @@ class SettingsViewModel(
 //                        )
 //                    }
 
-                    loadGames()
-                }
-                .onFailure { exception ->
-                    _state.update {
-                        it.copy(
-                            isLoading = false,
-                            error = exception.message
-                        )
+//                        loadGames()
                     }
+                    .onFailure { exception ->
+                        _state.update {
+                            it.copy(
+                                isLoading = false,
+                                error = exception.message
+                            )
+                        }
+                    }
+            } catch (e : Exception) {
+                _state.update {
+                    it.copy(
+                        isLoading = false,
+                        error = e.message
+                    )
                 }
+            }
+
 
 
         }

@@ -1,11 +1,13 @@
 package dev.vr.com.presentation.screen.arena
 
-import Carousel
+import dev.vr.com.core.components.layout.Carousel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -261,11 +263,27 @@ fun ArenaScreen(
             contentDescription = "banner background"
         )
 
-        Carousel(
-            modifier = Modifier
-                .fillMaxWidth(),
-            objects = state.games
-        )
+        if (state.isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        } else if (state.games.isEmpty()) {
+            Text(
+                text = "Игр нет",
+                modifier = Modifier.padding(16.dp)
+            )
+        } else {
+            Carousel(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                objects = state.games
+            )
+        }
     }
 }
 

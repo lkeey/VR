@@ -1,6 +1,6 @@
 package dev.vr.com.presentation.screen.holidays
 
-import Carousel
+import dev.vr.com.core.components.layout.Carousel
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text

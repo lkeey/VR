@@ -39,11 +39,11 @@ fun RoundedButton(
                 color = color,
                 shape = shape
             )
-            .padding(innerPadding)
             .clickable(
                 indication = null,
                 interactionSource = remember { MutableInteractionSource() }
-            ) { onClick() },
+            ) { onClick() }
+            .padding(innerPadding),
         contentAlignment = Alignment.Center
     ) {
         Box(
