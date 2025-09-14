@@ -26,12 +26,12 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper/
-          key: gradle-${{ runner.os }}-${{ hashFiles('VR/composeApp/**/*.gradle*', 'VR/composeApp/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('composeApp/**/*.gradle*', 'composeApp/gradle-wrapper.properties') }}
           enableCrossOsArchive: true
 
       - name: Build MSI
         run: ./gradlew packageMsi
-        working-directory: VR/composeApp
+        working-directory: composeApp
         shell: pwsh
 
       - name: Upload MSI artifact
@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compose-msi
-          path: VR/composeApp/build/compose/binaries/main/msi/*.msi
+          path: composeApp/build/compose/binaries/main/msi/*.msi
 
   build-macos:
     runs-on: macos-latest
@@ -59,12 +59,12 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper/
-          key: gradle-${{ runner.os }}-${{ hashFiles('VR/composeApp/**/*.gradle*', 'VR/composeApp/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('composeApp/**/*.gradle*', 'composeApp/gradle-wrapper.properties') }}
           enableCrossOsArchive: true
 
       - name: Build DMG
         run: ./gradlew packageDmg
-        working-directory: VR/composeApp
+        working-directory: composeApp
         shell: bash
 
       - name: Upload DMG artifact
@@ -72,7 +72,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compose-dmg
-          path: VR/composeApp/build/compose/binaries/main/dmg/*.dmg
+          path: composeApp/build/compose/binaries/main/dmg/*.dmg
 
   build-linux:
     runs-on: ubuntu-latest
@@ -92,12 +92,12 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper/
-          key: gradle-${{ runner.os }}-${{ hashFiles('VR/composeApp/**/*.gradle*', 'VR/composeApp/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('composeApp/**/*.gradle*', 'composeApp/gradle-wrapper.properties') }}
           enableCrossOsArchive: true
 
       - name: Build DEB
         run: ./gradlew packageDeb
-        working-directory: VR/composeApp
+        working-directory: composeApp
         shell: bash
 
       - name: Upload DEB artifact
@@ -105,4 +105,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compose-deb
-          path: VR/composeApp/build/compose/binaries/main/deb/*.deb
+          path: composeApp/build/compose/binaries/main/deb/*.deb
