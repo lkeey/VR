@@ -19,6 +19,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.vr.com.core.components.movie.VideoPlayer
+import dev.vr.com.core.components.movie.rememberVideoPlayerState
 import dev.vr.com.core.theme.Theme
 import dev.vr.com.presentation.model.GameModel
 import org.jetbrains.compose.resources.Font
@@ -31,6 +33,10 @@ fun GamePopUp(
     gameModel: GameModel,
     onDismiss: () -> Unit
 ) {
+
+    val state = rememberVideoPlayerState()
+
+    val VIDEO_URL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
     VRPopUp(
         onDismiss = onDismiss,
@@ -64,7 +70,16 @@ fun GamePopUp(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-//                    Player(
+                VideoPlayer(
+                    url = VIDEO_URL,
+                    state = state,
+                    onFinish = state::stopPlayback,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(400.dp)
+                )
+
+//                Player(
 //                    url = videoUrl,
 //                    onFinish = {},
 //                    modifier = Modifier
