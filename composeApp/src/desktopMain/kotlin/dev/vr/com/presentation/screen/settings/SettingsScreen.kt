@@ -179,8 +179,6 @@ fun SettingsScreen (
                 games = state.games,
                 isEnableToDelete = true,
                 onClick = { game ->
-                    /* TODO delete */
-//                    selectedGame = game
                     viewModel.onEvent(SettingsEvent.DeleteGame(game.id))
                 }
             )

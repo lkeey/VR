@@ -48,7 +48,9 @@ fun GamesGrid (
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }
                     ) {
-                        onClick(game)
+                        if (!isEnableToDelete) {
+                            onClick(game)
+                        }
                     }
             ) {
                 Image(
@@ -70,7 +72,13 @@ fun GamesGrid (
                             .padding(4.dp)
                             .clip(CircleShape)
                             .background(Theme.colors.pinkAction)
-                            .padding(4.dp),
+                            .padding(4.dp)
+                            .clickable (
+                                indication = null,
+                                interactionSource = remember { MutableInteractionSource() }
+                            ) {
+                                onClick(game)
+                            },
                         tint = Color.White
                     )
 
