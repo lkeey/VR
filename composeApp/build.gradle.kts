@@ -59,7 +59,7 @@ compose.desktop {
             targetFormats(
                 TargetFormat.Dmg,
                 TargetFormat.Msi,
-//                TargetFormat.Deb
+                TargetFormat.Deb
             )
             packageName = "dev.vr.com"
             packageVersion = "2.0.2"
