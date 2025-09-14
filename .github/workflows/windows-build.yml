@@ -28,15 +28,15 @@ jobs:
             ~/.gradle/caches
             ~/.gradle/wrapper/
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          enableCrossOsArchive: true
 
       - name: Build MSI
-        run: |
-          ./gradlew clean build
-        shell: bash
+        run: ./gradlew packageMsi
+        shell: pwsh   # PowerShell вместо Git Bash
 
       - name: Upload MSI artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: compose-msi
-          path: composeApp/build/compose/binaries/main/release/*.msi
+          path: composeApp/build/compose/binaries/main/msi/*.msi
