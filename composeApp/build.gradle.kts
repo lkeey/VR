@@ -65,10 +65,14 @@ compose.desktop {
                 TargetFormat.Deb
             )
             packageName = "dev.vr.com"
-            packageVersion = "2.0.2"
+            packageVersion = "2.1.0"
 
-            buildTypes {
-                release { }
+
+            buildTypes.release.proguard {
+                isEnabled.set(false)
+                configurationFiles.from(file("proguard-rules.pro"))
+                optimize.set(false)
+                obfuscate.set(false)
             }
 
             modules("java.sql", "java.naming")
