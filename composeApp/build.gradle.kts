@@ -10,7 +10,12 @@ plugins {
 
 kotlin {
 
-    jvm("desktop")
+    jvm("desktop") {
+        compilations.all {
+            // JVM Toolchain для Java 17
+            kotlinOptions.jvmTarget = "17"
+        }
+    }
 
     jvmToolchain(17)
     
@@ -34,14 +39,13 @@ kotlin {
 
             // db
             implementation("app.cash.sqldelight:runtime:2.0.2")
-            implementation("app.cash.sqldelight:sqlite-driver:2.0.2")
             implementation("app.cash.sqldelight:coroutines-extensions:2.0.2")
 
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
-
+            implementation("app.cash.sqldelight:sqlite-driver:2.0.2")
         }
     }
 }
@@ -58,17 +62,10 @@ compose.desktop {
 //                TargetFormat.Deb
             )
             packageName = "dev.vr.com"
-            packageVersion = "1.0.0"
+            packageVersion = "2.0.0"
 
             buildTypes {
-                release {
-//                    proguard {
-//                        obfuscate.set(false)
-//                        optimize.set(false)
-//                        // Include your custom rules
-//                        configurationFiles.from(file("proguard-rules.pro"))
-//                    }
-                }
+                release { }
             }
         }
     }
@@ -80,5 +77,9 @@ sqldelight {
             packageName.set("dev.vr.com.db")
         }
     }
+}
+
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
