@@ -28,9 +28,9 @@ import org.jetbrains.compose.resources.Font
 import vr.composeapp.generated.resources.Bold
 import vr.composeapp.generated.resources.ExtraBold
 import vr.composeapp.generated.resources.Res
-import java.awt.Frame
 import java.io.File
-import java.awt.FileDialog as AwtFileDialog
+import javax.swing.JFileChooser
+import javax.swing.filechooser.FileNameExtensionFilter
 
 @Composable
 fun SettingsScreen (
@@ -176,7 +176,7 @@ fun SettingsScreen (
             GamesGrid(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f),
+                    .height(400.dp),
                 games = state.games,
                 isEnableToDelete = true,
                 onClick = { game ->
@@ -190,8 +190,18 @@ fun SettingsScreen (
 }
 
 fun chooseImageFile(): File? {
-    val fileDialog = AwtFileDialog(null as Frame?, "Select Image", AwtFileDialog.LOAD)
-    fileDialog.isVisible = true
-    return if (fileDialog.file != null) File(fileDialog.directory, fileDialog.file) else null
-}
+    val fileChooser = JFileChooser()
+    fileChooser.dialogTitle = "Select Image"
 
+    // Фильтр для PNG и JPEG
+    val filter = FileNameExtensionFilter("Image files", "png", "jpg", "jpeg")
+    fileChooser.fileFilter = filter
+    fileChooser.isAcceptAllFileFilterUsed = false
+
+    val result = fileChooser.showOpenDialog(null)
+    return if (result == JFileChooser.APPROVE_OPTION) {
+        fileChooser.selectedFile
+    } else {
+        null
+    }
+}
