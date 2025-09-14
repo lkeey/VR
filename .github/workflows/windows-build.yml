@@ -30,7 +30,7 @@ jobs:
           enableCrossOsArchive: true
 
       - name: Build MSI
-        run: ./gradlew packageMsi
+        run: gradlew.bat packageMsi
         working-directory: composeApp
         shell: pwsh
 
