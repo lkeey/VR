@@ -113,6 +113,7 @@ class SettingsViewModel(
                 addGameUseCase
                     .invoke(
                         game = GameModel(
+                            id = 0L,
                             text = state.value.gameName ?: throw Exception("Обязательно укажите название") ,
                             image = state.value.gameImage ?: throw Exception("Обязательно добавьте изображение"),
                             description = state.value.gameDescription ?: "",
@@ -160,7 +161,6 @@ class SettingsViewModel(
             repository.deleteGame(id)
         }
     }
-
 
 }
 

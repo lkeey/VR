@@ -21,6 +21,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.field.VRDropDown
 import dev.vr.com.core.components.field.VRTextField
+import dev.vr.com.core.components.layout.GamesGrid
 import dev.vr.com.core.theme.Theme
 import dev.vr.com.data.model.CategoryModel
 import org.jetbrains.compose.resources.Font
@@ -162,27 +163,27 @@ fun SettingsScreen (
             viewModel.onEvent(SettingsEvent.OnAddGame)
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
         Divider(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 8.dp),
+                .padding(vertical = 4.dp),
             thickness = 2.dp,
             color = Theme.colors.blueAction
         )
 
         if (state.games.isNotEmpty()) {
-            state.games.forEach {
-                Column {
-                    Text("$it")
-
-                    Image(
-                        bitmap = it.image,
-                        contentDescription = it.text,
-                    )
+            GamesGrid(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                games = state.games,
+                isEnableToDelete = true,
+                onClick = { game ->
+                    /* TODO delete */
+//                    selectedGame = game
+                    viewModel.onEvent(SettingsEvent.DeleteGame(game.id))
                 }
-            }
+            )
         } else {
             Text("Игр нет")
         }

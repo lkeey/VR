@@ -12,7 +12,6 @@ kotlin {
 
     jvm("desktop") {
         compilations.all {
-            // JVM Toolchain для Java 17
             kotlinOptions.jvmTarget = "17"
         }
     }
@@ -21,7 +20,7 @@ kotlin {
     
     sourceSets {
         val desktopMain by getting
-        
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -46,6 +45,7 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation("app.cash.sqldelight:sqlite-driver:2.0.2")
+            implementation("org.xerial:sqlite-jdbc:3.45.3.0")
         }
     }
 }
@@ -62,12 +62,14 @@ compose.desktop {
 //                TargetFormat.Deb
             )
             packageName = "dev.vr.com"
-            packageVersion = "2.0.0"
+            packageVersion = "2.0.1"
 
             buildTypes {
                 release { }
             }
         }
+
+//        jvmArgs("--add-modules", "java.sql")
     }
 }
 

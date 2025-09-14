@@ -8,10 +8,11 @@ fun GameEntity.toModel(
     imageConverter: (ByteArray) -> ImageBitmap
 ): GameModel {
     return GameModel(
+        id = id,
         image = imageConverter(imageData),
         movie = videoPath,
         text = name,
-        description = description
+        description = description,
     )
 }
 
