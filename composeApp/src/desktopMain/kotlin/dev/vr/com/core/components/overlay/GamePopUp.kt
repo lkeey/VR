@@ -1,13 +1,10 @@
 package dev.vr.com.core.components.overlay
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.GenericShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,15 +25,31 @@ import vr.composeapp.generated.resources.Bold
 import vr.composeapp.generated.resources.Light
 import vr.composeapp.generated.resources.Res
 
+/**
+ * good project:
+ * https://github.com/realityexpander/CloudCoverUSA2/blob/37feae3c18c55591331c2981eb149b2ab3e84dd9/composeApp/build.gradle.kts
+ */
+
 @Composable
 fun GamePopUp(
     gameModel: GameModel,
     onDismiss: () -> Unit
 ) {
 
+    var isShowingMovie by remember {
+        mutableStateOf(false)
+    }
+
     val state = rememberVideoPlayerState()
 
-    val VIDEO_URL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    /**
+     * file:///полный_путь
+     * file:///Users/lkey/Desktop/videos/информатика.mp4
+     *
+     * ссылка на видео
+     * http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4
+     */
+//    val VIDEO_URL = "file:///Users/lkey/Desktop/videos/информатика.mp4"
 
     VRPopUp(
         onDismiss = onDismiss,
@@ -70,37 +83,25 @@ fun GamePopUp(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                VideoPlayer(
-                    url = VIDEO_URL,
-                    state = state,
-                    onFinish = state::stopPlayback,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(400.dp)
-                )
-
-//                Player(
-//                    url = videoUrl,
-//                    onFinish = {},
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .height(400.dp),
-//                    isResumed = true,
-//                    volume = 1f,
-//                    speed = 1f,
-//                    seek = 0f,
-//                    isFullscreen = false,
-//                    progressState = mutableStateOf( Progress(0f, 0))
-//                )
-
-                Image(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(max = 400.dp),
-                    bitmap = gameModel.image,
-                    contentDescription = gameModel.text,
-                    contentScale = ContentScale.Crop
-                )
+                if (isShowingMovie && gameModel.movie != null) {
+                    VideoPlayer(
+                        url = gameModel.movie,
+                        state = state,
+                        onFinish = state::stopPlayback,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(400.dp)
+                    )
+                } else {
+                    Image(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .heightIn(max = 400.dp),
+                        bitmap = gameModel.image,
+                        contentDescription = gameModel.text,
+                        contentScale = ContentScale.Crop
+                    )
+                }
 
                 Spacer(Modifier.height(12.dp))
 
@@ -119,7 +120,14 @@ fun GamePopUp(
 
                 Text(
                     text = "PROMO VIDEO",
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable (
+                            enabled = gameModel.movie != null
+                        ) {
+                            isShowingMovie = !isShowingMovie
+                        }
+                    ,
                     style = TextStyle(
                         color = Theme.colors.blueAction,
                         fontSize = 28.sp,
