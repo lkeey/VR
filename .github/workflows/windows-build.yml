@@ -1,4 +1,4 @@
-name: Build Compose App
+name: Build Compose Desktop App
 
 on:
   push:
@@ -10,7 +10,6 @@ on:
 jobs:
   build-windows:
     runs-on: windows-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,15 +26,12 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper/
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('VR/composeApp/**/*.gradle*', 'VR/composeApp/gradle-wrapper.properties') }}
           enableCrossOsArchive: true
 
       - name: Build MSI
         run: ./gradlew packageMsi
-        shell: pwsh
-
-      - name: Debug output
-        run: ls -R build/compose/binaries
+        working-directory: VR/composeApp
         shell: pwsh
 
       - name: Upload MSI artifact
@@ -43,11 +39,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compose-msi
-          path: build/compose/binaries/main/msi/*.msi
+          path: VR/composeApp/build/compose/binaries/main/msi/*.msi
 
   build-macos:
     runs-on: macos-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -64,11 +59,12 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper/
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('VR/composeApp/**/*.gradle*', 'VR/composeApp/gradle-wrapper.properties') }}
           enableCrossOsArchive: true
 
       - name: Build DMG
         run: ./gradlew packageDmg
+        working-directory: VR/composeApp
         shell: bash
 
       - name: Upload DMG artifact
@@ -76,11 +72,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compose-dmg
-          path: build/compose/binaries/main/dmg/*.dmg
+          path: VR/composeApp/build/compose/binaries/main/dmg/*.dmg
 
   build-linux:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -97,11 +92,12 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper/
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('VR/composeApp/**/*.gradle*', 'VR/composeApp/gradle-wrapper.properties') }}
           enableCrossOsArchive: true
 
       - name: Build DEB
         run: ./gradlew packageDeb
+        working-directory: VR/composeApp
         shell: bash
 
       - name: Upload DEB artifact
@@ -109,4 +105,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: compose-deb
-          path: build/compose/binaries/main/deb/*.deb
+          path: VR/composeApp/build/compose/binaries/main/deb/*.deb
