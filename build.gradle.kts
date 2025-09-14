@@ -7,3 +7,7 @@ plugins {
 
     alias(libs.plugins.sqldelight) apply false
 }
+
+tasks.withType<Jar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

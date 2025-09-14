@@ -9,7 +9,10 @@ plugins {
 }
 
 kotlin {
+
     jvm("desktop")
+
+    jvmToolchain(17)
     
     sourceSets {
         val desktopMain by getting
@@ -27,7 +30,7 @@ kotlin {
             implementation(libs.kotlinx.serialization.json)
 
             // movie
-            implementation("uk.co.caprica:vlcj:4.7.0")
+//            implementation("uk.co.caprica:vlcj:4.7.0")
 
             // db
             implementation("app.cash.sqldelight:runtime:2.0.2")
@@ -39,7 +42,6 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
 
-
         }
     }
 }
@@ -50,10 +52,24 @@ compose.desktop {
         mainClass = "dev.vr.com.MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(
+                TargetFormat.Dmg,
+                TargetFormat.Msi,
+//                TargetFormat.Deb
+            )
             packageName = "dev.vr.com"
             packageVersion = "1.0.0"
 
+            buildTypes {
+                release {
+//                    proguard {
+//                        obfuscate.set(false)
+//                        optimize.set(false)
+//                        // Include your custom rules
+//                        configurationFiles.from(file("proguard-rules.pro"))
+//                    }
+                }
+            }
         }
     }
 }
