@@ -8,12 +8,8 @@ on:
   pull_request:
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-
+  build-windows:
+    runs-on: windows-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -30,26 +26,8 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper/
-          key: gradle-${{ runner.os }}-${{ hashFiles('composeApp/**/*.gradle*', 'composeApp/gradle-wrapper.properties') }}
+          key: gradle-windows-${{ hashFiles('composeApp/**/*.gradle*', 'composeApp/gradle-wrapper.properties') }}
           enableCrossOsArchive: true
 
-      - name: Build Desktop App
-        run: |
-          if [ "${{ runner.os }}" == "Windows" ]; then
-            gradlew.bat :composeApp:packageMsi
-          elif [ "${{ runner.os }}" == "macOS" ]; then
-            ./gradlew :composeApp:packageDmg
-          else
-            ./gradlew :composeApp:packageDeb
-          fi
-        shell: bash
-
-      - name: Upload artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: desktop-artifact
-          path: |
-            composeApp/build/compose/binaries/main/msi/*.msi
-            composeApp/build/compose/binaries/main/dmg/*.dmg
-            composeApp/build/compose/binaries/main/deb/*.deb
+      - name: Build MSI
+        run: gradlew.bat :composeApp:pa
