@@ -112,6 +112,7 @@ fun SettingsScreen (
         VRTextField(
             previousData = state.gameName ?: "",
             label = "Введите описание игры / блока, если есть:",
+            isSingleLine = false,
             onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameDescription(it))
             }
@@ -119,7 +120,7 @@ fun SettingsScreen (
 
         VRTextField(
             previousData = state.gameMovieUrl ?: "",
-            label = "**Введите ссылку на видео игры / блока, если есть:",
+            label = "Введите ссылку на видео игры / блока, если есть:",
             onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameMoviePath(it))
             }

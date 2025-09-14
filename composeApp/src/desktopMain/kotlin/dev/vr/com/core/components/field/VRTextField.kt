@@ -25,6 +25,7 @@ fun VRTextField (
     previousData: String,
     label: String,
     backgroundColor: Color = Theme.colors.grayBackground,
+    isSingleLine: Boolean = true,
     isReadOnly: Boolean = false,
     skew: Dp = 12.dp,
     cutTL: Dp = 8.dp,
@@ -61,7 +62,7 @@ fun VRTextField (
             cutTopRight = cutTR,
             cutBottomRight = cutBR
         ),
-        singleLine = true,
+        singleLine = isSingleLine,
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 8.dp),
