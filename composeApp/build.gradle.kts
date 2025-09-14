@@ -62,14 +62,14 @@ compose.desktop {
 //                TargetFormat.Deb
             )
             packageName = "dev.vr.com"
-            packageVersion = "2.0.1"
+            packageVersion = "2.0.2"
 
             buildTypes {
                 release { }
             }
-        }
 
-//        jvmArgs("--add-modules", "java.sql")
+            modules("java.sql", "java.naming")
+        }
     }
 }
 
@@ -80,8 +80,3 @@ sqldelight {
         }
     }
 }
-
-tasks.withType<Jar> {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-

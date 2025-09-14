@@ -93,7 +93,7 @@ class SettingsViewModel(
 
             getGamesUseCase.invoke()
                 .catch { e ->
-                    _state.update { it.copy(error = e.message, isLoading = false) }
+                    _state.update { it.copy(error = e.toString(), isLoading = false) }
                 }
                 .collect { games ->
                     _state.update { it.copy(games = games, isLoading = false, error = null) }
@@ -150,8 +150,6 @@ class SettingsViewModel(
                     )
                 }
             }
-
-
 
         }
     }
