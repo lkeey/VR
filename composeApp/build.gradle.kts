@@ -73,7 +73,8 @@ compose.desktop {
                 obfuscate.set(false)
             }
 
-            modules("java.sql", "java.naming")
+            // Include required modules for vlcj (AWT/Swing, instrumentation, and unsupported)
+            modules("java.sql", "java.naming", "java.instrument", "jdk.unsupported")
         }
     }
 }

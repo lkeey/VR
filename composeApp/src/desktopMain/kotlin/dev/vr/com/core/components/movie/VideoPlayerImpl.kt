@@ -33,6 +33,7 @@ internal fun VideoPlayerImpl(
     val mediaPlayer = remember { mediaPlayerComponent.mediaPlayer() }
     mediaPlayer.emitProgressTo(progressState)
     mediaPlayer.setupVideoFinishHandler(onFinish)
+    mediaPlayer.attachDiagnostics()
 
     val factory = remember { { mediaPlayerComponent } }
     /* OR the following code and using SwingPanel(factory = { factory }, ...) */
@@ -75,7 +76,8 @@ private fun Float.toPercentage(): Int = (this * 100).roundToInt()
  */
 private fun initializeMediaPlayerComponent(): Component {
     NativeDiscovery().discover()
-    return if (isMacOS()) {
+    // Use callback rendering on macOS and Linux to avoid black-screen issues with embedded video in packaged builds
+    return if (isMacOS() || isLinux()) {
         CallbackMediaPlayerComponent()
     } else {
         EmbeddedMediaPlayerComponent()
@@ -138,4 +140,44 @@ private fun isMacOS(): Boolean {
         .getProperty("os.name", "generic")
         .lowercase(Locale.ENGLISH)
     return "mac" in os || "darwin" in os
+}
+
+private fun isLinux(): Boolean {
+    val os = System
+        .getProperty("os.name", "generic")
+        .lowercase(Locale.ENGLISH)
+    return "nix" in os || "nux" in os || "aix" in os || "linux" in os
+}
+
+@Composable
+private fun MediaPlayer.attachDiagnostics() {
+    DisposableEffect(Unit) {
+        val listener = object : MediaPlayerEventAdapter() {
+            override fun error(mediaPlayer: MediaPlayer) {
+                println("[vlcj] error: playback error occurred")
+            }
+
+            override fun playing(mediaPlayer: MediaPlayer) {
+                println("[vlcj] playing: video started")
+            }
+
+            override fun videoOutput(mediaPlayer: MediaPlayer, newCount: Int) {
+                println("[vlcj] videoOutput: count=$newCount")
+            }
+
+            override fun opening(mediaPlayer: MediaPlayer) {
+                println("[vlcj] opening media")
+            }
+
+            override fun stopped(mediaPlayer: MediaPlayer) {
+                println("[vlcj] stopped")
+            }
+
+            override fun paused(mediaPlayer: MediaPlayer) {
+                println("[vlcj] paused")
+            }
+        }
+        events().addMediaPlayerEventListener(listener)
+        onDispose { events().removeMediaPlayerEventListener(listener) }
+    }
 }
