@@ -12,7 +12,7 @@ import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter
 import uk.co.caprica.vlcj.player.component.CallbackMediaPlayerComponent
 import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer
-import java.awt.Component
+import javax.swing.JComponent
 import java.util.*
 import kotlin.math.roundToInt
 
@@ -62,8 +62,12 @@ internal fun VideoPlayerImpl(
     DisposableEffect(Unit) { onDispose(mediaPlayer::release) }
     SwingPanel(
         factory = factory,
-        background = Color.Transparent,
-        modifier = modifier
+        background = Color.Black,
+        modifier = modifier,
+        update = { component ->
+            component.isOpaque = true
+            component.background = java.awt.Color.BLACK
+        }
     )
 }
 
@@ -73,13 +77,10 @@ private fun Float.toPercentage(): Int = (this * 100).roundToInt()
  * See https://github.com/caprica/vlcj/issues/887#issuecomment-503288294
  * for why we're using CallbackMediaPlayerComponent for macOS.
  */
-private fun initializeMediaPlayerComponent(): Component {
+private fun initializeMediaPlayerComponent(): JComponent {
     NativeDiscovery().discover()
-    return if (isMacOS()) {
-        CallbackMediaPlayerComponent()
-    } else {
-        EmbeddedMediaPlayerComponent()
-    }
+    val useCallback = isMacOS() || isWayland()
+    return if (useCallback) CallbackMediaPlayerComponent() else EmbeddedMediaPlayerComponent()
 }
 
 /**
@@ -126,7 +127,7 @@ private fun MediaPlayer.emitProgressTo(state: MutableState<Progress>) {
  * The method names are the same, but they don't share the same parent/interface.
  * That's why we need this method.
  */
-private fun Component.mediaPlayer() = when (this) {
+private fun JComponent.mediaPlayer() = when (this) {
     is CallbackMediaPlayerComponent -> mediaPlayer()
     is EmbeddedMediaPlayerComponent -> mediaPlayer()
     else -> error("mediaPlayer() can only be called on vlcj player components")
@@ -137,4 +138,10 @@ private fun isMacOS(): Boolean {
         .getProperty("os.name", "generic")
         .lowercase(Locale.ENGLISH)
     return "mac" in os || "darwin" in os
+}
+
+private fun isWayland(): Boolean {
+    val sessionType = System.getenv("XDG_SESSION_TYPE")?.lowercase(Locale.ENGLISH)
+    val waylandDisplay = System.getenv("WAYLAND_DISPLAY")
+    return sessionType == "wayland" || !waylandDisplay.isNullOrBlank()
 }

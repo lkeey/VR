@@ -57,6 +57,10 @@ kotlin {
 compose.desktop {
     application {
         mainClass = "dev.vr.com.MainKt"
+        jvmArgs += listOf(
+            "-Dsun.java2d.opengl=true",
+            "-Dawt.toolkit=sun.awt.X11.XToolkit"
+        )
 
         nativeDistributions {
             targetFormats(
