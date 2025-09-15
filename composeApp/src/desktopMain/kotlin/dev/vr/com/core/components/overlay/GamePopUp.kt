@@ -90,7 +90,8 @@ fun GamePopUp(
                         onFinish = state::stopPlayback,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(400.dp)
+                            .height(400.dp),
+
                     )
                 } else {
                     Image(

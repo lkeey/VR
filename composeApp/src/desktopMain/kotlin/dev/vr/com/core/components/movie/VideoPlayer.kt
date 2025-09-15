@@ -31,7 +31,7 @@ fun rememberVideoPlayerState(
     volume: Float = 1f,
     isResumed: Boolean = true,
     isFullscreen: Boolean = false
-): VideoPlayerState = rememberSaveable(saver = VideoPlayerState.Saver()) {
+): VideoPlayerState = rememberSaveable(saver = Saver()) {
     VideoPlayerState(
         seek,
         speed,
@@ -75,7 +75,7 @@ class VideoPlayerState(
         /**
          * The default [Saver] implementation for [VideoPlayerState].
          */
-        fun Saver() = listSaver<VideoPlayerState, Any>(
+        fun Saver() = listSaver(
             save = {
                 listOf(
                     it.seek,
@@ -92,8 +92,8 @@ class VideoPlayerState(
                     speed = it[1] as Float,
                     volume = it[2] as Float,
                     isResumed = it[3] as Boolean,
-                    isFullscreen = it[3] as Boolean,
-                    progress = it[4] as Progress,
+                    isFullscreen = it[4] as Boolean,
+                    progress = it[5] as Progress,
                 )
             }
         )

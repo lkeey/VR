@@ -42,13 +42,11 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation("app.cash.sqldelight:sqlite-driver:2.0.2")
-            implementation("org.xerial:sqlite-jdbc:3.45.3.0")
-
+            implementation("org.xerial:sqlite-jdbc:3.47.0.0")
 
             // movie
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.0")
+//            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.8.3")
             implementation("uk.co.caprica:vlcj:4.8.2")
-
         }
     }
 }

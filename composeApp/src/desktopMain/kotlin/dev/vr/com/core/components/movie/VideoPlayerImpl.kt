@@ -93,6 +93,7 @@ private fun MediaPlayer.setupVideoFinishHandler(onFinish: (() -> Unit)?) {
         val listener = object : MediaPlayerEventAdapter() {
             override fun finished(mediaPlayer: MediaPlayer) {
                 onFinish?.invoke()
+
                 mediaPlayer.submit { mediaPlayer.controls().play() }
             }
         }
