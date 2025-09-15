@@ -38,7 +38,22 @@ internal fun VideoPlayerImpl(
     /* OR the following code and using SwingPanel(factory = { factory }, ...) */
     // val factory by rememberUpdatedState(mediaPlayerComponent)
 
-    LaunchedEffect(url) { mediaPlayer.media().play/*OR .start*/(url) }
+    LaunchedEffect(url) {
+        // Ensure the Swing/AWT component is realized before starting playback to avoid black screen
+        while (!mediaPlayerComponent.isDisplayable || !mediaPlayerComponent.isShowing) {
+            delay(50)
+        }
+
+        val playOptions = buildList {
+            add(":no-video-title-show")
+            if (isLinux()) {
+                // Disable hardware acceleration on Linux to avoid black screen in some environments
+                add(":avcodec-hw=none")
+            }
+        }.toTypedArray()
+
+        mediaPlayer.media().play/*OR .start*/(url, *playOptions)
+    }
     LaunchedEffect(seek) { mediaPlayer.controls().setPosition(seek) }
     LaunchedEffect(speed) { mediaPlayer.controls().setRate(speed) }
     LaunchedEffect(volume) { mediaPlayer.audio().setVolume(volume.toPercentage()) }
@@ -138,4 +153,11 @@ private fun isMacOS(): Boolean {
         .getProperty("os.name", "generic")
         .lowercase(Locale.ENGLISH)
     return "mac" in os || "darwin" in os
+}
+
+private fun isLinux(): Boolean {
+    val os = System
+        .getProperty("os.name", "generic")
+        .lowercase(Locale.ENGLISH)
+    return "nux" in os || "linux" in os
 }
