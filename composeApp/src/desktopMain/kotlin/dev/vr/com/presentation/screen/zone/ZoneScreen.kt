@@ -17,7 +17,7 @@ import dev.vr.com.core.components.layout.GamesGrid
 import dev.vr.com.core.components.overlay.Banner
 import dev.vr.com.core.components.overlay.GamePopUp
 import dev.vr.com.core.components.overlay.InfoVideoPopUp
-import dev.vr.com.core.components.text.RoundedText
+import dev.vr.com.core.components.text.CustomBackgroundText
 import dev.vr.com.core.theme.Theme
 import dev.vr.com.presentation.model.GameModel
 import org.jetbrains.compose.resources.Font
@@ -38,9 +38,7 @@ fun ZoneScreen(
     if (showVideoPopup) {
         InfoVideoPopUp(
             image = Res.drawable.zone_popup,
-            onCLick = {
-                /* TODO */
-            },
+            movieUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
             onDismiss = {
                 showVideoPopup = false
             },
@@ -68,7 +66,7 @@ fun ZoneScreen(
                 }
             },
             secondColumn = {
-                RoundedText(
+                CustomBackgroundText(
                     content = {
                         Text(
                             text = "ШУТЕРЫ, КВЕСТЫ, СПОРТ,  \n" +

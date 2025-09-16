@@ -5,7 +5,9 @@ enum class CategoryModel (
 ) {
     ARENA("Arena"),
     ZONE("Zone"),
-    HOLIDAYS("Holidays");
+    HOLIDAYS("Holidays"),
+    OUR_PARK("У нас в парке"),
+    OUR_GAMES("О наших играх"),
 
     /*companion object {
         fun fromKey(key: String): CategoryModel =

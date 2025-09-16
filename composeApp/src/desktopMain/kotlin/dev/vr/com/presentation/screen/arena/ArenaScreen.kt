@@ -19,7 +19,7 @@ import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.overlay.Banner
 import dev.vr.com.core.components.overlay.InfoPopup
 import dev.vr.com.core.components.overlay.InfoVideoPopUp
-import dev.vr.com.core.components.text.RoundedText
+import dev.vr.com.core.components.text.CustomBackgroundText
 import dev.vr.com.core.theme.Theme
 import dev.vr.com.data.model.PopupItem
 import org.jetbrains.compose.resources.Font
@@ -38,7 +38,8 @@ fun ArenaScreen(
 
     if (showInfoPopup) {
         InfoPopup(
-            items = getItems()
+            items1st = state.items1st,
+            items2nd = state.items2nd,
         ) {
             showInfoPopup = false
         }
@@ -46,17 +47,15 @@ fun ArenaScreen(
 
     if (showVideoPopup) {
         InfoVideoPopUp(
-           image = Res.drawable.video_popup_arena,
-            onCLick = {
-                /* TODO */
-            },
+            image = Res.drawable.video_popup_arena,
+            movieUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
             onDismiss = {
                 showVideoPopup = false
 
             },
             firstColumn = {
                 Column {
-                    RoundedText(
+                    CustomBackgroundText(
                         content = {
                             Text(
                                 text = "ВАС ЖДУТ НЕРЕАЛЬНЫЕ ЭМОЦИИ",
@@ -287,27 +286,30 @@ fun ArenaScreen(
     }
 }
 
-fun getItems(): List<PopupItem> {
-    return listOf(
-        PopupItem(Res.drawable.ic_park_1, "VR аттракционы и автостимуляторы"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
-    )
-}
+//fun getItems(): List<PopupItem> {
+//    return listOf(
+//        PopupItem(Res.drawable.ic_park_1, "Больше нет головокружений и тошноты"),
+//        PopupItem(Res.drawable.ic_park_1, "Безопасно!\n" +
+//                "Стены и столбы игровых зон парка оборудованы мягкими протекторами"),
+//        PopupItem(Res.drawable.ic_park_1, "Организация и проведение праздничных мероприятий\n" +
+//                "и турниров"),
+//        PopupItem(Res.drawable.ic_park_1, "Две игровые арены\n" +
+//                "Общей площадью 200м2"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//        PopupItem(Res.drawable.ic_park_1, "Командные сражения до 16 игроков"),
+//    )
+//}
 
 //private fun getGames() : List<GameModel> {
 //    return listOf(

@@ -3,15 +3,18 @@ package dev.vr.com.core.components.overlay
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.GenericShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -19,20 +22,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.vr.com.core.components.text.RoundedText
 import dev.vr.com.core.theme.Theme
-import dev.vr.com.data.model.PopupItem
+import dev.vr.com.presentation.model.GameModel
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import vr.composeapp.generated.resources.ExtraBold
 import vr.composeapp.generated.resources.Light
 import vr.composeapp.generated.resources.Res
-import vr.composeapp.generated.resources.top_background
+import vr.composeapp.generated.resources.name_top
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun InfoPopup(
-    items: List<PopupItem>,
+    items1st: List<GameModel>,
+    items2nd: List<GameModel>,
     onDismiss: () -> Unit
 ) {
-
     VRPopUp(
         onDismiss = onDismiss,
     ) {
@@ -42,15 +46,14 @@ fun InfoPopup(
                 .fillMaxHeight(0.7f)
                 .clip(
                     GenericShape { size, _ ->
-                        // Размер среза угла (можешь регулировать)
                         val cutX = size.width * 0.05f
                         val cutY = size.height * 0.1f
 
-                        moveTo(0f, 0f)                 // левый верх
-                        lineTo(size.width, 0f)         // правый верх
-                        lineTo(size.width, size.height - cutY) // правая сторона вниз
-                        lineTo(size.width - cutX, size.height) // срезанный угол
-                        lineTo(0f, size.height)        // левый низ
+                        moveTo(0f, 0f)
+                        lineTo(size.width, 0f)
+                        lineTo(size.width, size.height - cutY)
+                        lineTo(size.width - cutX, size.height)
+                        lineTo(0f, size.height)
                         close()
                     }
                 )
@@ -59,19 +62,23 @@ fun InfoPopup(
             contentAlignment = Alignment.Center
         ) {
             Column(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
             ) {
-                // Header
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                ) {
-                    RoundedText(
-                        content = {
+                // Заголовок 1
+                RoundedText(
+                    modifier = Modifier.fillMaxWidth(),
+                    content = {
+                        Box(Modifier.fillMaxWidth()) {
+                            Icon(
+                                modifier = Modifier.align(Alignment.CenterStart),
+                                tint = Color.Unspecified,
+                                painter = painterResource(Res.drawable.name_top),
+                                contentDescription = "name"
+                            )
                             Row(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Center
+                                modifier = Modifier.align(Alignment.TopCenter)
                             ) {
                                 Text(
                                     text = "У НАС В",
@@ -88,51 +95,111 @@ fun InfoPopup(
                                     fontWeight = FontWeight(800),
                                 )
                             }
-                        },
-                        color = Theme.colors.grayBackground,
-                        shape = Res.drawable.top_background
-                    )
-                }
+                        }
+                    },
+                    color = Theme.colors.grayBackground,
+                )
 
                 Spacer(Modifier.height(16.dp))
 
-                LazyVerticalGrid(
-                    columns = GridCells
-                        .Fixed(4),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                // Первый блок
+                FlowRow(
+                    maxItemsInEachRow = 4,
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    contentPadding = PaddingValues(4.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    items(items) { item ->
-                        Column(
+                    items1st.forEach { item ->
+                        InfoPopUpItem(
                             modifier = Modifier
-                                .fillMaxWidth(),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Image(
-                                painter = painterResource(item.image),
-                                contentDescription = item.content,
-                            )
-
-                            Spacer(Modifier.height(8.dp))
-
-                            Text(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                text = item.content,
-                                color = Theme.colors.textInverse,
-                                textAlign = TextAlign.Center
-                            )
-                        }
+                                .weight(1f),
+                            item = item
+                        )
                     }
                 }
 
+                Spacer(Modifier.height(24.dp))
+
+                // Заголовок 2
+                RoundedText(
+                    modifier = Modifier.fillMaxWidth(),
+                    content = {
+                        Box(Modifier.fillMaxWidth()) {
+                            Icon(
+                                modifier = Modifier.align(Alignment.CenterStart),
+                                tint = Color.Unspecified,
+                                painter = painterResource(Res.drawable.name_top),
+                                contentDescription = "name"
+                            )
+                            Row(
+                                modifier = Modifier.align(Alignment.TopCenter)
+                            ) {
+                                Text(
+                                    text = "О НАШИХ",
+                                    color = Theme.colors.textInverse,
+                                    fontSize = 64.sp,
+                                    fontFamily = FontFamily(Font(Res.font.Light)),
+                                    fontWeight = FontWeight(600),
+                                )
+                                Text(
+                                    text = " ИГРАХ:",
+                                    color = Theme.colors.textInverse,
+                                    fontSize = 64.sp,
+                                    fontFamily = FontFamily(Font(Res.font.ExtraBold)),
+                                    fontWeight = FontWeight(800),
+                                )
+                            }
+                        }
+                    },
+                    color = Theme.colors.grayBackground,
+                )
+
+                Spacer(Modifier.height(16.dp))
+
+                // Второй блок
+                FlowRow(
+                    maxItemsInEachRow = 4,
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    items2nd.forEach { item ->
+                        InfoPopUpItem(
+                            modifier = Modifier
+                                .weight(1f),
+                            item = item
+                        )
+                    }
+                }
             }
         }
+    }
+}
 
+@Composable
+private fun InfoPopUpItem(
+    item : GameModel,
+    modifier: Modifier
+) {
+    Column(
+        modifier = modifier
+            .width(250.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            bitmap = item.image,
+            contentDescription = item.text,
+        )
 
+        Spacer(Modifier.height(8.dp))
+
+        Text(
+            text = item.text,
+            color = Theme.colors.textInverse,
+            textAlign = TextAlign.Center,
+            fontSize = 20.sp,
+            fontFamily = FontFamily(Font(Res.font.Light)),
+            fontWeight = FontWeight(700),
+        )
     }
 }

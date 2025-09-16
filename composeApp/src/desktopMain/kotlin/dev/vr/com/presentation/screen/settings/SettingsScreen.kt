@@ -104,6 +104,7 @@ fun SettingsScreen (
         VRTextField(
             previousData = state.gameName ?: "",
             label = "Введите название игры / блока:",
+            isSingleLine = false,
             onTextChanged = {
                 viewModel.onEvent(SettingsEvent.OnEnterGameName(it))
             }

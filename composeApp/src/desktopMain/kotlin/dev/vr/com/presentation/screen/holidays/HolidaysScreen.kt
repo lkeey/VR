@@ -15,7 +15,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dev.vr.com.core.components.button.RoundedButton
 import dev.vr.com.core.components.overlay.Banner
 import dev.vr.com.core.components.overlay.InfoVideoPopUp
-import dev.vr.com.core.components.text.RoundedText
+import dev.vr.com.core.components.text.CustomBackgroundText
 import dev.vr.com.core.theme.Theme
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
@@ -34,9 +34,7 @@ fun HolidaysScreen(
     if (showVideoPopup) {
         InfoVideoPopUp(
             image = Res.drawable.zone_popup,
-            onCLick = {
-                /* TODO */
-            },
+            movieUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
             onDismiss = {
                 showVideoPopup = false
             },
@@ -65,7 +63,7 @@ fun HolidaysScreen(
                 }
             },
             secondColumn = {
-                RoundedText(
+                CustomBackgroundText(
                     content = {
                         Text(
                             text = "ОРГАНИЗУЕМ НЕОБЫКНОВЕННОЕ И\n" +

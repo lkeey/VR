@@ -7,7 +7,10 @@ import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,6 +20,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.vr.com.core.components.movie.VideoPlayer
+import dev.vr.com.core.components.movie.rememberVideoPlayerState
 import dev.vr.com.core.theme.Theme
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.Font
@@ -28,12 +33,17 @@ import vr.composeapp.generated.resources.ic_play
 @Composable
 fun InfoVideoPopUp (
     image : DrawableResource,
+    movieUrl : String,
     firstColumn : @Composable () -> Unit,
     secondColumn : @Composable () -> Unit,
     bottom : @Composable () -> Unit,
     onDismiss: () -> Unit,
-    onCLick: () -> Unit,
 ) {
+
+    var isShowingMovie by remember {
+        mutableStateOf(false)
+    }
+    val state = rememberVideoPlayerState()
 
     VRPopUp(
         onDismiss = onDismiss,
@@ -68,43 +78,54 @@ fun InfoVideoPopUp (
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        painter = painterResource(image),
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Column (
-                        modifier = Modifier
-                            .align(Alignment.CenterEnd)
-                            .padding(end = 32.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            painter = painterResource(Res.drawable.ic_play),
-                            contentDescription = "play",
-                            tint = Color.Unspecified,
+                    if (isShowingMovie) {
+                        VideoPlayer(
+                            url = movieUrl,
+                            state = state,
+                            onFinish = state::stopPlayback,
                             modifier = Modifier
-                                .height(100.dp)
-                                .clickable (
-                                    indication = null,
-                                    interactionSource = remember { MutableInteractionSource() }
-                                ) {
-                                    onCLick()
-                                }
+                                .fillMaxWidth()
+                                .height(400.dp),
+                            )
+                    } else {
+                        Image(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            painter = painterResource(image),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop
                         )
 
-                        Text(
+                        Column (
                             modifier = Modifier
-                                .padding(top = 4.dp),
-                            text = "ВИДЕО",
-                            color = Theme.colors.textInverse,
-                            fontSize = 32.sp,
-                            fontFamily = FontFamily(Font(Res.font.Bold)),
-                            fontWeight = FontWeight(700),
-                        )
+                                .align(Alignment.CenterEnd)
+                                .padding(end = 32.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Icon(
+                                painter = painterResource(Res.drawable.ic_play),
+                                contentDescription = "play",
+                                tint = Color.Unspecified,
+                                modifier = Modifier
+                                    .height(100.dp)
+                                    .clickable (
+                                        indication = null,
+                                        interactionSource = remember { MutableInteractionSource() }
+                                    ) {
+                                        isShowingMovie = true
+                                    }
+                            )
+
+                            Text(
+                                modifier = Modifier
+                                    .padding(top = 4.dp),
+                                text = "ВИДЕО",
+                                color = Theme.colors.textInverse,
+                                fontSize = 32.sp,
+                                fontFamily = FontFamily(Font(Res.font.Bold)),
+                                fontWeight = FontWeight(700),
+                            )
+                        }
                     }
                 }
 

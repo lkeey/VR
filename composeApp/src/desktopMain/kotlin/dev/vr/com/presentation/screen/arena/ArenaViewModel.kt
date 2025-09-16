@@ -34,14 +34,14 @@ class ArenaViewModel (
     }
 
     private fun loadGames() {
+        _state.update {
+            it.copy(
+                isLoading = true
+            )
+        }
+
         viewModelScope.launch {
-
-            _state.update {
-                it.copy(
-                    isLoading = true
-                )
-            }
-
+            // games
             getGamesUseCase
                 .invoke(CategoryModel.ARENA)
                 .catch { e ->
@@ -50,8 +50,32 @@ class ArenaViewModel (
                 .collect { games ->
                     _state.update { it.copy(games = games, isLoading = false, error = null) }
                 }
-
         }
+
+        viewModelScope.launch {
+            //1st
+            getGamesUseCase
+                .invoke(CategoryModel.OUR_PARK)
+                .catch { e ->
+                    _state.update { it.copy(error = e.message, isLoading = false) }
+                }
+                .collect { items1st ->
+                    _state.update { it.copy(items1st = items1st, isLoading = false, error = null) }
+                }
+        }
+
+        viewModelScope.launch {
+            //2nd
+            getGamesUseCase
+                .invoke(CategoryModel.OUR_GAMES)
+                .catch { e ->
+                    _state.update { it.copy(error = e.message, isLoading = false) }
+                }
+                .collect { items2nd ->
+                    _state.update { it.copy(items2nd = items2nd, isLoading = false, error = null) }
+                }
+        }
+
     }
 
 
