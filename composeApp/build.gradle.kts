@@ -73,7 +73,12 @@ compose.desktop {
                 obfuscate.set(false)
             }
 
-            modules("java.sql", "java.naming")
+            modules(
+                // Include required modules for sqldelight
+                "java.sql", "java.naming",
+                // Include required modules for vlcj (AWT/Swing, instrumentation, and unsupported)
+                "java.instrument", "jdk.unsupported"
+            )
         }
     }
 }
