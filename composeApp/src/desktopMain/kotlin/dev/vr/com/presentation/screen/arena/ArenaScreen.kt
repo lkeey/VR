@@ -60,9 +60,7 @@ fun ArenaScreen(
                             Text(
                                 text = "ВАС ЖДУТ НЕРЕАЛЬНЫЕ ЭМОЦИИ",
                                 color = Theme.colors.textInverse,
-                                fontSize = 32.sp,
-                                fontFamily = FontFamily(Font(Res.font.Bold)),
-                                fontWeight = FontWeight(700),
+
                             )
                         },
                         color = Theme.colors.blueAction,
