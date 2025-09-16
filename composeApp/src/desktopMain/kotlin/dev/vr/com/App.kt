@@ -22,6 +22,7 @@ import dev.vr.com.presentation.screen.holidays.HolidaysScreen
 import dev.vr.com.presentation.screen.zone.ZoneScreen
 import dev.vr.com.presentation.screen.arena.ArenaViewModel
 import dev.vr.com.presentation.screen.holidays.HolidaysViewModel
+import dev.vr.com.presentation.screen.settings.SettingsGate
 import dev.vr.com.presentation.screen.settings.SettingsScreen
 import dev.vr.com.presentation.screen.settings.SettingsViewModel
 import dev.vr.com.presentation.screen.zone.ZoneViewModel
@@ -81,10 +82,16 @@ fun App() {
             }
         ) { target ->
             when (target) {
-                Route.Arena -> ArenaScreen(ArenaViewModel(gameRepository))
-                Route.Zone -> ZoneScreen(ZoneViewModel(gameRepository))
-                Route.Holidays -> HolidaysScreen(HolidaysViewModel(gameRepository))
-                Route.Settings -> SettingsScreen(SettingsViewModel(gameRepository))
+                Route.Arena -> ArenaScreen(viewModel = ArenaViewModel(gameRepository))
+                Route.Zone -> ZoneScreen(viewModel = ZoneViewModel(gameRepository))
+                Route.Holidays -> HolidaysScreen(viewModel = HolidaysViewModel(gameRepository))
+                Route.Settings -> SettingsGate(
+                    viewModel = SettingsViewModel(gameRepository),
+                    onDismiss = {
+                        previousRoute = currentRoute
+                        currentRoute = Route.Arena
+                    }
+                )
             }
         }
     }
