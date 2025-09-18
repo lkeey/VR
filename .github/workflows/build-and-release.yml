@@ -69,6 +69,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
     
     steps:
     - name: Checkout code
@@ -78,6 +80,13 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         path: ./artifacts
+
+    - name: List downloaded artifacts
+      run: |
+        echo "Artifacts structure:"
+        find ./artifacts -type f -name "*.dmg" -o -name "*.msi" -o -name "*.deb" | head -20
+        echo "All files in artifacts:"
+        find ./artifacts -type f | head -20
 
     - name: Create Release
       id: create_release
@@ -104,7 +113,7 @@ jobs:
         draft: false
         prerelease: ${{ github.ref == 'refs/heads/dev' }}
         files: |
-          ./artifacts/macos-build-artifacts/*.dmg
-          ./artifacts/windows-build-artifacts/*.msi
-          ./artifacts/linux-build-artifacts/*.deb
+          ./artifacts/**/*.dmg
+          ./artifacts/**/*.msi
+          ./artifacts/**/*.deb
         token: ${{ secrets.GITHUB_TOKEN }}
