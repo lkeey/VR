@@ -27,7 +27,7 @@ fun CustomBackgroundText(
                 .matchParentSize()
         )
 
-        content.invoke()
+        content()
     }
 
 }

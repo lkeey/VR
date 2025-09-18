@@ -47,13 +47,13 @@ fun ZoneScreen(
                     modifier = Modifier
                         .padding(start = 8.dp)
                 ){
-                    Text(
-                        text = "VR ZONE",
-                        color = Theme.colors.textInverse,
-                        fontSize = 32.sp,
-                        fontFamily = FontFamily(Font(Res.font.ExtraBold)),
-                        fontWeight = FontWeight(800),
+                    Icon(
+                        painter = painterResource(Res.drawable.vr_zone_name),
+                        contentDescription = "arena",
+                        tint = Theme.colors.textInverse
                     )
+
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
                         text = "В VR зоне гости смогут сыграть в лучшие\nиндивидуальные VR игры всех жанров\n" +
@@ -186,128 +186,3 @@ fun ZoneScreen(
     }
 }
 
-
-//private fun getGames() : List<GameModel> {
-//    return listOf(
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//        GameModel(
-//            image = Res.drawable.zone1,
-//            movie = "1.mp4",
-//            text = "ALYX",
-//            description = "ALYX описание"
-//        ),
-//    )
-//}

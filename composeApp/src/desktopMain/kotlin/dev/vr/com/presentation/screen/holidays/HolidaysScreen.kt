@@ -3,6 +3,7 @@ package dev.vr.com.presentation.screen.holidays
 import dev.vr.com.core.components.layout.Carousel
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -42,14 +43,15 @@ fun HolidaysScreen(
                 Column (
                     modifier = Modifier
                         .padding(start = 8.dp)
+                        .padding(top = 16.dp)
                 ){
-                    Text(
-                        text = "ПРАЗДНИКИ И МЕРОПРИЯТИЯ",
-                        color = Theme.colors.textInverse,
-                        fontSize = 32.sp,
-                        fontFamily = FontFamily(Font(Res.font.ExtraBold)),
-                        fontWeight = FontWeight(800),
+                    Icon(
+                        painter = painterResource(Res.drawable.holidays_name),
+                        contentDescription = "arena",
+                        tint = Theme.colors.textInverse
                     )
+
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
                         text = "Ламповая атмосфера парка и комфортная" +
@@ -63,20 +65,27 @@ fun HolidaysScreen(
                 }
             },
             secondColumn = {
-                CustomBackgroundText(
-                    content = {
-                        Text(
-                            text = "ОРГАНИЗУЕМ НЕОБЫКНОВЕННОЕ И\n" +
-                                    "ЗАПОМИНАЮЩЕЕСЯ МЕРОПРИЯТИЕ!",
-                            color = Theme.colors.textInverse,
-                            fontSize = 36.sp,
-                            fontFamily = FontFamily(Font(Res.font.Bold)),
-                            fontWeight = FontWeight(600),
-                        )
-                    },
-                    color = Theme.colors.blueAction,
-                    shape = Res.drawable.grafity_2x
-                )
+                Column (
+                    modifier = Modifier
+                        .padding(start = 8.dp)
+                        .padding(top = 16.dp),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    CustomBackgroundText(
+                        content = {
+                            Text(
+                                text = "ОРГАНИЗУЕМ НЕОБЫКНОВЕННОЕ И\n" +
+                                        "ЗАПОМИНАЮЩЕЕСЯ МЕРОПРИЯТИЕ!",
+                                color = Theme.colors.textInverse,
+                                fontSize = 36.sp,
+                                fontFamily = FontFamily(Font(Res.font.Bold)),
+                                fontWeight = FontWeight(600),
+                            )
+                        },
+                        color = Theme.colors.blueAction,
+                        shape = Res.drawable.grafity_2x
+                    )
+                }
             },
             bottom = { }
         )

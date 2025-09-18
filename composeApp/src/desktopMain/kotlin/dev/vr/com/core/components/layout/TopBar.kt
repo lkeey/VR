@@ -112,9 +112,6 @@ fun TopBar(
                 else Theme.colors.pinkAction,
             content = {
                 Icon(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp),
                     painter = painterResource(Res.drawable.holidays_name),
                     contentDescription = "arena",
                     tint = Theme.colors.textInverse
