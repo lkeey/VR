@@ -81,12 +81,10 @@ jobs:
 
     - name: Create Release
       id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{ github.ref_name }}-${{ github.run_number }}
-        release_name: Release ${{ github.ref_name }}-${{ github.run_number }}
+        name: Release ${{ github.ref_name }}-${{ github.run_number }}
         body: |
           ## Build Information
           - **Branch**: ${{ github.ref_name }}
@@ -105,33 +103,8 @@ jobs:
           - **Linux**: Install using `sudo dpkg -i *.deb`
         draft: false
         prerelease: ${{ github.ref == 'refs/heads/dev' }}
-
-    - name: Upload macOS DMG
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./artifacts/macos-build-artifacts/*.dmg
-        asset_name: VR-Arena-${{ github.ref_name }}-${{ github.run_number }}-macos.dmg
-        asset_content_type: application/octet-stream
-
-    - name: Upload Windows MSI
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./artifacts/windows-build-artifacts/*.msi
-        asset_name: VR-Arena-${{ github.ref_name }}-${{ github.run_number }}-windows.msi
-        asset_content_type: application/octet-stream
-
-    - name: Upload Linux DEB
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./artifacts/linux-build-artifacts/*.deb
-        asset_name: VR-Arena-${{ github.ref_name }}-${{ github.run_number }}-linux.deb
-        asset_content_type: application/octet-stream
+        files: |
+          ./artifacts/macos-build-artifacts/*.dmg
+          ./artifacts/windows-build-artifacts/*.msi
+          ./artifacts/linux-build-artifacts/*.deb
+        token: ${{ secrets.GITHUB_TOKEN }}
