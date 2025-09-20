@@ -1,4 +1,6 @@
+
 # VR Arena - Desktop Application
+
 
 A modern desktop application for V/S Arena built with Kotlin Multiplatform and Jetpack Compose, featuring a media player and video platform capabilities.
 
@@ -183,6 +185,5 @@ This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) 
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📞 Support
+Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
 
-For support and questions, please open an issue in the GitHub repository.
