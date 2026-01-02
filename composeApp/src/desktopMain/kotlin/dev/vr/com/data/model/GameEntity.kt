@@ -5,7 +5,7 @@ data class GameEntity(
     val id: Long = 0L,
     val name: String,
     val description: String?,
-    val imageData: ByteArray,
+    val imagesData: ByteArray,
     val videoPath: String?,
     val categoryName: String
 ) {
@@ -18,7 +18,7 @@ data class GameEntity(
         if (id != other.id) return false
         if (name != other.name) return false
         if (description != other.description) return false
-        if (!imageData.contentEquals(other.imageData)) return false
+        if (!imagesData.contentEquals(other.imagesData)) return false
         if (videoPath != other.videoPath) return false
 
         return true
@@ -28,7 +28,7 @@ data class GameEntity(
         var result = id.hashCode()
         result = 31 * result + name.hashCode()
         result = 31 * result + description.hashCode()
-        result = 31 * result + imageData.contentHashCode()
+        result = 31 * result + imagesData.contentHashCode()
         result = 31 * result + videoPath.hashCode()
         return result
     }

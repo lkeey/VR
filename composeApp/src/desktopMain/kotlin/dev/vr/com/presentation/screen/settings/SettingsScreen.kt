@@ -2,11 +2,16 @@ package dev.vr.com.presentation.screen.settings
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonColors
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -130,18 +135,63 @@ fun SettingsScreen (
 
         Button(onClick = {
             val file = chooseImageFile()
-            viewModel.onEvent(SettingsEvent.OnChooseImage(file))
+            viewModel.onEvent(SettingsEvent.OnAddImage(file))
         }) {
-            Text("Выберите изображение")
+            Text("Добавить изображение")
         }
 
-        state.gameImage?.let {
-            Image(
-                bitmap = it,
-                contentDescription = "Selected Image",
+        if (state.gameImages.isNotEmpty()) {
+            Row(
                 modifier = Modifier
-                    .size(150.dp)
-            )
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState())
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                state.gameImages.forEachIndexed { index, imageBitmap ->
+                    Box(
+                        modifier = Modifier
+                            .size(150.dp)
+                    ) {
+                        Image(
+                            bitmap = imageBitmap,
+                            contentDescription = "Selected Image ${index + 1}",
+                            modifier = Modifier
+                                .fillMaxSize()
+                        )
+
+                        // Remove button
+                        Text(
+                            modifier = Modifier
+                                .align(Alignment.TopEnd)
+                                .clickable {
+                                    viewModel.onEvent(SettingsEvent.OnRemoveImage(index))
+                                }
+                                .background(
+                                    color = Theme.colors.blueAction,
+                                    shape = CircleShape
+                                )
+                                .padding(8.dp),
+                            text = "✕",
+                            fontSize = 20.sp,
+                            color = Theme.colors.pinkAction
+                        )
+                        
+                        // Image number indicator
+                        Text(
+                            text = "${index + 1}",
+                            modifier = Modifier
+                                .align(Alignment.BottomStart)
+                                .background(Theme.colors.blueAction.copy(alpha = 0.7f))
+                                .padding(4.dp),
+                            color = Theme.colors.textInverse,
+                            fontSize = 16.sp,
+                            fontFamily = FontFamily(Font(Res.font.Bold)),
+                            fontWeight = FontWeight(700)
+                        )
+                    }
+                }
+            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))

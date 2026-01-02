@@ -55,7 +55,7 @@ fun GameItem (
             modifier = Modifier
                 .fillMaxSize(),
             contentScale = ContentScale.Crop,
-            bitmap = game.image,
+            bitmap = game.images.firstOrNull() ?: game.images.first(),
             contentDescription = "game image",
         )
 

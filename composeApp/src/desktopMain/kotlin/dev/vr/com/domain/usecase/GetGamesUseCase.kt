@@ -1,7 +1,7 @@
 package dev.vr.com.domain.usecase
 
 import dev.vr.com.data.model.CategoryModel
-import dev.vr.com.domain.extension.byteArrayToImageBitmap
+import dev.vr.com.domain.extension.deserializeImageBitmaps
 import dev.vr.com.domain.extension.toModel
 import dev.vr.com.domain.repository.GameRepository
 import dev.vr.com.presentation.model.GameModel
@@ -21,7 +21,7 @@ class GetGamesUseCase (
                 list.map {
                     it.toModel(
                         imageConverter = { bytes ->
-                            byteArrayToImageBitmap(bytes)
+                            deserializeImageBitmaps(bytes)
                         }
                     )
                 }
@@ -35,7 +35,7 @@ class GetGamesUseCase (
                 list.map {
                     it.toModel(
                         imageConverter = { bytes ->
-                            byteArrayToImageBitmap(bytes)
+                            deserializeImageBitmaps(bytes)
                         }
                     )
                 }

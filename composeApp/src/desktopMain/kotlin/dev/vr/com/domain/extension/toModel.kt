@@ -5,11 +5,11 @@ import dev.vr.com.data.model.GameEntity
 import dev.vr.com.presentation.model.GameModel
 
 fun GameEntity.toModel(
-    imageConverter: (ByteArray) -> ImageBitmap
+    imageConverter: (ByteArray) -> List<ImageBitmap>
 ): GameModel {
     return GameModel(
         id = id,
-        image = imageConverter(imageData),
+        images = imageConverter(imagesData),
         movie = videoPath,
         text = name,
         description = description,

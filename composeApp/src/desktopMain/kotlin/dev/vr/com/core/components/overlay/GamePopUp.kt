@@ -2,12 +2,16 @@ package dev.vr.com.core.components.overlay
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -73,13 +77,13 @@ fun GamePopUp(
                     }
                 )
                 .background(Theme.colors.grayBackground)
-                .padding(20.dp)
-                .verticalScroll(rememberScrollState()),
+                .padding(20.dp),
             contentAlignment = Alignment.Center
         ) {
             Column(
                 modifier = Modifier
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
@@ -94,14 +98,69 @@ fun GamePopUp(
 
                     )
                 } else {
-                    Image(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .heightIn(max = 400.dp),
-                        bitmap = gameModel.image,
-                        contentDescription = gameModel.text,
-                        contentScale = ContentScale.Crop
-                    )
+                    // Use HorizontalPager for multiple images
+                    if (gameModel.images.size > 1) {
+                        val pagerState = rememberPagerState(pageCount = { gameModel.images.size })
+                        
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            HorizontalPager(
+                                state = pagerState,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .heightIn(max = 400.dp)
+                            ) { page ->
+                                Image(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .heightIn(max = 400.dp),
+                                    bitmap = gameModel.images[page],
+                                    contentDescription = "${gameModel.text} - Image ${page + 1}",
+                                    contentScale = ContentScale.Crop
+                                )
+                            }
+                            
+                            Spacer(Modifier.height(8.dp))
+                            
+                            // Page indicators (dots)
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 8.dp),
+                                horizontalArrangement = Arrangement.Center,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                repeat(gameModel.images.size) { index ->
+                                    Box(
+                                        modifier = Modifier
+                                            .size(if (pagerState.currentPage == index) 12.dp else 8.dp)
+                                            .clip(CircleShape)
+                                            .background(
+                                                if (pagerState.currentPage == index) 
+                                                    Theme.colors.blueAction 
+                                                else 
+                                                    Theme.colors.secondaryText.copy(alpha = 0.5f)
+                                            )
+                                    )
+                                    if (index < gameModel.images.size - 1) {
+                                        Spacer(Modifier.width(8.dp))
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // Single image - no pager needed
+                        Image(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(max = 400.dp),
+                            bitmap = gameModel.images.firstOrNull() ?: gameModel.images.first(),
+                            contentDescription = gameModel.text,
+                            contentScale = ContentScale.Crop
+                        )
+                    }
                 }
 
                 Spacer(Modifier.height(12.dp))

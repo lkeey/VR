@@ -9,7 +9,8 @@ sealed interface SettingsEvent {
     data class OnEnterGameDescription(val description: String) : SettingsEvent
     data class OnEnterGameMoviePath(val movie: String) : SettingsEvent
 
-    data class OnChooseImage(val file: File?) : SettingsEvent
+    data class OnAddImage(val file: File?) : SettingsEvent
+    data class OnRemoveImage(val index: Int) : SettingsEvent
     data class DeleteGame(val id: Long) : SettingsEvent
     data object OnAddGame : SettingsEvent
 

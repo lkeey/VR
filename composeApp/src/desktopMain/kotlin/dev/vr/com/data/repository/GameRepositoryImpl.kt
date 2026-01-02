@@ -22,7 +22,7 @@ class GameRepositoryImpl(
                         id = it.id,
                         name = it.name,
                         description = it.description,
-                        imageData = it.image,
+                        imagesData = it.images,
                         videoPath = it.video_path,
                         categoryName = it.category
                     )
@@ -39,7 +39,7 @@ class GameRepositoryImpl(
                         id = it.id,
                         name = it.name,
                         description = it.description,
-                        imageData = it.image,
+                        imagesData = it.images,
                         videoPath = it.video_path,
                         categoryName = it.category
                     )
@@ -53,7 +53,7 @@ class GameRepositoryImpl(
         queries.insertGame(
             name = gameEntity.name,
             description = gameEntity.description,
-            image = gameEntity.imageData,
+            images = gameEntity.imagesData,
             video_path = gameEntity.videoPath,
             category = gameEntity.categoryName
         )

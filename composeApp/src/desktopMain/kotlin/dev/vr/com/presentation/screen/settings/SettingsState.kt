@@ -11,6 +11,6 @@ data class SettingsState(
     val gameName: String? = null,
     val gameDescription: String? = null,
     val gameMovieUrl: String? = null,
-    val gameImage: ImageBitmap? = null,
+    val gameImages: List<ImageBitmap> = emptyList(),
     val gameCategory: CategoryModel? = null
 )

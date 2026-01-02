@@ -2,14 +2,14 @@ CREATE TABLE game (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     description TEXT,
-    image BLOB NOT NULL,
+    images BLOB NOT NULL,
     video_path TEXT,
     category TEXT NOT NULL
 );
 
 -- Insert a new game
 insertGame:
-INSERT INTO game(name, description, image, video_path, category)
+INSERT INTO game(name, description, images, video_path, category)
 VALUES (?, ?, ?, ?, ?);
 
 -- Delete a game by id

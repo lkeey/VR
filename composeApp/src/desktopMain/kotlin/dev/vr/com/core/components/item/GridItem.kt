@@ -64,7 +64,7 @@ fun GridItem (
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(max = 250.dp),
-            bitmap = game.image,
+            bitmap = game.images.firstOrNull() ?: game.images.first(),
             contentDescription = game.text,
             contentScale = ContentScale.Crop
         )

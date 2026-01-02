@@ -187,7 +187,7 @@ private fun InfoPopUpItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            bitmap = item.image,
+            bitmap = item.images.firstOrNull() ?: item.images.first(),
             contentDescription = item.text,
         )
 

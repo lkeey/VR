@@ -37,17 +37,25 @@ class SettingsViewModel(
 
             is SettingsEvent.DeleteGame -> deleteGame(event.id)
 
-            is SettingsEvent.OnChooseImage -> {
+            is SettingsEvent.OnAddImage -> {
 
                 if (event.file != null) {
                     val buffered = ImageIO.read(event.file)
                     _state.update {
                         it.copy(
-                            gameImage = buffered.toComposeImageBitmap()
+                            gameImages = it.gameImages + buffered.toComposeImageBitmap()
                         )
                     }
                 } else {
                    /* TODO SHOW ERROR */
+                }
+            }
+
+            is SettingsEvent.OnRemoveImage -> {
+                _state.update {
+                    it.copy(
+                        gameImages = it.gameImages.filterIndexed { index, _ -> index != event.index }
+                    )
                 }
             }
 
@@ -115,7 +123,7 @@ class SettingsViewModel(
                         game = GameModel(
                             id = 0L,
                             text = state.value.gameName ?: throw Exception("Обязательно укажите название") ,
-                            image = state.value.gameImage ?: throw Exception("Обязательно добавьте изображение"),
+                            images = state.value.gameImages.takeIf { it.isNotEmpty() } ?: throw Exception("Обязательно добавьте хотя бы одно изображение"),
                             description = state.value.gameDescription ?: "",
                             movie = state.value.gameMovieUrl ?: ""
                         ),
@@ -125,7 +133,7 @@ class SettingsViewModel(
 //                    _state.update {
 //                        it.copy(
 //                            gameName = null,
-//                            gameImage = null,
+//                            gameImages = emptyList(),
 //                            gameDescription = null,
 //                            gameMovieUrl = null,
 //                            gameCategory = null,
