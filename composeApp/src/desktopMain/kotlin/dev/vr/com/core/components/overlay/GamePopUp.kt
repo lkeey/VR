@@ -119,27 +119,26 @@ fun GamePopUp(
 
                 Spacer(Modifier.height(8.dp))
 
-                Text(
-                    text = "PROMO VIDEO",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable (
-                            enabled = gameModel.movie != null
-                        ) {
-                            isShowingMovie = !isShowingMovie
-                        }
-                    ,
-                    style = TextStyle(
-                        color = Theme.colors.blueAction,
-                        fontSize = 28.sp,
-                        fontFamily = FontFamily(Font(Res.font.Bold)),
-                        fontWeight = FontWeight.W700,
-                        textAlign = TextAlign.Start,
-                        textDecoration = TextDecoration.Underline
+                if (!gameModel.movie.isNullOrEmpty()) {
+                    Text(
+                        text = "PROMO VIDEO - ${gameModel.movie}",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                isShowingMovie = !isShowingMovie
+                            },
+                        style = TextStyle(
+                            color = Theme.colors.blueAction,
+                            fontSize = 28.sp,
+                            fontFamily = FontFamily(Font(Res.font.Bold)),
+                            fontWeight = FontWeight.W700,
+                            textAlign = TextAlign.Start,
+                            textDecoration = TextDecoration.Underline
+                        )
                     )
-                )
 
-                Spacer(Modifier.height(20.dp))
+                    Spacer(Modifier.height(20.dp))
+                }
 
                 gameModel.description?.let {
                     Text(
