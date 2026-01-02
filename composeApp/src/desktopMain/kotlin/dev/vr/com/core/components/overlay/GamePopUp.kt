@@ -180,7 +180,7 @@ fun GamePopUp(
 
                 if (!gameModel.movie.isNullOrEmpty()) {
                     Text(
-                        text = "PROMO VIDEO - ${gameModel.movie}",
+                        text = "PROMO VIDEO",
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
